@@ -8,6 +8,7 @@
   <title>Lo-Key — The smart battery that puts car keys to sleep</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <script src="reviews-data.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body class="has-announcement">
@@ -48,9 +49,6 @@
             <span class="pill"><span class="pill-dot"></span>No base station</span>
             <span class="pill"><span class="pill-dot"></span>No car modification</span>
           </div>
-        </div>
-        <div class="hero-visual reveal" aria-label="Lo-Key product visual">
-          <div class="hero-visual-card">
         </div>
       </div>
     </section>
@@ -210,6 +208,45 @@
             <div class="feature-row"><span class="num">05</span><div><strong>May extend key-fob battery life</strong><span>Because the fob is unpowered while sleeping, Lo-Key may reduce the energy the key itself uses. Actual service life depends on the fob, how often the key moves, and how much time it spends asleep.</span></div></div>
           </div>
           <a class="btn btn-primary" style="margin-top:30px" href="product.html">View product details</a>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section reviews-section" id="reviews">
+      <div class="container" data-reviews-component data-review-page-size="3">
+        <div class="reviews-heading reveal">
+          <div>
+            <p class="eyebrow">Customer reviews</p>
+            <h2 class="h2">What Lo-Key owners are saying.</h2>
+            <p class="reviews-intro">Reviews are loaded from one shared data file, so this page and the product page always show the same feedback.</p>
+          </div>
+          <div class="reviews-overview" aria-label="Review summary">
+            <strong data-review-average>—</strong>
+            <span class="review-stars review-stars-large" data-review-summary-stars aria-hidden="true">★★★★★</span>
+            <a href="#reviews" data-review-count>0 reviews</a>
+          </div>
+        </div>
+        <div class="demo-review-notice" data-demo-review-notice hidden>Demo review content is shown for layout testing. Replace it with genuine purchaser feedback before launch.</div>
+        <div class="reviews-toolbar reveal">
+          <div class="reviews-count-block">
+            <strong data-review-count-label>0 reviews</strong>
+            <span data-review-showing>Showing 0</span>
+          </div>
+          <div class="reviews-toolbar-actions">
+            <button class="review-write-button" type="button" data-open-review>Write a review</button>
+            <label class="review-sort-label">Sort reviews
+              <select class="review-sort" data-review-sort>
+                <option value="recent">Most recent</option>
+                <option value="top">Top rated</option>
+                <option value="lowest">Lowest rated</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="reviews-grid" data-review-list aria-live="polite"></div>
+        <div class="reviews-show-all" data-review-show-all-wrap hidden>
+          <button type="button" data-review-show-all>Show all reviews</button>
         </div>
       </div>
     </section>

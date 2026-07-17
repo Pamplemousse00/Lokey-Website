@@ -8,6 +8,7 @@
   <title>Lo-Key Smart Battery — Product details</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <script src="reviews-data.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body class="product-page">
@@ -43,8 +44,8 @@
             <div class="badges"><span class="badge">Pilot release</span><span class="badge gold">Made in Canada</span></div>
             <h1 class="product-title">Lo-Key Smart Battery</h1>
             <p class="product-subtitle">CR2032-compatible motion-sleep protection for your car key.</p>
-            <div class="rating-note"><span class="stars" aria-hidden="true">★★★★★</span><span>Designed, prototyped, and tested in Mississauga, Ontario</span></div>
             <div class="price-row"><span class="price">$29.99 CAD</span><span class="price-note">Pilot price</span></div>
+            <a class="product-rating-summary" href="#reviews" aria-label="Read customer reviews"><span class="review-stars" data-product-stars aria-hidden="true">★★★★★</span><strong data-product-rating>—</strong><span data-product-review-count>(0 reviews)</span></a>
           </div>
 
           <div class="purchase-box mobile-purchase-box reveal">
@@ -66,8 +67,8 @@
               <div class="badges"><span class="badge">Pilot release</span><span class="badge gold">Assembled in Canada</span></div>
               <h1 class="product-title">Lo-Key Smart Battery</h1>
               <p class="product-subtitle">A CR2032-compatible battery module that automatically powers down an idle car key and wakes it with motion.</p>
-              <div class="rating-note"><span class="stars" aria-hidden="true">★★★★★</span><span>Designed, prototyped, and tested in Mississauga, Ontario</span></div>
               <div class="price-row"><span class="price">$29.99 CAD</span><span class="price-note">Pilot price</span></div>
+              <a class="product-rating-summary" href="#reviews" aria-label="Read customer reviews"><span class="review-stars" data-product-stars aria-hidden="true">★★★★★</span><strong data-product-rating>—</strong><span data-product-review-count>(0 reviews)</span></a>
             </div>
 
             <div class="purchase-box desktop-purchase-box">
@@ -103,7 +104,7 @@
     </section>
 
     <nav class="detail-nav" aria-label="Product details navigation">
-      <div class="container detail-nav-inner"><a href="#details">How it works</a><a href="#specifications">Specifications</a><a href="#compatibility">Compatibility</a><a href="#safety">Safety & limitations</a><a href="#product-faq">FAQ</a></div>
+      <div class="container detail-nav-inner"><a href="#details">How it works</a><a href="#specifications">Specifications</a><a href="#compatibility">Compatibility</a><a href="#safety">Safety & limitations</a><a href="#reviews">Reviews</a><a href="#product-faq">FAQ</a></div>
     </nav>
 
     <section class="detail-section white" id="details">
@@ -161,6 +162,45 @@
           <p>Lo-Key is designed to reduce exposure to relay attacks by removing power from an idle key fob. It does not stop theft methods that do not depend on the key’s wireless response.</p>
           <p>Coin batteries can cause severe injury if swallowed. Keep the product and any removed battery away from children. Do not recharge, crush, puncture, short-circuit, disassemble, or expose it to fire or excessive heat.</p>
           <p>Prototype units should be used only by informed adult testers. Final retail safety instructions, child-resistant packaging, transport compliance, and product certifications remain part of the production process.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="detail-section white reviews-section" id="reviews">
+      <div class="container" data-reviews-component data-review-page-size="6">
+        <div class="reviews-heading reveal">
+          <div>
+            <p class="eyebrow">Customer reviews</p>
+            <h2 class="h2">Feedback from verified purchasers.</h2>
+            <p class="reviews-intro">The same shared review data appears here and on the Lo-Key home page.</p>
+          </div>
+          <div class="reviews-overview" aria-label="Review summary">
+            <strong data-review-average>—</strong>
+            <span class="review-stars review-stars-large" data-review-summary-stars aria-hidden="true">★★★★★</span>
+            <a href="#reviews" data-review-count>0 reviews</a>
+          </div>
+        </div>
+        <div class="demo-review-notice" data-demo-review-notice hidden>Demo review content is shown for layout testing. Replace it with genuine purchaser feedback before launch.</div>
+        <div class="reviews-toolbar reveal">
+          <div class="reviews-count-block">
+            <strong data-review-count-label>0 reviews</strong>
+            <span data-review-showing>Showing 0</span>
+          </div>
+          <div class="reviews-toolbar-actions">
+            <button class="review-write-button" type="button" data-open-review>Write a review</button>
+            <label class="review-sort-label">Sort reviews
+              <select class="review-sort" data-review-sort>
+                <option value="recent">Most recent</option>
+                <option value="top">Top rated</option>
+                <option value="lowest">Lowest rated</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="reviews-grid" data-review-list aria-live="polite"></div>
+        <div class="reviews-show-all" data-review-show-all-wrap hidden>
+          <button type="button" data-review-show-all>Show all reviews</button>
         </div>
       </div>
     </section>
