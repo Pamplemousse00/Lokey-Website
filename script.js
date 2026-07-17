@@ -40,6 +40,50 @@
     showToast.timer = setTimeout(() => toast.classList.remove('show'), 2600);
   };
 
+  let confirmResolver = null;
+
+  const closeConfirm = (result = false) => {
+    const backdrop = document.querySelector('.confirm-backdrop');
+    backdrop?.classList.remove('open');
+    backdrop?.setAttribute('aria-hidden', 'true');
+    const resolve = confirmResolver;
+    confirmResolver = null;
+    if (resolve) resolve(result);
+  };
+
+  const ensureConfirmUI = () => {
+    if (document.querySelector('.confirm-backdrop')) return;
+    document.body.insertAdjacentHTML('beforeend', `
+      <div class="confirm-backdrop" aria-hidden="true">
+        <section class="confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="remove-title" aria-describedby="remove-description">
+          <h2 id="remove-title">Remove Lo-Key from your cart?</h2>
+          <p id="remove-description">Reducing the quantity to zero will remove this item.</p>
+          <div class="confirm-actions">
+            <button class="confirm-cancel" type="button">Keep it</button>
+            <button class="confirm-remove" type="button">Remove</button>
+          </div>
+        </section>
+      </div>
+    `);
+    const backdrop = document.querySelector('.confirm-backdrop');
+    backdrop?.addEventListener('click', (event) => {
+      if (event.target === backdrop) closeConfirm(false);
+    });
+    document.querySelector('.confirm-cancel')?.addEventListener('click', () => closeConfirm(false));
+    document.querySelector('.confirm-remove')?.addEventListener('click', () => closeConfirm(true));
+  };
+
+  const confirmRemoval = () => {
+    ensureConfirmUI();
+    return new Promise((resolve) => {
+      confirmResolver = resolve;
+      const backdrop = document.querySelector('.confirm-backdrop');
+      backdrop?.classList.add('open');
+      backdrop?.setAttribute('aria-hidden', 'false');
+      setTimeout(() => document.querySelector('.confirm-cancel')?.focus(), 60);
+    });
+  };
+
   const ensureCartUI = () => {
     if (document.querySelector('.cart-drawer')) return;
     document.body.insertAdjacentHTML('beforeend', `
@@ -57,7 +101,10 @@
     document.querySelector('.cart-backdrop').addEventListener('click', closeCart);
     document.querySelector('.cart-close').addEventListener('click', closeCart);
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') closeCart();
+      if (event.key === 'Escape') {
+        if (document.querySelector('.confirm-backdrop.open')) closeConfirm(false);
+        else closeCart();
+      }
     });
   };
 
@@ -129,12 +176,30 @@
       <p class="cart-note">Front-end demo cart. Connect this button to Shopify, Stripe, or another checkout when ready.</p>`;
 
     body.querySelectorAll('[data-cart-action]').forEach((button) => {
-      button.addEventListener('click', () => {
+      button.addEventListener('click', async () => {
         const action = button.dataset.cartAction;
         const current = getCart();
-        if (action === 'increase') current.qty += 1;
-        if (action === 'decrease') current.qty = Math.max(0, current.qty - 1);
-        if (action === 'remove') current.qty = 0;
+
+        if (action === 'increase') {
+          current.qty += 1;
+        }
+
+        if (action === 'decrease') {
+          if (current.qty === 1) {
+            const remove = await confirmRemoval();
+            if (!remove) return;
+            current.qty = 0;
+          } else {
+            current.qty = Math.max(0, current.qty - 1);
+          }
+        }
+
+        if (action === 'remove') {
+          const remove = await confirmRemoval();
+          if (!remove) return;
+          current.qty = 0;
+        }
+
         saveCart(current);
       });
     });
@@ -146,9 +211,17 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.site-header');
-    const updateHeader = () => header?.classList.toggle('scrolled', window.scrollY > 24);
+    const announcement = document.querySelector('.announcement');
+    const updateHeader = () => {
+      if (!header) return;
+      const announcementHeight = announcement?.offsetHeight || 0;
+      const remainingOffset = Math.max(0, announcementHeight - window.scrollY);
+      header.style.setProperty('--header-top', `${remainingOffset}px`);
+      header.classList.toggle('scrolled', window.scrollY > 8);
+    };
     updateHeader();
     window.addEventListener('scroll', updateHeader, { passive: true });
+    window.addEventListener('resize', updateHeader);
 
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');

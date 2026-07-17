@@ -19,6 +19,9 @@
       <a class="brand" href="index.html" aria-label="Lo-Key home">
         <img src="assets/logo-mark.svg" alt="">
         <span class="brand-name">lo-key</span>
+        <span class="canada-mark" aria-label="Canadian company" title="Canadian company">
+          <svg viewBox="0 0 32 36" aria-hidden="true"><path d="M16 2.5l2.2 5.8 4.8-2.6-1.3 6.1 5.8.1-4.5 4.1 4.1 2.6-6.8 2.2 1 7.1-5.3-3.2-1.8 5.3-4.3-6.1-4.3 6.1-1.8-5.3-5.3 3.2 1-7.1-6.8-2.2 4.1-2.6-4.5-4.1 5.8-.1-1.3-6.1 4.8 2.6L16 2.5z"/></svg>
+        </span>
       </a>
       <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
       <nav class="nav-links" aria-label="Primary">
@@ -37,9 +40,13 @@
         <div class="hero-copy reveal">
           <p class="eyebrow on-dark">Protection built into the battery</p>
           <h1 class="display">The smart battery that puts your car key <span>to sleep.</span></h1>
+          <div class="hero-battery-inline" aria-label="Lo-Key CR2032-compatible smart battery">
+            <span class="hero-battery-art"><img src="assets/exploded-lokey.webp" alt="Lo-Key smart battery concept in a CR2032-style shell"></span>
+            <span class="hero-battery-label"><small>What is Lo-Key?</small><strong>A smart CR2032-style battery</strong></span>
+          </div>
           <p class="lead">Lo-Key is a CR2032-compatible smart power module designed to shut down an idle key fob and wake it automatically when you pick it up.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="product.html">Shop Lo-Key <span aria-hidden="true">→</span></a>
+            <a class="btn btn-primary btn-hero-shop" href="product.html">Shop Lo-Key <span aria-hidden="true">→</span></a>
             <a class="btn btn-secondary" href="#how-it-works">See how it works</a>
           </div>
           <div class="hero-pills" aria-label="Product highlights">
@@ -116,19 +123,19 @@
           <p class="lead reveal">Lo-Key moves the protection into something your key already needs: its battery.</p>
         </div>
         <div class="steps">
-          <article class="step-card reveal">
+          <article class="step-card step-replace reveal">
             <span class="step-number">1</span>
             <h3 class="h3">Replace</h3>
             <p>Install Lo-Key in place of the key fob’s standard CR2032 battery.</p>
             <span class="step-note">No wiring. No pairing.</span>
           </article>
-          <article class="step-card reveal">
+          <article class="step-card step-sleep reveal">
             <span class="step-number">2</span>
             <h3 class="h3">Sleep</h3>
             <p>After the key remains still, Lo-Key disconnects power from the fob while its motion sensor keeps watch.</p>
             <span class="step-note">The key stops answering relay equipment.</span>
           </article>
-          <article class="step-card reveal">
+          <article class="step-card step-wake reveal">
             <span class="step-number">3</span>
             <h3 class="h3">Wake</h3>
             <p>Pick up the key and motion wakes the fob automatically. A fresh active window begins.</p>
@@ -203,6 +210,7 @@
             <div class="feature-row"><span class="num">02</span><div><strong>Motion-only operation</strong><span>No location tracking, wireless pairing, subscription, app, or base station.</span></div></div>
             <div class="feature-row"><span class="num">03</span><div><strong>Automatic three-minute active window</strong><span>Movement restores power and refreshes the timer while the key remains in use.</span></div></div>
             <div class="feature-row"><span class="num">04</span><div><strong>Ultra-low-power standby</strong><span>The internal control electronics remain lightly powered while the key fob itself is off.</span></div></div>
+            <div class="feature-row"><span class="num">05</span><div><strong>May extend key-fob battery life</strong><span>Because the fob is unpowered while sleeping, Lo-Key may reduce the energy the key itself uses. Actual service life depends on the fob, how often the key moves, and how much time it spends asleep.</span></div></div>
           </div>
           <a class="btn btn-primary" style="margin-top:30px" href="product.html">View product details</a>
         </div>
@@ -231,6 +239,10 @@
             <div class="faq-answer"><p>No. Lo-Key is intended to reduce exposure to key-fob relay attacks by removing power from an idle fob. It is one layer of security and does not prevent theft methods that do not depend on relaying the key.</p></div>
           </article>
           <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false"><span>Could Lo-Key extend my key-fob battery life?</span><span class="plus">+</span></button>
+            <div class="faq-answer"><p>Potentially. The key fob draws little or no power from Lo-Key while it is asleep, which may reduce the fob’s overall energy use. The real improvement will depend on the vehicle key, how often it is carried, and how much time it spends motionless.</p></div>
+          </article>
+          <article class="faq-item">
             <button class="faq-question" type="button" aria-expanded="false"><span>Does it collect location or driving data?</span><span class="plus">+</span></button>
             <div class="faq-answer"><p>No. The motion sensing is local to the battery and is used only to decide whether the key fob should be powered. There is no app, cloud account, GPS, or wireless connection.</p></div>
           </article>
@@ -247,10 +259,10 @@
           <p style="max-width:670px;color:#aebdcb">We are a Canadian company based in Mississauga, Ontario. Our batteries are assembled in Canada, combining practical electronics, compact mechanical design, and a focus on making everyday vehicle security easier to live with.</p>
         </div>
         <div class="about-facts">
-          <div class="about-fact"><span class="flag-mark">⌁</span><div><strong>Canadian company</strong><span>Built for Canadian drivers and beyond.</span></div></div>
-          <div class="about-fact"><span class="flag-mark">⌂</span><div><strong>Mississauga, Ontario</strong><span>Designed and developed in the Greater Toronto Area.</span></div></div>
-          <div class="about-fact"><span class="flag-mark">✓</span><div><strong>Assembled in Canada</strong><span>Final battery assembly and quality checks in Canada.</span></div></div>
-          <div class="about-fact"><span class="flag-mark">26</span><div><strong>Started in 2026</strong><span>A new company focused on a very old problem: stolen cars.</span></div></div>
+          <div class="about-fact"><span class="flag-mark" aria-hidden="true"><svg viewBox="0 0 32 36"><path d="M16 2.5l2.2 5.8 4.8-2.6-1.3 6.1 5.8.1-4.5 4.1 4.1 2.6-6.8 2.2 1 7.1-5.3-3.2-1.8 5.3-4.3-6.1-4.3 6.1-1.8-5.3-5.3 3.2 1-7.1-6.8-2.2 4.1-2.6-4.5-4.1 5.8-.1-1.3-6.1 4.8 2.6L16 2.5z"/></svg></span><div><strong>Canadian company</strong><span>Built for Canadian drivers and beyond.</span></div></div>
+          <div class="about-fact"><span class="flag-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 29s9-8.5 9-17A9 9 0 1 0 7 12c0 8.5 9 17 9 17z"/><circle cx="16" cy="12" r="3.5"/></svg></span><div><strong>Mississauga, Ontario</strong><span>Designed and developed in the Greater Toronto Area.</span></div></div>
+          <div class="about-fact"><span class="flag-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M6 4h20v7H6zM9 11v7h14v-7M12 18v6h8v-6M7 24h18v4H7zM4 8h2M26 8h2"/><path d="M16 4v7"/></svg></span><div><strong>Assembled in Canada</strong><span>Final battery assembly and quality checks in Canada.</span></div></div>
+          <div class="about-fact"><span class="flag-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="5" y="7" width="22" height="20" rx="2"/><path d="M10 4v6M22 4v6M5 13h22"/><path d="M10 18h3M15 18h3M20 18h3M10 22h3M15 22h3"/></svg></span><div><strong>Started in 2026</strong><span>A new company focused on a very old problem: stolen cars.</span></div></div>
         </div>
       </div>
     </section>
