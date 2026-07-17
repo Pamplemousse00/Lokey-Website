@@ -11,6 +11,10 @@
     subtitle: 'CR2032-compatible motion-sleep battery'
   };
 
+
+
+
+
   const getCart = () => {
     try {
       const parsed = JSON.parse(localStorage.getItem(CART_KEY));
@@ -19,6 +23,11 @@
       return { qty: 0 };
     }
   };
+
+  const SHOPIFY_VARIANT_ID = '54038879011180';
+  const SHOPIFY_STORE =
+  `https://phit9f-0y.myshopify.com/cart/` +
+  `${SHOPIFY_VARIANT_ID}:${getCart()}`;
 
   const saveCart = (cart) => {
     localStorage.setItem(CART_KEY, JSON.stringify(cart));
@@ -204,9 +213,23 @@
       });
     });
 
-    foot.querySelector('[data-checkout]')?.addEventListener('click', () => {
-      showToast('Checkout is ready to connect to your payment provider.');
-    });
+    foot.querySelector('[data-checkout]')?.addEventListener(
+      'click',
+      () => {
+        const cart = getCart();
+
+        if (cart.qty < 1) {
+          return;
+        }
+
+        const checkoutUrl =
+          `${SHOPIFY_STORE}/cart/` +
+          `${SHOPIFY_VARIANT_ID}:${cart.qty}` +
+          `?channel=buy_button`;
+
+        window.location.assign(checkoutUrl);
+      }
+    );
   };
 
   document.addEventListener('DOMContentLoaded', () => {
