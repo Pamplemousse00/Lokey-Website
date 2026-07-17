@@ -259,22 +259,24 @@
       });
     });
 
-    const qtyInput = document.querySelector('#quantity');
-    document.querySelectorAll('[data-qty]').forEach((button) => {
-      button.addEventListener('click', () => {
-        if (!qtyInput) return;
-        const next = Math.max(1, Math.min(20, Number(qtyInput.value || 1) + Number(button.dataset.qty)));
-        qtyInput.value = String(next);
+    document.querySelectorAll('.purchase-box').forEach((box) => {
+      const qtyInput = box.querySelector('[data-quantity-input]');
+      box.querySelectorAll('[data-qty]').forEach((button) => {
+        button.addEventListener('click', () => {
+          if (!qtyInput) return;
+          const next = Math.max(1, Math.min(20, Number(qtyInput.value || 1) + Number(button.dataset.qty)));
+          qtyInput.value = String(next);
+        });
       });
-    });
 
-    document.querySelector('[data-add-to-cart]')?.addEventListener('click', () => {
-      const amount = Math.max(1, Math.min(20, Number(qtyInput?.value || 1)));
-      const cart = getCart();
-      cart.qty += amount;
-      saveCart(cart);
-      showToast(`${amount} ${amount === 1 ? 'Lo-Key' : 'Lo-Keys'} added to cart.`);
-      openCart();
+      box.querySelector('[data-add-to-cart]')?.addEventListener('click', () => {
+        const amount = Math.max(1, Math.min(20, Number(qtyInput?.value || 1)));
+        const cart = getCart();
+        cart.qty += amount;
+        saveCart(cart);
+        showToast(`${amount} ${amount === 1 ? 'Lo-Key' : 'Lo-Keys'} added to cart.`);
+        openCart();
+      });
     });
 
     document.querySelectorAll('[data-open-cart]').forEach((button) => {

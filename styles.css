@@ -277,9 +277,13 @@ button { cursor: pointer; }
 .hero-content {
   position: relative;
   z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(340px, .82fr);
+  gap: 44px;
+  align-items: center;
   padding: 170px 0 90px;
 }
-.hero-copy { max-width: 760px; }
+.hero-copy { max-width: 100%; }
 .hero .display span { color: var(--aqua); }
 .hero-actions {
   display: flex;
@@ -629,12 +633,11 @@ button { cursor: pointer; }
   flex: 0 0 auto;
   width: 44px;
   height: 44px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 14px;
   background: var(--aqua);
-  color: var(--ink);
-  font-size: 1.2rem;
 }
 
 .cta-band {
@@ -981,14 +984,11 @@ button { cursor: pointer; }
   background: var(--aqua);
   box-shadow: 0 0 0 1px rgba(255,255,255,.13);
 }
-.brand .canada-mark svg {
-  width: 16px;
-  height: 18px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.45;
-  stroke-linejoin: round;
-  stroke-linecap: round;
+.brand .canada-mark img {
+  width: 15px;
+  height: 17px;
+  display: block;
+  opacity: .98;
 }
 
 .nav-links .btn-primary {
@@ -1005,12 +1005,13 @@ button { cursor: pointer; }
 
 .hero-copy { position: relative; }
 .hero-battery-inline {
+  display: none;
   position: absolute;
   left: calc(100% + 78px);
   top: 104px;
   width: 286px;
   padding: 15px;
-  display: flex;
+  align-items: center;
   align-items: center;
   gap: 15px;
   border: 1px solid rgba(255,255,255,.19);
@@ -1050,6 +1051,46 @@ button { cursor: pointer; }
   line-height: 1.2;
 }
 
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 420px;
+}
+.hero-visual-card {
+  position: relative;
+  width: min(100%, 610px);
+  min-height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+.hero-visual-glow {
+  position: absolute;
+  right: 6%;
+  top: 50%;
+  width: 520px;
+  height: 320px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  background: radial-gradient(circle, rgba(19,212,220,.16), rgba(19,212,220,0) 67%);
+  filter: blur(6px);
+}
+.hero-visual-card img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  filter: drop-shadow(0 38px 48px rgba(0,0,0,.34));
+  opacity: .97;
+}
+.hero-visual-caption { display: none; }
+
 .step-card {
   background:
     linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.018)),
@@ -1060,14 +1101,10 @@ button { cursor: pointer; }
 .step-sleep { box-shadow: inset 0 3px 0 rgba(255,196,40,.75); }
 .step-wake { box-shadow: inset 0 3px 0 rgba(112,232,237,.5); }
 
-.flag-mark svg {
-  width: 25px;
-  height: 25px;
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.flag-mark img {
+  width: 45px;
+  height: 45px;
+  display: block;
 }
 
 .toast {
@@ -1075,11 +1112,7 @@ button { cursor: pointer; }
 }
 
 .mobile-product-summary { display: none; }
-.product-main .product-gallery,
-.product-main .product-info {
-  opacity: 1;
-  transform: none;
-}
+.mobile-purchase-box { display: none; }
 .quick-benefits { grid-template-columns: repeat(4, 1fr); }
 
 .confirm-backdrop {
@@ -1129,13 +1162,13 @@ button { cursor: pointer; }
 .confirm-remove { border-color: #a73939 !important; background: #a73939; color: var(--white); }
 
 @media (max-width: 1080px) {
-  .hero-battery-inline {
-    left: auto;
-    right: 0;
-    top: -18px;
-    width: 250px;
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: end;
   }
-  .hero-copy { max-width: 100%; padding-right: 270px; }
+  .hero-visual { justify-content: center; min-height: 0; }
+  .hero-visual-card { width: min(100%, 560px); }
 }
 
 @media (max-width: 820px) {
@@ -1170,11 +1203,13 @@ button { cursor: pointer; }
   .hero-copy {
     padding-right: 0;
   }
+  .hero-visual { display: none; }
   .hero .display {
     font-size: clamp(2.75rem, 13.2vw, 4.35rem);
     line-height: .97;
   }
   .hero-battery-inline {
+    display: flex;
     position: static;
     width: min(100%, 310px);
     margin: 22px 0 0;
@@ -1205,14 +1240,19 @@ button { cursor: pointer; }
   .product-main { padding-top: 102px; }
   .product-breadcrumb { margin-bottom: 16px; }
   .product-grid {
-    grid-template-columns: minmax(0, 1.08fr) minmax(124px, .92fr);
-    gap: 18px 14px;
-    align-items: center;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    align-items: start;
   }
+  .product-gallery { order: 1; }
   .mobile-product-summary {
     display: block;
-    grid-column: 1;
-    grid-row: 1;
+    order: 2;
+    margin-top: -2px;
+  }
+  .mobile-purchase-box {
+    display: block;
+    order: 3;
   }
   .mobile-product-summary .badges { gap: 5px; }
   .mobile-product-summary .badge {
@@ -1221,33 +1261,34 @@ button { cursor: pointer; }
   }
   .mobile-product-summary .product-title {
     margin: 12px 0 7px;
-    font-size: clamp(2rem, 9vw, 2.65rem);
+    font-size: clamp(2.15rem, 10vw, 2.95rem);
   }
   .mobile-product-summary .product-subtitle {
-    font-size: .83rem;
-    line-height: 1.4;
+    font-size: .92rem;
+    line-height: 1.45;
+  }
+  .mobile-product-summary .rating-note {
+    margin-top: 12px;
+    font-size: .8rem;
   }
   .mobile-product-summary .price-row {
-    display: block;
-    margin: 14px 0 0;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 16px 0 0;
   }
-  .mobile-product-summary .price { display: block; font-size: 1.38rem; }
-  .mobile-product-summary .price-note { display: block; margin-top: 2px; }
-  .product-gallery {
-    grid-column: 2;
-    grid-row: 1;
-  }
+  .mobile-product-summary .price { font-size: 1.5rem; }
   .product-image-card {
-    min-height: 225px;
-    border-radius: 23px;
+    min-height: 430px;
+    border-radius: 28px;
   }
-  .product-image-card::before { width: 220px; height: 220px; }
-  .product-image-card img { width: 128%; max-width: none; }
+  .product-image-card::before { width: 260px; height: 260px; }
+  .product-image-card img { width: 112%; max-width: none; }
   .gallery-caption { display: none; }
   .product-info {
-    grid-column: 1 / -1;
-    grid-row: 2;
+    order: 4;
   }
+  .desktop-purchase-box { display: none; }
   .desktop-product-intro { display: none; }
   .purchase-box { padding: 20px; }
   .purchase-controls { grid-template-columns: 116px 1fr; }
