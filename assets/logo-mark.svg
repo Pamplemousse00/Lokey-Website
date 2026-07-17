@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Lo-Key logo mark</title>
+  <rect width="64" height="64" rx="18" fill="#11d4dc"/>
+  <path d="M20 29v-5.5C20 16.6 25.4 11 32 11s12 5.6 12 12.5V29" fill="none" stroke="#081321" stroke-width="5.5" stroke-linecap="round"/>
+  <rect x="14" y="27" width="36" height="27" rx="8" fill="#081321"/>
+  <circle cx="32" cy="40" r="4.5" fill="#ffc427"/>
+  <path d="M32 44v5" stroke="#ffc427" stroke-width="4" stroke-linecap="round"/>
+</svg>
