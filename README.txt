@@ -81,3 +81,28 @@ The form supports URL prefill. A link such as:
 opens the review modal and pre-populates the order number. The customer can then
 enter the purchase email used at checkout. Avoid putting the customer's email in
 the URL because URLs may be stored in browser history, analytics, and server logs.
+
+PRODUCT IMAGES
+--------------
+Both the product-page thumbnail gallery and the home-page rotating carousel read from:
+
+    product-images.js
+
+To add or replace product photos:
+1. Copy each image into the assets folder.
+2. Add another object to window.LO_KEY_PRODUCT_IMAGES with src, alt, and label.
+3. The product page automatically creates hover/click thumbnails.
+4. The home page automatically rotates through the same list. Using either arrow or a dot pauses automatic rotation for the remainder of that page visit.
+
+SHOPIFY CHECKOUT
+----------------
+The custom cart checkout redirects to Shopify variant 54038879011180 at:
+
+    https://phit9f-0y.myshopify.com/cart/VARIANT_ID:QUANTITY
+
+The variant ID is defined near the top of script.js as SHOPIFY_VARIANT_ID.
+
+
+SOCIAL LINKS
+The Instagram, Facebook, and YouTube links currently point to each platform's home page.
+Replace those href values in index.html and product.html with the final Lo-Key account URLs.

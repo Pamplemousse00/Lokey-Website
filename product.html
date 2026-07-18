@@ -9,18 +9,25 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <script src="reviews-data.js" defer></script>
+  <script src="product-images.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body class="product-page">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header scrolled" aria-label="Main navigation">
     <div class="container nav">
-      <a class="brand" href="index.html" aria-label="Lo-Key home"><img src="assets/logo-mark.svg" alt=""><span class="brand-name">lo-key</span><span class="canada-mark" aria-label="Canadian company" title="Canadian company"><img src="assets/icon-maple.svg" alt=""></span></a>
+      <a class="brand" href="index.html" aria-label="Lo-Key home"><img src="assets/logo-mark.svg" alt=""><span class="brand-name">lo-key</span><span class="canada-mark" aria-label="Canadian company" title="Canadian company"><img src="assets/icon-maple.png" alt=""></span></a>
       <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
       <nav class="nav-links" aria-label="Primary">
         <a href="index.html#how-it-works">How it works</a>
         <a href="#details">Details</a>
         <a href="#compatibility">Compatibility</a>
+        <a href="#product-faq">FAQ</a>
+        <div class="nav-socials" aria-label="Social media">
+          <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Lo-Key on Instagram"><img src="assets/social-instagram.svg" alt=""></a>
+          <a class="social-link" href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Lo-Key on Facebook"><img src="assets/social-facebook.svg" alt=""></a>
+          <a class="social-link" href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="Lo-Key on YouTube"><img src="assets/social-youtube.svg" alt=""></a>
+        </div>
         <a class="cart-link" href="#" data-open-cart>Cart <span class="cart-count" hidden>0</span></a>
         <a class="btn btn-primary" href="#buy">Buy Lo-Key</a>
       </nav>
@@ -32,12 +39,15 @@
       <div class="container">
         <div class="product-breadcrumb"><a href="index.html">Home</a> / Lo-Key Smart Battery</div>
         <div class="product-grid">
-          <div class="product-gallery reveal">
-            <div class="product-image-card">
-              <img src="assets/exploded-lokey.webp" alt="Exploded concept rendering of the Lo-Key smart battery with shell, internal cell, and flexible circuit">
-              <span class="concept-label">Concept rendering</span>
+          <div class="product-gallery reveal" data-product-gallery>
+            <div class="product-gallery-layout">
+              <div class="product-thumbnails" data-product-thumbnails aria-label="Product images"></div>
+              <div class="product-image-card">
+                <img data-product-main-image src="assets/exploded-lokey.webp" alt="Exploded concept rendering of the Lo-Key smart battery with shell, internal cell, and flexible circuit">
+                <span class="concept-label" data-product-image-label>Inside Lo-Key</span>
+              </div>
             </div>
-            <p class="gallery-caption">Final appearance, markings, and packaging may change before production.</p>
+            <p class="gallery-caption">Hover over or select a thumbnail to view another image. Final appearance, markings, and packaging may change before production.</p>
           </div>
 
           <div class="mobile-product-summary reveal" aria-label="Lo-Key product summary">
@@ -228,6 +238,11 @@
         <div class="footer-brand"><a class="brand" href="index.html"><img src="assets/logo-mark.svg" alt=""><span>lo-key</span></a><p>Canadian company · Mississauga, Ontario · Assembled in Canada · Established 2026.</p></div>
         <div class="footer-col"><h4>Explore</h4><a href="index.html">Home</a><a href="index.html#how-it-works">How it works</a><a href="index.html#about">About us</a></div>
         <div class="footer-col"><h4>Product</h4><a href="#details">Details</a><a href="#compatibility">Compatibility</a><a href="#safety">Safety</a></div>
+        <div class="footer-col footer-social"><h4>Follow</h4><div class="footer-social-links">
+          <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Lo-Key on Instagram"><img src="assets/social-instagram.svg" alt=""><span>Instagram</span></a>
+          <a class="social-link" href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Lo-Key on Facebook"><img src="assets/social-facebook.svg" alt=""><span>Facebook</span></a>
+          <a class="social-link" href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="Lo-Key on YouTube"><img src="assets/social-youtube.svg" alt=""><span>YouTube</span></a>
+        </div></div>
       </div>
       <div class="footer-bottom"><p>Lo-Key is designed to reduce exposure to relay attacks by powering down an idle key fob. It does not prevent all theft methods. Product imagery and pricing are for the pilot storefront concept.</p><p>© 2026 Lo-Key. Made in Canada.</p></div>
     </div>

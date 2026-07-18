@@ -3,6 +3,7 @@
 
   const money = new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' });
   const CART_KEY = 'lokey-cart-v1';
+  const SHOPIFY_VARIANT_ID = '54038879011180';
   const product = {
     id: 'lokey-cr2032',
     name: 'Lo-Key Smart Battery',
@@ -10,8 +11,6 @@
     image: 'assets/exploded-lokey.webp',
     subtitle: 'CR2032-compatible motion-sleep battery'
   };
-  const SHOPIFY_VARIANT_ID =
-  '54038879011180';
 
   const getCart = () => {
     try {
@@ -218,8 +217,8 @@
         }
 
         const checkoutUrl =
-      `https://phit9f-0y.myshopify.com/cart/` +
-      `${SHOPIFY_VARIANT_ID}:${cart.qty}`;
+          `https://phit9f-0y.myshopify.com/cart/` +
+          `${SHOPIFY_VARIANT_ID}:${cart.qty}`;
 
         window.location.assign(checkoutUrl);
       }
@@ -658,9 +657,169 @@
     }
   };
 
+
+  const getProductImages = () => {
+    const images = Array.isArray(window.LO_KEY_PRODUCT_IMAGES)
+      ? window.LO_KEY_PRODUCT_IMAGES
+      : [];
+
+    return images.filter((image) => image && image.src);
+  };
+
+  const preloadProductImages = (images) => {
+    images.forEach((image) => {
+      const preload = new Image();
+      preload.src = image.src;
+    });
+  };
+
+  const initializeProductGallery = () => {
+    const gallery = document.querySelector('[data-product-gallery]');
+    if (!gallery) return;
+
+    const images = getProductImages();
+    if (!images.length) return;
+
+    const mainImage = gallery.querySelector('[data-product-main-image]');
+    const label = gallery.querySelector('[data-product-image-label]');
+    const thumbnails = gallery.querySelector('[data-product-thumbnails]');
+    if (!mainImage || !thumbnails) return;
+
+    preloadProductImages(images);
+
+    let selectedIndex = -1;
+
+    const selectImage = (index) => {
+      const image = images[index];
+      if (!image || index === selectedIndex) return;
+      selectedIndex = index;
+
+      mainImage.classList.add('is-changing');
+      window.setTimeout(() => {
+        mainImage.src = image.src;
+        mainImage.alt = image.alt || 'Lo-Key product image';
+        if (label) label.textContent = image.label || 'Product image';
+        thumbnails.querySelectorAll('[data-product-image-index]').forEach((button) => {
+          const active = Number(button.dataset.productImageIndex) === index;
+          button.classList.toggle('active', active);
+          button.setAttribute('aria-current', active ? 'true' : 'false');
+        });
+        mainImage.classList.remove('is-changing');
+      }, 70);
+    };
+
+    thumbnails.innerHTML = images.map((image, index) => `
+      <button class="product-thumbnail${index === 0 ? ' active' : ''}" type="button"
+        data-product-image-index="${index}"
+        aria-label="Show ${escapeHTML(image.label || `product image ${index + 1}`)}"
+        aria-current="${index === 0 ? 'true' : 'false'}">
+        <img src="${escapeHTML(image.src)}" alt="">
+      </button>
+    `).join('');
+
+    thumbnails.querySelectorAll('[data-product-image-index]').forEach((button) => {
+      const index = Number(button.dataset.productImageIndex);
+      button.addEventListener('mouseenter', () => selectImage(index));
+      button.addEventListener('focus', () => selectImage(index));
+      button.addEventListener('click', () => selectImage(index));
+    });
+
+    selectImage(0);
+  };
+
+  const initializeProductCarousel = () => {
+    const carousel = document.querySelector('[data-product-carousel]');
+    if (!carousel) return;
+
+    const images = getProductImages();
+    if (!images.length) return;
+
+    const imageElement = carousel.querySelector('[data-carousel-image]');
+    const label = carousel.querySelector('[data-carousel-label]');
+    const dots = carousel.querySelector('[data-carousel-dots]');
+    const previous = carousel.querySelector('[data-carousel-prev]');
+    const next = carousel.querySelector('[data-carousel-next]');
+    if (!imageElement || !dots) return;
+
+    preloadProductImages(images);
+
+    let currentIndex = 0;
+    let timer = null;
+    let manuallyPaused = false;
+
+    const update = (index) => {
+      currentIndex = (index + images.length) % images.length;
+      const image = images[currentIndex];
+
+      imageElement.classList.add('is-changing');
+      window.setTimeout(() => {
+        imageElement.src = image.src;
+        imageElement.alt = image.alt || 'Lo-Key product image';
+        if (label) label.textContent = image.label || 'Product image';
+        dots.querySelectorAll('[data-carousel-index]').forEach((dot) => {
+          const active = Number(dot.dataset.carouselIndex) === currentIndex;
+          dot.classList.toggle('active', active);
+          dot.setAttribute('aria-current', active ? 'true' : 'false');
+        });
+        imageElement.classList.remove('is-changing');
+      }, 130);
+    };
+
+    const stopRotation = () => {
+      manuallyPaused = true;
+      if (timer) window.clearInterval(timer);
+      timer = null;
+      carousel.classList.add('is-paused');
+    };
+
+    const startRotation = () => {
+      if (manuallyPaused || images.length < 2) return;
+      if (timer) window.clearInterval(timer);
+      timer = window.setInterval(() => update(currentIndex + 1), 4600);
+    };
+
+    dots.innerHTML = images.map((image, index) => `
+      <button class="product-carousel-dot${index === 0 ? ' active' : ''}" type="button"
+        data-carousel-index="${index}"
+        aria-label="Show ${escapeHTML(image.label || `product image ${index + 1}`)}"
+        aria-current="${index === 0 ? 'true' : 'false'}"></button>
+    `).join('');
+
+    previous?.addEventListener('click', () => {
+      stopRotation();
+      update(currentIndex - 1);
+    });
+
+    next?.addEventListener('click', () => {
+      stopRotation();
+      update(currentIndex + 1);
+    });
+
+    dots.querySelectorAll('[data-carousel-index]').forEach((dot) => {
+      dot.addEventListener('click', () => {
+        stopRotation();
+        update(Number(dot.dataset.carouselIndex));
+      });
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        if (timer) window.clearInterval(timer);
+        timer = null;
+      } else {
+        startRotation();
+      }
+    });
+
+    update(0);
+    startRotation();
+  };
+
   document.addEventListener('DOMContentLoaded', () => {
     initializeReviews();
     initializeReviewForm();
+    initializeProductGallery();
+    initializeProductCarousel();
 
     const header = document.querySelector('.site-header');
     const announcement = document.querySelector('.announcement');

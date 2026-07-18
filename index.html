@@ -9,6 +9,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <script src="reviews-data.js" defer></script>
+  <script src="product-images.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body class="has-announcement">
@@ -20,13 +21,19 @@
       <a class="brand" href="index.html" aria-label="Lo-Key home">
         <img src="assets/logo-mark.svg" alt="">
         <span class="brand-name">lo-key</span>
-        <span class="canada-mark" aria-label="Canadian company" title="Canadian company"><img src="assets/icon-maple.svg" alt=""></span>
+        <span class="canada-mark" aria-label="Canadian company" title="Canadian company"><img src="assets/icon-maple.png" alt=""></span>
       </a>
       <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
       <nav class="nav-links" aria-label="Primary">
         <a href="#how-it-works">How it works</a>
         <a href="#who-its-for">Who it’s for</a>
         <a href="#about">About us</a>
+        <a href="#faq">FAQ</a>
+        <div class="nav-socials" aria-label="Social media">
+          <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Lo-Key on Instagram"><img src="assets/social-instagram.svg" alt=""></a>
+          <a class="social-link" href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Lo-Key on Facebook"><img src="assets/social-facebook.svg" alt=""></a>
+          <a class="social-link" href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="Lo-Key on YouTube"><img src="assets/social-youtube.svg" alt=""></a>
+        </div>
         <a class="cart-link" href="#" data-open-cart>Cart <span class="cart-count" hidden>0</span></a>
         <a class="btn btn-primary" href="product.html">Shop Lo-Key</a>
       </nav>
@@ -192,9 +199,14 @@
 
     <section class="section dark" id="inside-lokey">
       <div class="container product-showcase">
-        <div class="product-visual reveal">
-          <img src="assets/exploded-lokey.webp" alt="Concept rendering showing the layers inside a Lo-Key smart coin battery">
-          <span class="concept-label">Concept rendering</span>
+        <div class="product-carousel reveal" data-product-carousel>
+          <div class="product-carousel-stage">
+            <img data-carousel-image src="assets/exploded-lokey.webp" alt="Concept rendering showing the layers inside a Lo-Key smart coin battery">
+            <span class="concept-label" data-carousel-label>Inside Lo-Key</span>
+            <button class="product-carousel-arrow product-carousel-prev" type="button" data-carousel-prev aria-label="Show previous product image">‹</button>
+            <button class="product-carousel-arrow product-carousel-next" type="button" data-carousel-next aria-label="Show next product image">›</button>
+          </div>
+          <div class="product-carousel-dots" data-carousel-dots aria-label="Product image selection"></div>
         </div>
         <div class="reveal">
           <p class="eyebrow on-dark">Small format. Purpose-built electronics.</p>
@@ -293,7 +305,7 @@
           <p style="max-width:670px;color:#aebdcb">We are a Canadian company based in Mississauga, Ontario. Our batteries are assembled in Canada, combining practical electronics, compact mechanical design, and a focus on making everyday vehicle security easier to live with.</p>
         </div>
         <div class="about-facts">
-          <div class="about-fact"><span class="flag-mark" aria-hidden="true"><img src="assets/icon-maple.svg" alt=""></span><div><strong>Canadian company</strong><span>Built for Canadian drivers and beyond.</span></div></div>
+          <div class="about-fact"><span class="flag-mark" aria-hidden="true"><img src="assets/icon-maple.png" alt=""></span><div><strong>Canadian company</strong><span>Built for Canadian drivers and beyond.</span></div></div>
           <div class="about-fact"><span class="flag-mark" aria-hidden="true"><img src="assets/icon-pin.svg" alt=""></span><div><strong>Mississauga, Ontario</strong><span>Designed and developed in the Greater Toronto Area.</span></div></div>
           <div class="about-fact"><span class="flag-mark" aria-hidden="true"><img src="assets/icon-press.svg" alt=""></span><div><strong>Assembled in Canada</strong><span>Final battery assembly and quality checks in Canada.</span></div></div>
           <div class="about-fact"><span class="flag-mark" aria-hidden="true"><img src="assets/icon-calendar.svg" alt=""></span><div><strong>Started in 2026</strong><span>A new company focused on a very old problem: stolen cars.</span></div></div>
@@ -318,6 +330,11 @@
         </div>
         <div class="footer-col"><h4>Explore</h4><a href="#how-it-works">How it works</a><a href="#who-its-for">Who it’s for</a><a href="#about">About us</a></div>
         <div class="footer-col"><h4>Product</h4><a href="product.html">Lo-Key Smart Battery</a><a href="product.html#compatibility">Compatibility</a><a href="product.html#safety">Safety & limitations</a></div>
+        <div class="footer-col footer-social"><h4>Follow</h4><div class="footer-social-links">
+          <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Lo-Key on Instagram"><img src="assets/social-instagram.svg" alt=""><span>Instagram</span></a>
+          <a class="social-link" href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Lo-Key on Facebook"><img src="assets/social-facebook.svg" alt=""><span>Facebook</span></a>
+          <a class="social-link" href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="Lo-Key on YouTube"><img src="assets/social-youtube.svg" alt=""><span>YouTube</span></a>
+        </div></div>
       </div>
       <div class="footer-bottom">
         <p>Lo-Key is designed to reduce exposure to relay attacks by powering down an idle key fob. It does not prevent all theft methods and should be used as one layer in a broader vehicle-security approach. Product imagery is conceptual.</p>
