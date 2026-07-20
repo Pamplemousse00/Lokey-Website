@@ -2194,13 +2194,14 @@ button { cursor: pointer; }
   top: 0;
   left: calc(100% + 24px);
   width: min(540px, calc(100vw - 720px));
-  height: 560px;
+  aspect-ratio: 1 / 1;
+  height: auto;
   overflow: hidden;
   border: 1px solid var(--line-dark);
   border-radius: 22px;
   background-color: #fff;
   background-repeat: no-repeat;
-  background-size: 330%;
+  background-size: auto;
   box-shadow: 0 24px 70px rgba(8,19,33,.24);
   opacity: 0;
   pointer-events: none;
@@ -2211,6 +2212,22 @@ button { cursor: pointer; }
   opacity: 1;
   transform: translateY(0);
 }
+.product-zoom-lens {
+  position: absolute;
+  z-index: 6;
+  left: 0;
+  top: 0;
+  width: 124px;
+  height: 124px;
+  border: 2px solid var(--aqua-deep);
+  border-radius: 5px;
+  background: rgba(19,212,220,.14);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.75), 0 5px 18px rgba(8,19,33,.16);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 80ms ease;
+}
+.product-zoom-lens.visible { opacity: 1; }
 
 /* Vehicle compatibility checker ------------------------------------------ */
 .compatibility-layout {
@@ -2334,7 +2351,8 @@ button { cursor: pointer; }
 .vehicle-checker-help strong { color: var(--ink); }
 
 @media (max-width: 1180px) {
-  .product-zoom-preview { display: none; }
+  .product-zoom-preview,
+  .product-zoom-lens { display: none; }
   .product-image-card { cursor: default; }
 }
 
@@ -2357,7 +2375,8 @@ button { cursor: pointer; }
   .vehicle-checker-form { grid-template-columns: 1fr; }
   .vehicle-check-button { grid-column: auto; }
   .vehicle-result-heading { align-items: flex-start; flex-direction: column; gap: 2px; }
-  .product-zoom-preview { display: none; }
+  .product-zoom-preview,
+  .product-zoom-lens { display: none; }
   .product-image-card { cursor: default; }
   .inside-battery-visual { min-height: 340px; }
   .inside-battery-visual img { width: 115%; }
@@ -2605,4 +2624,43 @@ button { cursor: pointer; }
     margin-bottom: 16px;
   }
   #relay-attacks .relay-path-x { display: none; }
+}
+
+/* Mobile/tablet product gallery fix ---------------------------------------
+   The desktop gallery is intentionally sticky, but it must return to normal
+   document flow before the layout collapses to one column. This rule is kept
+   at the end of the stylesheet so later gallery/zoom additions cannot
+   accidentally override it. */
+@media (max-width: 1180px) {
+  .product-page .product-gallery {
+    position: static !important;
+    top: auto !important;
+    z-index: auto !important;
+  }
+}
+
+
+/* Product-page vertical rhythm --------------------------------------------
+   Keep the detailed sections distinct without making the page feel sparse. */
+.product-page .product-main {
+  padding-bottom: 58px;
+}
+.product-page .detail-section {
+  padding-top: 74px;
+  padding-bottom: 74px;
+}
+.product-page .detail-section .section-head {
+  margin-bottom: 40px;
+}
+@media (max-width: 820px) {
+  .product-page .product-main {
+    padding-bottom: 44px;
+  }
+  .product-page .detail-section {
+    padding-top: 58px;
+    padding-bottom: 58px;
+  }
+  .product-page .detail-section .section-head {
+    margin-bottom: 32px;
+  }
 }

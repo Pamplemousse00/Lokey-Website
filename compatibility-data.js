@@ -1,7 +1,7 @@
 window.LO_KEY_COMPATIBILITY_FALLBACK = {
-  "schemaVersion": 6,
+  "schemaVersion": 9,
   "generatedAt": "2026-07-20",
-  "description": "Vehicle catalogue with exact and typical battery-size fitment rules. CR2032 entries return Maybe until physically tested with Lo-Key; non-CR2032 entries return No; 2017 Hyundai Tucson returns Yes. Rules marked typical-fitment should still be confirmed against the battery marking inside the customer’s exact key fob.",
+  "description": "Vehicle catalogue containing factual battery fitment rules only. Customer-facing wording is stored once in compatibility-messages.js and selected by status.",
   "years": [
     2026,
     2025,
@@ -4138,7 +4138,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
     }
   ],
   "defaultStatus": "untested",
-  "defaultMessage": "We do not yet have a sufficiently reliable battery-size record for this exact vehicle. Open the key fob and confirm the battery marking before ordering.",
   "batteryRules": [
     {
       "make": "Hyundai",
@@ -4146,8 +4145,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2017,
       "to": 2017,
       "battery": "CR2032",
-      "status": "verified",
-      "message": "This vehicle has been tested and verified to be compatible with Lo-Key."
+      "status": "verified"
     },
     {
       "make": "Toyota",
@@ -4156,8 +4154,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2024,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Toyota",
@@ -4166,8 +4163,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Toyota",
@@ -4176,8 +4172,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2021,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Toyota",
@@ -4186,8 +4181,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2024,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Toyota",
@@ -4196,8 +4190,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Toyota",
@@ -4206,8 +4199,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2022,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Toyota",
@@ -4216,8 +4208,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2022,
       "battery": "CR1632",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Toyota",
@@ -4226,8 +4217,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2022,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Toyota",
@@ -4236,8 +4226,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Honda",
@@ -4246,8 +4235,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Honda",
@@ -4256,8 +4244,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Honda",
@@ -4266,8 +4253,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Honda",
@@ -4276,8 +4262,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Honda",
@@ -4286,8 +4271,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Acura",
@@ -4296,8 +4280,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Acura",
@@ -4306,8 +4289,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2006,
       "battery": "CR2025",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Acura",
@@ -4316,8 +4298,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Acura",
@@ -4326,8 +4307,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2013,
       "battery": "CR1616",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Subaru",
@@ -4336,8 +4316,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Subaru",
@@ -4346,8 +4325,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Subaru",
@@ -4356,8 +4334,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Subaru",
@@ -4366,8 +4343,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2025,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Subaru",
@@ -4376,8 +4352,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Nissan",
@@ -4386,8 +4361,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Nissan",
@@ -4396,8 +4370,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2018,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Nissan",
@@ -4406,8 +4379,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Nissan",
@@ -4416,8 +4388,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2006,
       "battery": "CR2025",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Nissan",
@@ -4426,8 +4397,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Nissan",
@@ -4436,8 +4406,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2004,
       "battery": "CR2025",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Nissan",
@@ -4446,8 +4415,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Nissan",
@@ -4456,8 +4424,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Nissan",
@@ -4466,8 +4433,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Mazda",
@@ -4476,8 +4442,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Mazda",
@@ -4486,8 +4451,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2021,
       "battery": "CR2025",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Mazda",
@@ -4496,8 +4460,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Mazda",
@@ -4506,8 +4469,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2025",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Mazda",
@@ -4516,8 +4478,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ford",
@@ -4526,8 +4487,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2019,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ford",
@@ -4536,8 +4496,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ford",
@@ -4546,8 +4505,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2019,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ford",
@@ -4556,8 +4514,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ford",
@@ -4566,8 +4523,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2014,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ford",
@@ -4576,8 +4532,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2017,
       "battery": "CR2025",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ford",
@@ -4586,8 +4541,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ford",
@@ -4596,8 +4550,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ford",
@@ -4606,8 +4559,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2450",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ford",
@@ -4616,8 +4568,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2017,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ford",
@@ -4626,8 +4577,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ram",
@@ -4636,8 +4586,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2018,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ram",
@@ -4646,8 +4595,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ram",
@@ -4656,8 +4604,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2018,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ram",
@@ -4666,8 +4613,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ram",
@@ -4676,8 +4622,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2018,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ram",
@@ -4686,8 +4631,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Jeep",
@@ -4696,8 +4640,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2018,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Jeep",
@@ -4706,8 +4649,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Jeep",
@@ -4716,8 +4658,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2021,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Jeep",
@@ -4726,8 +4667,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Dodge",
@@ -4736,8 +4676,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a CR2032 battery. This exact vehicle has not yet been physically tested with Lo-Key."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Dodge",
@@ -4746,8 +4685,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "confidence": "fitment-guide",
-      "message": "This key fob is listed as using a battery other than CR2032, so the current Lo-Key format is not compatible."
+      "confidence": "fitment-guide"
     },
     {
       "make": "Ford",
@@ -4755,8 +4693,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2020,
       "to": 2024,
       "battery": "CR2032 or CR2450",
-      "status": "conditional",
-      "message": "These years used more than one fob style. Flip-key or integrated-keyhead remotes are listed with CR2032, while Intelligent Access or remote-start keys are listed with CR2450. Check the battery marking inside your exact key."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -4764,8 +4701,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2018,
       "to": 2019,
       "battery": "CR2032 or CR2450",
-      "status": "conditional",
-      "message": "These years used more than one fob style. Some use CR2032 and some Intelligent Access keys use CR2450. Check the battery marking inside your exact key."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -4773,8 +4709,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2016,
       "to": 2017,
       "battery": "CR2032 or 2 × CR2025",
-      "status": "conditional",
-      "message": "These years used more than one fob style. Integrated-keyhead remotes are listed with CR2032, while some Intelligent Access transmitters use two CR2025 cells."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -4838,8 +4773,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2023,
       "to": 2026,
       "battery": "CR2032 or CR2450",
-      "status": "conditional",
-      "message": "Current Corolla fobs can differ by key type. Non-smart-key versions are listed with CR2032, while smart-key versions are listed with CR2450. Check the battery marking inside your exact key."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -4927,8 +4861,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2020,
       "to": 2020,
       "battery": "CR2025 or CR2032",
-      "status": "conditional",
-      "message": "The 2020 CX-5 is listed with different batteries for different key types: Type A uses CR2025 and Type B uses CR2032. Check the battery marking inside your exact key."
+      "status": "conditional"
     },
     {
       "make": "Mazda",
@@ -4952,8 +4885,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2020,
       "to": 2020,
       "battery": "CR2025 or CR2032",
-      "status": "conditional",
-      "message": "The 2020 Mazda6 is listed with different batteries for different key types. Check the battery marking inside your exact key."
+      "status": "conditional"
     },
     {
       "make": "Mazda",
@@ -5281,8 +5213,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2006,
       "to": 2012,
       "battery": "CR2032 or VL2020",
-      "status": "conditional",
-      "message": "Some Comfort Access fobs use CR2032, while other fobs use a rechargeable VL2020. Check the battery marking inside your exact key."
+      "status": "conditional"
     },
     {
       "make": "BMW",
@@ -5298,8 +5229,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2007,
       "to": 2010,
       "battery": "CR2032 on some Comfort Access fobs",
-      "status": "conditional",
-      "message": "Some Comfort Access fobs use CR2032. Check the battery marking inside your exact key before ordering."
+      "status": "conditional"
     },
     {
       "make": "BMW",
@@ -5315,8 +5245,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2001,
       "to": 2008,
       "battery": "CR2032 on some Comfort Access fobs",
-      "status": "conditional",
-      "message": "Some Comfort Access fobs use CR2032. Check the battery marking inside your exact key before ordering."
+      "status": "conditional"
     },
     {
       "make": "Chevrolet",
@@ -5500,8 +5429,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2015,
       "to": 2019,
       "battery": "CR2032 or CR2450",
-      "status": "conditional",
-      "message": "This year range used more than one fob style. Some use CR2032 and some smart keys use CR2450. Check the battery marking inside your exact key."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -5613,8 +5541,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2013,
       "to": 2020,
       "battery": "CR2032 or CR1620",
-      "status": "conditional",
-      "message": "Some smart fobs use CR2032, while other remote-key styles use CR1620. Check the battery marking inside your exact key."
+      "status": "conditional"
     },
     {
       "make": "Honda",
@@ -5630,8 +5557,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2014,
       "to": 2020,
       "battery": "CR2032 or CR1620",
-      "status": "conditional",
-      "message": "Some smart fobs use CR2032, while other remote-key styles use CR1620. Check the battery marking inside your exact key."
+      "status": "conditional"
     },
     {
       "make": "Honda",
@@ -5647,8 +5573,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2016,
       "to": 2020,
       "battery": "CR2032 or CR1620",
-      "status": "conditional",
-      "message": "Some smart fobs use CR2032, while other remote-key styles use CR1620. Check the battery marking inside your exact key."
+      "status": "conditional"
     },
     {
       "make": "Honda",
@@ -5680,8 +5605,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2015,
       "to": 2020,
       "battery": "CR2032 or CR1620",
-      "status": "conditional",
-      "message": "Some smart fobs use CR2032, while other remote-key styles use CR1620. Check the battery marking inside your exact key."
+      "status": "conditional"
     },
     {
       "make": "Honda",
@@ -5953,8 +5877,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2013,
       "to": 2013,
       "battery": "CR2032 or CR2016",
-      "status": "conditional",
-      "message": "Different 2013 Camry fob styles are listed with different batteries. Check the battery marking inside your exact key."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -5994,8 +5917,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2007,
       "to": 2015,
       "battery": "CR2032",
-      "status": "compatible",
-      "message": "This key fob is listed as using a CR2032 battery, but Lo-Key has not yet been physically tested in this exact vehicle."
+      "status": "compatible"
     },
     {
       "make": "Hyundai",
@@ -6003,8 +5925,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2022,
       "to": 2024,
       "battery": "CR2032",
-      "status": "compatible",
-      "message": "This key fob is listed as using a CR2032 battery, but Lo-Key has not yet been physically tested in this exact vehicle."
+      "status": "compatible"
     },
     {
       "make": "Acura",
@@ -6013,7 +5934,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2003,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6023,7 +5943,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2022,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6033,7 +5952,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2001,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6043,7 +5961,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6053,7 +5970,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 1996,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6063,7 +5979,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6073,7 +5988,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2005,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6083,7 +5997,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2022,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6093,7 +6006,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6103,7 +6015,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2012,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6113,7 +6024,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6123,7 +6033,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2006,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6133,7 +6042,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2014,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6143,7 +6051,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6153,7 +6060,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2014,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6163,7 +6069,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2013,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6173,7 +6078,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6183,7 +6087,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6193,7 +6096,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6203,7 +6105,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6213,7 +6114,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6223,7 +6123,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6233,7 +6132,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6243,7 +6141,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6253,7 +6150,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6263,7 +6159,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6273,7 +6168,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6283,7 +6177,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2005,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6293,7 +6186,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6303,7 +6195,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6313,7 +6204,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6323,7 +6213,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6333,7 +6222,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6343,7 +6231,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6353,7 +6240,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6363,7 +6249,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6373,7 +6258,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6383,7 +6267,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2024,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6393,7 +6276,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6403,7 +6285,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6413,7 +6294,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6423,7 +6303,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6433,7 +6312,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6443,7 +6321,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6453,7 +6330,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6463,7 +6339,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6473,7 +6348,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6483,7 +6357,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6493,7 +6366,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6503,7 +6375,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032 or VL2020",
       "status": "conditional",
-      "message": "Available fitment data lists more than one possible key-fob battery (CR2032 or VL2020). Check the battery marking inside your exact key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6513,7 +6384,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6523,7 +6393,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032 or VL2020",
       "status": "conditional",
-      "message": "Available fitment data lists more than one possible key-fob battery (CR2032 or VL2020). Check the battery marking inside your exact key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6533,7 +6402,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2019,
       "battery": "CR2032 or VL2020",
       "status": "conditional",
-      "message": "Available fitment data lists more than one possible key-fob battery (CR2032 or VL2020). Check the battery marking inside your exact key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6543,7 +6411,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032 or VL2020",
       "status": "conditional",
-      "message": "Available fitment data lists more than one possible key-fob battery (CR2032 or VL2020). Check the battery marking inside your exact key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6553,7 +6420,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 1997,
       "battery": "CR2032 or VL2020",
       "status": "conditional",
-      "message": "Available fitment data lists more than one possible key-fob battery (CR2032 or VL2020). Check the battery marking inside your exact key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6563,7 +6429,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6573,7 +6438,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2021,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6583,7 +6447,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6593,7 +6456,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6603,7 +6465,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6613,7 +6474,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6623,7 +6483,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6633,7 +6492,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6643,7 +6501,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6653,7 +6510,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6663,7 +6519,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6673,7 +6528,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6683,7 +6537,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6693,7 +6546,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6703,7 +6555,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2002,
       "battery": "CR2032 or VL2020",
       "status": "conditional",
-      "message": "Available fitment data lists more than one possible key-fob battery (CR2032 or VL2020). Check the battery marking inside your exact key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6713,7 +6564,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -6723,7 +6573,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2019,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6733,7 +6582,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2005,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6743,7 +6591,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6753,7 +6600,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2022,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6763,7 +6609,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6773,7 +6618,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6783,7 +6627,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6793,7 +6636,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2019,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6803,7 +6645,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2005,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6813,7 +6654,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2011,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6823,7 +6663,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2005,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6833,7 +6672,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2007,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6843,7 +6681,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2004,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6853,7 +6690,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6863,7 +6699,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2007,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6873,7 +6708,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2007,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6883,7 +6717,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2017,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6893,7 +6726,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2019,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6903,7 +6735,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6913,7 +6744,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6923,7 +6753,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6933,7 +6762,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2019,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6943,7 +6771,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2005,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6953,7 +6780,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2011,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6963,7 +6789,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6973,7 +6798,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6983,7 +6807,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -6993,7 +6816,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7003,7 +6825,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2004,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7013,7 +6834,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7023,7 +6843,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2011,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7033,7 +6852,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7043,7 +6861,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7053,7 +6870,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7063,7 +6879,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2019,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7073,7 +6888,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2005,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7083,7 +6897,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2013,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7093,7 +6906,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2011,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7103,7 +6915,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2005,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7113,7 +6924,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7123,7 +6933,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7133,7 +6942,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7143,7 +6951,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7153,7 +6960,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2002,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7163,7 +6969,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2024,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7173,7 +6978,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2017,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7183,7 +6987,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2005,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7193,7 +6996,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2018,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7203,7 +7005,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2010,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7213,7 +7014,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7223,7 +7023,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7233,7 +7032,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2019,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7243,7 +7041,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7253,7 +7050,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7263,7 +7059,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7273,7 +7068,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2011,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7283,7 +7077,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7293,7 +7086,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2025,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7303,7 +7095,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2007,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7313,7 +7104,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7323,7 +7113,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7333,7 +7122,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7343,7 +7131,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7353,7 +7140,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2022,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7363,7 +7149,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7373,7 +7158,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7383,7 +7167,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7393,7 +7176,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7403,7 +7185,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7413,7 +7194,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7423,7 +7203,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7433,7 +7212,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2019,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7443,7 +7221,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2017,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7453,7 +7230,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7463,7 +7239,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2004,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7473,7 +7248,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7483,7 +7257,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2004,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7493,7 +7266,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2008,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7503,7 +7275,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2008,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7513,7 +7284,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7523,7 +7293,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2010,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7533,7 +7302,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2010,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7543,7 +7311,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7553,7 +7320,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2003,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7563,7 +7329,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7573,7 +7338,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2000,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7583,7 +7347,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2014,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7593,7 +7356,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2012,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7603,7 +7365,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2007,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7613,7 +7374,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7623,7 +7383,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7633,7 +7392,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -7643,7 +7401,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2011,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7653,7 +7410,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7663,7 +7419,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7673,7 +7428,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7683,7 +7437,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -7693,7 +7446,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2004,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7703,7 +7455,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7713,7 +7464,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2008,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7723,7 +7473,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2005,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7733,7 +7482,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2012,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7743,7 +7491,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2010,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7753,7 +7500,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2010,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7763,7 +7509,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2010,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7773,7 +7518,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2006,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7783,7 +7527,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2006,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7793,7 +7536,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2010,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7803,7 +7545,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2017,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7813,7 +7554,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7823,7 +7563,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2019,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7833,7 +7572,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2019,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7843,7 +7581,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7853,7 +7590,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7863,7 +7599,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -7872,8 +7607,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 1996,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -7881,8 +7615,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2021,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -7890,8 +7623,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2021,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -7899,8 +7631,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2013,
       "to": 2018,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -7908,8 +7639,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2000,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -7917,8 +7647,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2011,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -7926,8 +7655,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -7935,8 +7663,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2018,
       "to": 2022,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -7944,8 +7671,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2007,
       "to": 2024,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -7953,8 +7679,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2001,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -7962,8 +7687,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2003,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -7971,8 +7695,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2000,
       "to": 2005,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -7980,8 +7703,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1997,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -7989,8 +7711,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -7998,8 +7719,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8007,8 +7727,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1999,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8016,8 +7735,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1999,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8025,8 +7743,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2011,
       "to": 2019,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8034,8 +7751,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2005,
       "to": 2007,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8043,8 +7759,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2009,
       "to": 2019,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8052,8 +7767,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2000,
       "to": 2018,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8061,8 +7775,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2004,
       "to": 2007,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8070,8 +7783,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2005,
       "to": 2007,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8079,8 +7791,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2006,
       "to": 2020,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8088,8 +7799,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2022,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8097,8 +7807,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8106,8 +7815,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2021,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8115,8 +7823,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2011,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8124,8 +7831,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2019,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8133,8 +7839,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2019,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8142,8 +7847,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2002,
       "to": 2005,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8151,8 +7855,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2015,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8160,8 +7863,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2010,
       "to": 2023,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Ford",
@@ -8169,8 +7871,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2003,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "GMC",
@@ -8179,7 +7880,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8189,7 +7889,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8199,7 +7898,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2000,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8209,7 +7907,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8219,7 +7916,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8229,7 +7925,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8239,7 +7934,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2001,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8249,7 +7943,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2005,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8259,7 +7952,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8269,7 +7961,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8279,7 +7970,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8289,7 +7979,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8299,7 +7988,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8309,7 +7997,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8319,7 +8006,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8329,7 +8015,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8339,7 +8024,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8349,7 +8033,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8359,7 +8042,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8369,7 +8051,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8379,7 +8060,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8389,7 +8069,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -8399,7 +8078,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -8409,7 +8087,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2021,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8419,7 +8096,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -8429,7 +8105,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -8439,7 +8114,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2015,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -8449,7 +8123,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2011,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -8459,7 +8132,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -8469,7 +8141,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8479,7 +8150,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2006,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -8489,7 +8159,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2014,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -8499,7 +8168,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2022,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8509,7 +8177,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -8519,7 +8186,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2002,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -8529,7 +8195,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8539,7 +8204,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8549,7 +8213,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2001,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -8559,7 +8222,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8569,7 +8231,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2014,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -8579,7 +8240,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8589,7 +8249,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR1616",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1616, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -8599,7 +8258,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2022,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8609,7 +8267,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2017,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8619,7 +8276,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8629,7 +8285,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8639,7 +8294,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8649,7 +8303,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8659,7 +8312,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2022,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8669,7 +8321,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8679,7 +8330,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8689,7 +8339,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8699,7 +8348,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8709,7 +8357,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8719,7 +8366,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8729,7 +8375,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8739,7 +8384,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8749,7 +8393,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2008,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8759,7 +8402,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8769,7 +8411,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2022,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8779,7 +8420,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8789,7 +8429,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2012,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8799,7 +8438,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2001,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8809,7 +8447,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2005,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -8818,8 +8455,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2008,
       "to": 2012,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8827,8 +8463,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2003,
       "to": 2012,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8836,8 +8471,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2003,
       "to": 2008,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8845,8 +8479,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2009,
       "to": 2013,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8854,8 +8487,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 1996,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8863,8 +8495,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1999,
       "to": 2002,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8872,8 +8503,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2011,
       "to": 2012,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8881,8 +8511,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2003,
       "to": 2008,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8890,8 +8519,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2008,
       "to": 2013,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8899,8 +8527,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2001,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8908,8 +8535,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2002,
       "to": 2004,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8917,8 +8543,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 1997,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8926,8 +8551,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2013,
       "to": 2013,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8935,8 +8559,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2006,
       "to": 2010,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8944,8 +8567,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2011,
       "to": 2013,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8953,8 +8575,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2003,
       "to": 2004,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8962,8 +8583,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2006,
       "to": 2010,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8971,8 +8591,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2011,
       "to": 2013,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8980,8 +8599,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2015,
       "to": 2015,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8989,8 +8607,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2006,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -8998,8 +8615,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2014,
       "to": 2024,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -9007,8 +8623,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2014,
       "to": 2022,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -9016,8 +8631,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2014,
       "to": 2019,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -9025,8 +8639,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2017,
       "to": 2019,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -9034,8 +8647,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1997,
       "to": 2003,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -9043,8 +8655,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2014,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -9052,8 +8663,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2022,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -9061,8 +8671,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2004,
       "to": 2013,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -9070,8 +8679,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2014,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -9079,8 +8687,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2014,
       "to": 2017,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Infiniti",
@@ -9088,8 +8695,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2014,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Jaguar",
@@ -9098,7 +8704,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2024,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9108,7 +8713,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9118,7 +8722,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2024,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9128,7 +8731,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2024,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9138,7 +8740,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2008,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9148,7 +8749,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2008,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9158,7 +8758,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9168,7 +8767,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2024,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9178,7 +8776,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2019,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9188,7 +8785,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2015,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9198,7 +8794,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2001,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9208,7 +8803,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9218,7 +8812,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2010,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9228,7 +8821,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9238,7 +8830,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -9248,7 +8839,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9258,7 +8848,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -9268,7 +8857,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2012,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9278,7 +8866,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2017,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9288,7 +8875,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -9298,7 +8884,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -9308,7 +8893,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -9318,7 +8902,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9328,7 +8911,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9338,7 +8920,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9348,7 +8929,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9358,7 +8938,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9368,7 +8947,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9378,7 +8956,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9388,7 +8965,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2024,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9398,7 +8974,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9408,7 +8983,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9418,7 +8992,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9428,7 +9001,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9438,7 +9010,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9448,7 +9019,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9458,7 +9028,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2010,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9468,7 +9037,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2021,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9478,7 +9046,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9488,7 +9055,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2001,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9498,7 +9064,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9508,7 +9073,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9518,7 +9082,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9528,7 +9091,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2002,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9538,7 +9100,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9548,7 +9109,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9558,7 +9118,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9568,7 +9127,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 1997,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9578,7 +9136,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9588,7 +9145,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2004,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9598,7 +9154,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9608,7 +9163,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9618,7 +9172,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2005,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9628,7 +9181,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2015,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9638,7 +9190,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9648,7 +9199,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9658,7 +9208,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9668,7 +9217,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9678,7 +9226,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9688,7 +9235,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9698,7 +9244,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2017,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9708,7 +9253,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9718,7 +9262,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR1632",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1632, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -9728,7 +9271,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9738,7 +9280,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2012,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9748,7 +9289,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9758,7 +9298,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9768,7 +9307,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2012,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9778,7 +9316,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9788,7 +9325,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9798,7 +9334,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9808,7 +9343,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9818,7 +9352,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9828,7 +9361,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9838,7 +9370,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2000,
       "battery": "CR1632",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1632, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -9848,7 +9379,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2010,
       "battery": "CR1632",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1632, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -9858,7 +9388,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9868,7 +9397,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -9877,8 +9405,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2003,
       "to": 2005,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lincoln",
@@ -9886,8 +9413,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2020,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lincoln",
@@ -9895,8 +9421,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2002,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lincoln",
@@ -9904,8 +9429,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2017,
       "to": 2020,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lincoln",
@@ -9913,8 +9437,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2020,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lincoln",
@@ -9922,8 +9445,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2000,
       "to": 2006,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lincoln",
@@ -9931,8 +9453,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 1998,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lincoln",
@@ -9940,8 +9461,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2015,
       "to": 2019,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lincoln",
@@ -9949,8 +9469,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2009,
       "to": 2016,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lincoln",
@@ -9958,8 +9477,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2010,
       "to": 2019,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lincoln",
@@ -9967,8 +9485,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2007,
       "to": 2018,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lincoln",
@@ -9976,8 +9493,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2007,
       "to": 2020,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lincoln",
@@ -9985,8 +9501,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2019,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lincoln",
@@ -9994,8 +9509,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1998,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lincoln",
@@ -10003,8 +9517,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2011,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lincoln",
@@ -10012,8 +9525,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2006,
       "to": 2006,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lucid",
@@ -10021,8 +9533,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2022,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Lucid",
@@ -10030,8 +9541,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2025,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "MINI",
@@ -10040,7 +9550,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2024,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10050,7 +9559,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10060,7 +9568,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10070,7 +9577,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10080,7 +9586,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2002,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10090,7 +9595,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10100,7 +9604,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2021,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10110,7 +9613,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10120,7 +9622,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10130,7 +9631,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10140,7 +9640,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2012,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10150,7 +9649,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10160,7 +9658,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10170,7 +9667,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10180,7 +9676,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2014,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10190,7 +9685,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10200,7 +9694,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2015,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10210,7 +9703,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2021,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10220,7 +9712,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2002,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10230,7 +9721,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 1998,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10240,7 +9730,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2006,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10250,7 +9739,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10260,7 +9748,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10270,7 +9757,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2003,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10280,7 +9766,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 1996,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10290,7 +9775,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2011,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10300,7 +9784,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2011,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10310,7 +9793,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2022,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10320,7 +9802,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2011,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10330,7 +9811,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10340,7 +9820,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2014,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10350,7 +9829,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10360,7 +9838,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10370,7 +9847,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10380,7 +9856,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10390,7 +9865,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10400,7 +9874,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10410,7 +9883,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10420,7 +9892,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10430,7 +9901,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10440,7 +9910,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10450,7 +9919,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10460,7 +9928,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10470,7 +9937,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10480,7 +9946,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2015,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10490,7 +9955,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10500,7 +9964,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2015,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10510,7 +9973,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2012,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10520,7 +9982,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10530,7 +9991,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10540,7 +10000,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10550,7 +10009,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10560,7 +10018,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2015,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10570,7 +10027,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10580,7 +10036,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 1999,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10590,7 +10045,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2004,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10600,7 +10054,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2012,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10610,7 +10063,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10620,7 +10072,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2008,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10630,7 +10081,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2011,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10640,7 +10090,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2012,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10650,7 +10099,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2017,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10660,7 +10108,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2002,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10670,7 +10117,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2024,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10680,7 +10126,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2006,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10690,7 +10135,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2004,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10700,7 +10144,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10710,7 +10153,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10720,7 +10162,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10730,7 +10171,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 1998,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10740,7 +10180,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 1998,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10750,7 +10189,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10760,7 +10198,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10770,7 +10207,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10780,7 +10216,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10790,7 +10225,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10800,7 +10234,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2014,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10810,7 +10243,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10820,7 +10252,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2024,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10830,7 +10261,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2017,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10840,7 +10270,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10850,7 +10279,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10860,7 +10288,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10870,7 +10297,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10880,7 +10306,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2021,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10890,7 +10315,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10900,7 +10324,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2002,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10910,7 +10333,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10920,7 +10342,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2017,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10930,7 +10351,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10940,7 +10360,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2022,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -10950,7 +10369,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10960,7 +10378,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2024,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10970,7 +10387,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10980,7 +10396,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2015,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -10990,7 +10405,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11000,7 +10414,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2021,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11010,7 +10423,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11020,7 +10432,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11030,7 +10441,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11040,7 +10450,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11050,7 +10459,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11060,7 +10468,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11070,7 +10477,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11080,7 +10486,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11090,7 +10495,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11100,7 +10504,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11110,7 +10513,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11120,7 +10522,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11130,7 +10531,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11140,7 +10540,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11150,7 +10549,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11160,7 +10558,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11170,7 +10567,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2022,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11180,7 +10576,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11190,7 +10585,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2450",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2450, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11200,7 +10594,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2006,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11210,7 +10603,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2011,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11220,7 +10612,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2011,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11230,7 +10621,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2011,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11240,7 +10630,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11250,7 +10639,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 1998,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11260,7 +10648,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 1998,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11270,7 +10657,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11280,7 +10666,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2007,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11290,7 +10675,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2005,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11300,7 +10684,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2010,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11310,7 +10693,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2007,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11320,7 +10702,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2002,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11330,7 +10711,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2010,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11340,7 +10720,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2010,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11350,7 +10729,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2016",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2016, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11360,7 +10738,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2016",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2016, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11370,7 +10747,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2016",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2016, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11380,7 +10756,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2015,
       "battery": "CR2016",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2016, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11390,7 +10765,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2016",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2016, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11400,7 +10774,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2006,
       "battery": "CR2016",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2016, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11410,7 +10783,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2015,
       "battery": "CR2016",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2016, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11420,7 +10792,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2014,
       "battery": "CR2016",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR2016, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11430,7 +10801,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11440,7 +10810,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2007,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11450,7 +10819,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2006,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11460,7 +10828,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2020,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11470,7 +10837,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11480,7 +10846,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11490,7 +10855,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11500,7 +10864,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11510,7 +10873,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2025,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11520,7 +10882,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11530,7 +10891,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11540,7 +10900,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2014,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11550,7 +10909,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11560,7 +10918,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2015,
       "battery": "CR1620 or CR2025",
       "status": "incompatible",
-      "message": "Available fitment data indicates that this vehicle typically uses CR1620 or CR2025, not CR2032, so the current Lo-Key format is not compatible.",
       "confidence": "typical-fitment"
     },
     {
@@ -11570,7 +10927,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11580,7 +10936,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11590,7 +10945,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11600,7 +10954,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11610,7 +10963,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11620,7 +10972,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2012,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11629,8 +10980,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11638,8 +10988,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2022,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11647,8 +10996,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2023,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11656,8 +11004,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2018,
       "to": 2022,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11665,8 +11012,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11674,8 +11020,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2005,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11683,8 +11028,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11692,8 +11036,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2022,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11701,8 +11044,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2023,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11710,8 +11052,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2000,
       "to": 2005,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11719,8 +11060,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2007,
       "to": 2014,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11728,8 +11068,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2023,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11737,8 +11076,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2022,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11746,8 +11084,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2001,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11755,8 +11092,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2021,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11764,8 +11100,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2024,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11773,8 +11108,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2003,
       "to": 2013,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11782,8 +11116,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2016,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11791,8 +11124,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2000,
       "to": 2005,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11800,8 +11132,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2001,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11809,8 +11140,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2012,
       "to": 2019,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11818,8 +11148,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2017,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11827,8 +11156,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2012,
       "to": 2017,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11836,8 +11164,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11845,8 +11172,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2001,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11854,8 +11180,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1998,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11863,8 +11188,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1999,
       "to": 2008,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11872,8 +11196,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 1998,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11881,8 +11204,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2020,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11890,8 +11212,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 1996,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11899,8 +11220,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2000,
       "to": 2026,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11908,8 +11228,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2009,
       "to": 2015,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11917,8 +11236,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2021,
       "to": 2024,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11926,8 +11244,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2007,
       "to": 2020,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Toyota",
@@ -11935,8 +11252,7 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "from": 2017,
       "to": 2018,
       "battery": "Varies by fob",
-      "status": "conditional",
-      "message": "This vehicle is included in our catalogue, but the exact key-fob battery can vary by year, trim, market, or remote style. Open the fob and confirm that the installed battery is marked CR2032 before ordering."
+      "status": "conditional"
     },
     {
       "make": "Volkswagen",
@@ -11945,7 +11261,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2023,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11955,7 +11270,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11965,7 +11279,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11975,7 +11288,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2019,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11985,7 +11297,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2002,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -11995,7 +11306,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2017,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12005,7 +11315,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12015,7 +11324,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2003,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12025,7 +11333,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2021,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12035,7 +11342,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12045,7 +11351,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2004,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12055,7 +11360,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12065,7 +11369,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12075,7 +11378,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12085,7 +11387,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12095,7 +11396,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2022,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12105,7 +11405,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2006,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12115,7 +11414,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2009,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12125,7 +11423,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12135,7 +11432,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12145,7 +11441,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2017,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12155,7 +11450,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 1996,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12165,7 +11459,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 1997,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12175,7 +11468,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2013,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12185,7 +11477,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2024,
       "battery": "CR2032 or CR2450",
       "status": "conditional",
-      "message": "Available fitment data lists more than one possible key-fob battery (CR2032 or CR2450). Check the battery marking inside your exact key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12195,7 +11486,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2004,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12205,7 +11495,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2013,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12215,7 +11504,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2011,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12225,7 +11513,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12235,7 +11522,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2000,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12245,7 +11531,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12255,7 +11540,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 1998,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12265,7 +11549,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032 or CR2450",
       "status": "conditional",
-      "message": "Available fitment data lists more than one possible key-fob battery (CR2032 or CR2450). Check the battery marking inside your exact key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12275,7 +11558,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2004,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12285,7 +11567,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2011,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12295,7 +11576,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032 or CR2450",
       "status": "conditional",
-      "message": "Available fitment data lists more than one possible key-fob battery (CR2032 or CR2450). Check the battery marking inside your exact key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12305,7 +11585,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2010,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12315,7 +11594,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 1998,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12325,7 +11603,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032 or CR2450",
       "status": "conditional",
-      "message": "Available fitment data lists more than one possible key-fob battery (CR2032 or CR2450). Check the battery marking inside your exact key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12335,7 +11612,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032 or CR2450",
       "status": "conditional",
-      "message": "Available fitment data lists more than one possible key-fob battery (CR2032 or CR2450). Check the battery marking inside your exact key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12345,7 +11621,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032 or CR2450",
       "status": "conditional",
-      "message": "Available fitment data lists more than one possible key-fob battery (CR2032 or CR2450). Check the battery marking inside your exact key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12355,7 +11630,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032 or CR2450",
       "status": "conditional",
-      "message": "Available fitment data lists more than one possible key-fob battery (CR2032 or CR2450). Check the battery marking inside your exact key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12365,7 +11639,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12375,7 +11648,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2016,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     },
     {
@@ -12385,7 +11657,6 @@ window.LO_KEY_COMPATIBILITY_FALLBACK = {
       "to": 2026,
       "battery": "CR2032",
       "status": "compatible",
-      "message": "Available fitment data indicates that this vehicle typically uses a CR2032 key-fob battery. Lo-Key has not yet been physically tested in this exact vehicle; confirm the battery marking inside your key before ordering.",
       "confidence": "typical-fitment"
     }
   ],

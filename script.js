@@ -6,7 +6,7 @@
   const SHOPIFY_VARIANT_ID = '54038879011180';
   const product = {
     id: 'lokey-cr2032',
-    name: 'Lo-Key Smart Battery',
+    name: 'Lo-Key Anti-Theft CR2032 Battery',
     price: 29.99,
     image: 'assets/exploded-lokey.webp',
     subtitle: 'CR2032-compatible motion-sleep battery'
@@ -685,6 +685,7 @@
     const thumbnails = gallery.querySelector('[data-product-thumbnails]');
     const imageCard = gallery.querySelector('.product-image-card');
     const zoomPreview = gallery.querySelector('[data-product-zoom]');
+    const zoomLens = gallery.querySelector('[data-product-zoom-lens]');
     if (!mainImage || !thumbnails) return;
 
     preloadProductImages(images);
@@ -731,24 +732,71 @@
       const hideZoom = () => {
         zoomPreview.classList.remove('visible');
         zoomPreview.setAttribute('aria-hidden', 'true');
+        zoomLens?.classList.remove('visible');
+      };
+
+      const updateZoom = (event) => {
+        if (event.pointerType === 'touch') return;
+
+        const cardRect = imageCard.getBoundingClientRect();
+        const imageRect = mainImage.getBoundingClientRect();
+        const lensWidth = zoomLens?.offsetWidth || 124;
+        const lensHeight = zoomLens?.offsetHeight || 124;
+
+        /*
+         * Work from the rendered image bounds rather than the surrounding
+         * card. The card contains empty space above and below some product
+         * images, so using the card percentages made the preview drift near
+         * the edges even though it looked correct in the centre.
+         */
+        const pointerX = event.clientX - imageRect.left;
+        const pointerY = event.clientY - imageRect.top;
+        const isOverRenderedImage = pointerX >= 0 && pointerX <= imageRect.width &&
+          pointerY >= 0 && pointerY <= imageRect.height;
+
+        if (!isOverRenderedImage) {
+          hideZoom();
+          return;
+        }
+
+        const lensLeftInImage = Math.max(
+          0,
+          Math.min(imageRect.width - lensWidth, pointerX - lensWidth / 2)
+        );
+        const lensTopInImage = Math.max(
+          0,
+          Math.min(imageRect.height - lensHeight, pointerY - lensHeight / 2)
+        );
+
+        if (zoomLens) {
+          zoomLens.style.left = `${imageRect.left - cardRect.left + lensLeftInImage}px`;
+          zoomLens.style.top = `${imageRect.top - cardRect.top + lensTopInImage}px`;
+        }
+
+        /*
+         * The preview and lens use the same aspect ratio. Scale the complete
+         * rendered image by the preview-to-lens ratio, then offset that image
+         * by the exact lens position. This makes every pixel in the preview
+         * correspond to the highlighted square, including at the top/bottom.
+         */
+        const scaleX = zoomPreview.clientWidth / lensWidth;
+        const scaleY = zoomPreview.clientHeight / lensHeight;
+        zoomPreview.style.backgroundSize =
+          `${imageRect.width * scaleX}px ${imageRect.height * scaleY}px`;
+        zoomPreview.style.backgroundPosition =
+          `${-lensLeftInImage * scaleX}px ${-lensTopInImage * scaleY}px`;
+
+        zoomPreview.classList.add('visible');
+        zoomPreview.setAttribute('aria-hidden', 'false');
+        zoomLens?.classList.add('visible');
       };
 
       imageCard.addEventListener('pointerenter', (event) => {
         if (event.pointerType === 'touch') return;
-        zoomPreview.classList.add('visible');
-        zoomPreview.setAttribute('aria-hidden', 'false');
+        updateZoom(event);
       });
 
-      imageCard.addEventListener('pointermove', (event) => {
-        if (event.pointerType === 'touch') return;
-        const rect = imageCard.getBoundingClientRect();
-        const x = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
-        const y = Math.max(0, Math.min(rect.height, event.clientY - rect.top));
-        const xPercent = rect.width ? (x / rect.width) * 100 : 50;
-        const yPercent = rect.height ? (y / rect.height) * 100 : 50;
-        zoomPreview.style.backgroundPosition = `${xPercent}% ${yPercent}%`;
-      });
-
+      imageCard.addEventListener('pointermove', updateZoom);
       imageCard.addEventListener('pointerleave', hideZoom);
     }
 
@@ -870,6 +918,31 @@
     }
   };
 
+  const compatibilityCopyFor = (status) => {
+    const configured = window.LO_KEY_COMPATIBILITY_MESSAGES?.[status];
+    if (configured?.lead && configured?.message) {
+      return {
+        lead: String(configured.lead),
+        message: String(configured.message)
+      };
+    }
+
+    return {
+      lead: 'Not confirmed.',
+      message: 'Compatibility information is not available for this selection.'
+    };
+  };
+
+  const normalizedCompatibilityStatus = (status, battery = '') => {
+    const value = String(status || '').toLowerCase();
+    if (['verified', 'compatible', 'conditional', 'incompatible'].includes(value)) return value;
+
+    const normalizedBattery = String(battery || '').trim().toUpperCase();
+    if (value === 'untested' && normalizedBattery === 'CR2032') return 'compatible';
+    if (value === 'untested' && normalizedBattery.includes('CR2032')) return 'conditional';
+    return 'unknown';
+  };
+
   const initializeCompatibilityChecker = async () => {
     const checker = document.querySelector('[data-vehicle-checker]');
     if (!checker) return;
@@ -950,10 +1023,20 @@
       const response = await requestCompatibilityData({ year, make, model });
       if (response?.result) {
         const item = response.result;
-        const status = item.status || 'untested';
-        if (status === 'verified') showResult('verified', 'Yes!', item.message || 'Your vehicle has been tested and verified to be compatible.', item.keyFobBattery ? `Listed key-fob battery: ${item.keyFobBattery}` : '');
-        else if (status === 'incompatible') showResult('incompatible', 'No.', item.message || 'This key fob is not compatible with Lo-Key.', item.keyFobBattery ? `Listed key-fob battery: ${item.keyFobBattery}` : '');
-        else showResult('untested', 'Maybe.', item.message || data.defaultMessage || 'This vehicle remains untested.');
+        const battery = item.keyFobBattery || item.battery || '';
+        const status = normalizedCompatibilityStatus(item.status, battery);
+        const copy = compatibilityCopyFor(status);
+        const visualStatus = status === 'verified'
+          ? 'verified'
+          : status === 'incompatible'
+            ? 'incompatible'
+            : 'untested';
+        showResult(
+          visualStatus,
+          copy.lead,
+          copy.message,
+          battery ? `Listed key-fob battery: ${battery}` : ''
+        );
         return;
       }
 
@@ -968,25 +1051,30 @@
       );
 
       if (rule) {
-        const batteryDetail = rule.battery ? `Listed key-fob battery: ${rule.battery}` : '';
-        if (rule.status === 'verified') {
-          showResult('verified', 'Yes!', rule.message || 'Your vehicle has been tested and verified to be compatible with Lo-Key.', batteryDetail);
-        } else if (rule.status === 'compatible') {
-          showResult('untested', 'Maybe.', rule.message || 'This key fob is listed as using a CR2032 battery, but Lo-Key has not yet been physically tested in this exact vehicle.', batteryDetail);
-        } else if (rule.status === 'conditional') {
-          showResult('untested', 'Maybe.', rule.message || 'This vehicle used more than one key-fob style. Check the battery marking inside your exact key.', batteryDetail);
-        } else {
-          showResult('incompatible', 'No.', rule.message || 'The listed key fob uses a battery other than CR2032, so the current Lo-Key format is not compatible.', batteryDetail);
-        }
+        const status = normalizedCompatibilityStatus(rule.status, rule.battery);
+        const copy = compatibilityCopyFor(status);
+        const visualStatus = status === 'verified'
+          ? 'verified'
+          : status === 'incompatible'
+            ? 'incompatible'
+            : 'untested';
+        showResult(
+          visualStatus,
+          copy.lead,
+          copy.message,
+          rule.battery ? `Listed key-fob battery: ${rule.battery}` : ''
+        );
         return;
       }
 
       const makeEntry = data.makes.find((entry) => entry.name === make);
       const modelEntry = makeEntry?.models.find((entry) => entry.name === model && year >= Number(entry.from) && year <= Number(entry.to));
       if (modelEntry) {
-        showResult('untested', 'Not classified yet.', data.defaultMessage || 'We do not yet have a reliable battery-size record for this exact vehicle and key-fob combination.', `${year} ${make} ${model}`);
+        const copy = compatibilityCopyFor('unknown');
+        showResult('untested', copy.lead, copy.message, `${year} ${make} ${model}`);
       } else {
-        showResult('untested', 'Not listed yet.', 'This exact vehicle is not in the current catalogue. Check the battery marking inside the key fob before ordering.');
+        const copy = compatibilityCopyFor('unlisted');
+        showResult('untested', copy.lead, copy.message);
       }
     });
   };
@@ -1076,16 +1164,11 @@
 
     document.querySelectorAll('[data-compatibility]').forEach((button) => {
       button.addEventListener('click', () => {
-        const choice = button.dataset.compatibility;
-        if (choice === 'cr2032') {
-          showToast('Good starting point. Confirm the compartment has enough clearance for the finished Lo-Key unit.');
-        } else {
-          const compatibilitySection = document.getElementById('compatibility');
-          compatibilitySection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          window.setTimeout(() => {
-            document.querySelector('[data-vehicle-year]')?.focus({ preventScroll: true });
-          }, 650);
-        }
+        const compatibilitySection = document.getElementById('compatibility');
+        compatibilitySection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.setTimeout(() => {
+          document.querySelector('[data-vehicle-year]')?.focus({ preventScroll: true });
+        }, 650);
       });
     });
 
