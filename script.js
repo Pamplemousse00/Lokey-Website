@@ -683,6 +683,8 @@
     const mainImage = gallery.querySelector('[data-product-main-image]');
     const label = gallery.querySelector('[data-product-image-label]');
     const thumbnails = gallery.querySelector('[data-product-thumbnails]');
+    const imageCard = gallery.querySelector('.product-image-card');
+    const zoomPreview = gallery.querySelector('[data-product-zoom]');
     if (!mainImage || !thumbnails) return;
 
     preloadProductImages(images);
@@ -698,6 +700,7 @@
       window.setTimeout(() => {
         mainImage.src = image.src;
         mainImage.alt = image.alt || 'Lo-Key product image';
+        if (zoomPreview) zoomPreview.style.backgroundImage = `url("${image.src}")`;
         if (label) label.textContent = image.label || 'Product image';
         thumbnails.querySelectorAll('[data-product-image-index]').forEach((button) => {
           const active = Number(button.dataset.productImageIndex) === index;
@@ -723,6 +726,31 @@
       button.addEventListener('focus', () => selectImage(index));
       button.addEventListener('click', () => selectImage(index));
     });
+
+    if (imageCard && zoomPreview) {
+      const hideZoom = () => {
+        zoomPreview.classList.remove('visible');
+        zoomPreview.setAttribute('aria-hidden', 'true');
+      };
+
+      imageCard.addEventListener('pointerenter', (event) => {
+        if (event.pointerType === 'touch') return;
+        zoomPreview.classList.add('visible');
+        zoomPreview.setAttribute('aria-hidden', 'false');
+      });
+
+      imageCard.addEventListener('pointermove', (event) => {
+        if (event.pointerType === 'touch') return;
+        const rect = imageCard.getBoundingClientRect();
+        const x = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
+        const y = Math.max(0, Math.min(rect.height, event.clientY - rect.top));
+        const xPercent = rect.width ? (x / rect.width) * 100 : 50;
+        const yPercent = rect.height ? (y / rect.height) * 100 : 50;
+        zoomPreview.style.backgroundPosition = `${xPercent}% ${yPercent}%`;
+      });
+
+      imageCard.addEventListener('pointerleave', hideZoom);
+    }
 
     selectImage(0);
   };
@@ -815,11 +843,160 @@
     startRotation();
   };
 
+
+  const normalizeVehicleValue = (value) => String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+
+  const compatibilityFallback = () => {
+    const data = window.LO_KEY_COMPATIBILITY_FALLBACK;
+    return data && Array.isArray(data.makes) ? data : { years: [], makes: [] };
+  };
+
+  const requestCompatibilityData = async (query = {}) => {
+    const url = new URL('compatibility-data.json', window.location.href);
+    Object.entries(query).forEach(([key, value]) => {
+      if (value !== undefined && value !== '') url.searchParams.set(key, value);
+    });
+
+    try {
+      const response = await fetch(url.toString(), { headers: { Accept: 'application/json' } });
+      if (!response.ok) throw new Error(`Compatibility request failed: ${response.status}`);
+      return await response.json();
+    } catch (error) {
+      return compatibilityFallback();
+    }
+  };
+
+  const initializeCompatibilityChecker = async () => {
+    const checker = document.querySelector('[data-vehicle-checker]');
+    if (!checker) return;
+
+    const form = checker.querySelector('[data-vehicle-form]');
+    const result = checker.querySelector('[data-vehicle-result]');
+    const yearSelect = checker.querySelector('[data-vehicle-year]');
+    const makeSelect = checker.querySelector('[data-vehicle-make]');
+    const modelSelect = checker.querySelector('[data-vehicle-model]');
+    if (!form || !result || !yearSelect || !makeSelect || !modelSelect) return;
+
+    let data = await requestCompatibilityData();
+    if (!Array.isArray(data.makes)) data = compatibilityFallback();
+
+    const fillSelect = (select, values, placeholder) => {
+      select.innerHTML = `<option value="" selected disabled>${escapeHTML(placeholder)}</option>` +
+        values.map((value) => `<option value="${escapeHTML(value)}">${escapeHTML(value)}</option>`).join('');
+    };
+
+    const availableMakesForYear = (year) => data.makes
+      .filter((make) => make.models.some((model) => year >= Number(model.from) && year <= Number(model.to)))
+      .map((make) => make.name)
+      .sort((a, b) => a.localeCompare(b));
+
+    const availableModels = (year, makeName) => {
+      const make = data.makes.find((entry) => entry.name === makeName);
+      if (!make) return [];
+      return [...new Set(make.models
+        .filter((model) => year >= Number(model.from) && year <= Number(model.to))
+        .map((model) => model.name))]
+        .sort((a, b) => a.localeCompare(b));
+    };
+
+    const years = Array.isArray(data.years) && data.years.length
+      ? data.years
+      : Array.from({ length: 31 }, (_, index) => 2026 - index);
+    fillSelect(yearSelect, years.map(String), 'Select year');
+    fillSelect(makeSelect, [], 'Select make');
+    fillSelect(modelSelect, [], 'Select model');
+    makeSelect.disabled = true;
+    modelSelect.disabled = true;
+
+    yearSelect.addEventListener('change', () => {
+      const year = Number(yearSelect.value);
+      fillSelect(makeSelect, availableMakesForYear(year), 'Select make');
+      fillSelect(modelSelect, [], 'Select model');
+      makeSelect.disabled = false;
+      modelSelect.disabled = true;
+      result.hidden = true;
+    });
+
+    makeSelect.addEventListener('change', () => {
+      const year = Number(yearSelect.value);
+      fillSelect(modelSelect, availableModels(year, makeSelect.value), 'Select model');
+      modelSelect.disabled = false;
+      result.hidden = true;
+    });
+
+    const showResult = (status, lead, message, detail = '') => {
+      result.className = `vehicle-result vehicle-result-${status}`;
+      result.hidden = false;
+      result.innerHTML = `
+        <div class="vehicle-result-heading"><strong>${escapeHTML(lead)}</strong><span>${escapeHTML(message)}</span></div>
+        ${detail ? `<span class="vehicle-result-detail">${escapeHTML(detail)}</span>` : ''}`;
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const year = Number(yearSelect.value);
+      const make = makeSelect.value;
+      const model = modelSelect.value;
+      if (!year || !make || !model) return;
+
+      result.className = 'vehicle-result vehicle-result-loading';
+      result.hidden = false;
+      result.textContent = 'Checking compatibility…';
+
+      const response = await requestCompatibilityData({ year, make, model });
+      if (response?.result) {
+        const item = response.result;
+        const status = item.status || 'untested';
+        if (status === 'verified') showResult('verified', 'Yes!', item.message || 'Your vehicle has been tested and verified to be compatible.', item.keyFobBattery ? `Listed key-fob battery: ${item.keyFobBattery}` : '');
+        else if (status === 'incompatible') showResult('incompatible', 'No.', item.message || 'This key fob is not compatible with Lo-Key.', item.keyFobBattery ? `Listed key-fob battery: ${item.keyFobBattery}` : '');
+        else showResult('untested', 'Maybe.', item.message || data.defaultMessage || 'This vehicle remains untested.');
+        return;
+      }
+
+      const rules = Array.isArray(data.batteryRules) ? data.batteryRules : [];
+      const selectedMake = normalizeVehicleValue(make);
+      const selectedModel = normalizeVehicleValue(model);
+      const rule = rules.find((entry) =>
+        normalizeVehicleValue(entry.make) === selectedMake &&
+        normalizeVehicleValue(entry.model) === selectedModel &&
+        year >= Number(entry.from) &&
+        year <= Number(entry.to)
+      );
+
+      if (rule) {
+        const batteryDetail = rule.battery ? `Listed key-fob battery: ${rule.battery}` : '';
+        if (rule.status === 'verified') {
+          showResult('verified', 'Yes!', rule.message || 'Your vehicle has been tested and verified to be compatible with Lo-Key.', batteryDetail);
+        } else if (rule.status === 'compatible') {
+          showResult('untested', 'Maybe.', rule.message || 'This key fob is listed as using a CR2032 battery, but Lo-Key has not yet been physically tested in this exact vehicle.', batteryDetail);
+        } else if (rule.status === 'conditional') {
+          showResult('untested', 'Maybe.', rule.message || 'This vehicle used more than one key-fob style. Check the battery marking inside your exact key.', batteryDetail);
+        } else {
+          showResult('incompatible', 'No.', rule.message || 'The listed key fob uses a battery other than CR2032, so the current Lo-Key format is not compatible.', batteryDetail);
+        }
+        return;
+      }
+
+      const makeEntry = data.makes.find((entry) => entry.name === make);
+      const modelEntry = makeEntry?.models.find((entry) => entry.name === model && year >= Number(entry.from) && year <= Number(entry.to));
+      if (modelEntry) {
+        showResult('untested', 'Not classified yet.', data.defaultMessage || 'We do not yet have a reliable battery-size record for this exact vehicle and key-fob combination.', `${year} ${make} ${model}`);
+      } else {
+        showResult('untested', 'Not listed yet.', 'This exact vehicle is not in the current catalogue. Check the battery marking inside the key fob before ordering.');
+      }
+    });
+  };
+
   document.addEventListener('DOMContentLoaded', () => {
     initializeReviews();
     initializeReviewForm();
     initializeProductGallery();
     initializeProductCarousel();
+    initializeCompatibilityChecker();
 
     const header = document.querySelector('.site-header');
     const announcement = document.querySelector('.announcement');
@@ -903,7 +1080,11 @@
         if (choice === 'cr2032') {
           showToast('Good starting point. Confirm the compartment has enough clearance for the finished Lo-Key unit.');
         } else {
-          showToast('Check the marking on your current key-fob battery before ordering.');
+          const compatibilitySection = document.getElementById('compatibility');
+          compatibilitySection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          window.setTimeout(() => {
+            document.querySelector('[data-vehicle-year]')?.focus({ preventScroll: true });
+          }, 650);
         }
       });
     });

@@ -1,346 +1,319 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Lo-Key is a CR2032-compatible smart battery that powers down idle key fobs to help reduce exposure to relay attacks—without an app, base station, or new routine.">
-  <meta name="theme-color" content="#081321">
-  <title>Lo-Key — The smart battery that puts car keys to sleep</title>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
-  <script src="reviews-data.js" defer></script>
-  <script src="product-images.js" defer></script>
-  <script src="script.js" defer></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Lo-Key is a CR2032-compatible smart battery that powers down idle key fobs to help reduce exposure to relay attacks—without an app, base station, or new routine." name="description"/>
+<meta content="#081321" name="theme-color"/>
+<title>Lo-Key — The smart battery that puts car keys to sleep</title>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="styles.css" rel="stylesheet"/>
+<script defer="" src="reviews-data.js"></script>
+<script defer="" src="script.js"></script>
 </head>
 <body class="has-announcement">
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div class="announcement">Canadian-built security for the key you already carry · Pilot launch 2026</div>
-
-  <header class="site-header" aria-label="Main navigation">
-    <div class="container nav">
-      <a class="brand" href="index.html" aria-label="Lo-Key home">
-        <img src="assets/logo-mark.svg" alt="">
-        <span class="brand-name">lo-key</span>
-        <span class="canada-mark" aria-label="Canadian company" title="Canadian company"><img src="assets/icon-maple.png" alt=""></span>
-      </a>
-      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="#how-it-works">How it works</a>
-        <a href="#who-its-for">Who it’s for</a>
-        <a href="#about">About us</a>
-        <a href="#faq">FAQ</a>
-        <div class="nav-socials" aria-label="Social media">
-          <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Lo-Key on Instagram"><img src="assets/social-instagram.svg" alt=""></a>
-          <a class="social-link" href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Lo-Key on Facebook"><img src="assets/social-facebook.svg" alt=""></a>
-          <a class="social-link" href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="Lo-Key on YouTube"><img src="assets/social-youtube.svg" alt=""></a>
-        </div>
-        <a class="cart-link" href="#" data-open-cart>Cart <span class="cart-count" hidden>0</span></a>
-        <a class="btn btn-primary" href="product.html">Shop Lo-Key</a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main">
-    <section class="hero dark">
-      <div class="container hero-content">
-        <div class="hero-copy reveal">
-          <p class="eyebrow on-dark">Protection built into the battery</p>
-          <h1 class="display">The smart battery that puts your car key <span>to sleep.</span></h1>
-          <p class="lead">Lo-Key is a CR2032-compatible smart power module designed to shut down an idle key fob and wake it automatically when you pick it up.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary btn-hero-shop" href="product.html">Shop Lo-Key <span aria-hidden="true">→</span></a>
-            <a class="btn btn-secondary" href="#how-it-works">See how it works</a>
-          </div>
-          <div class="hero-pills" aria-label="Product highlights">
-            <span class="pill"><span class="pill-dot"></span>No app</span>
-            <span class="pill"><span class="pill-dot"></span>No base station</span>
-            <span class="pill"><span class="pill-dot"></span>No car modification</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="trust-strip dark" aria-label="Vehicle theft context">
-      <div class="container stats">
-        <article class="stat reveal">
-          <span class="stat-value">70%+</span>
-          <span class="stat-label">of new vehicles are estimated to include keyless entry.</span>
-          <a class="stat-source" href="https://www.industryresearch.biz/market-reports/keyless-vehicle-access-control-systems-market-113964" target="_blank" rel="noopener">2024 market estimate ↗</a>
-        </article>
-        <article class="stat reveal">
-          <span class="stat-value">57k+</span>
-          <span class="stat-label">private passenger vehicles were stolen in Canada in 2024.</span>
-          <a class="stat-source" href="https://www.equiteassociation.com/press-releases/collective-efforts-result-in-improved-2024-auto-theft-trends-according-to-equite-associations-report-continued-efforts-needed-to-maintain-momentum" target="_blank" rel="noopener">Équité Association ↗</a>
-        </article>
-        <article class="stat reveal">
-          <span class="stat-value">~91%</span>
-          <span class="stat-label">of keyless models in a large ADAC test were not “better protected.”</span>
-          <a class="stat-source" href="https://www.motor1.com/news/732980/keyless-security-systems-defeated-easy-test/" target="_blank" rel="noopener">ADAC test summary ↗</a>
-        </article>
-      </div>
-    </section>
-
-    <section class="section white" id="relay-attacks">
-      <div class="container problem-grid">
-        <div class="reveal">
-          <p class="eyebrow">Relay attacks, simply explained</p>
-          <h2 class="h2">A thief can’t relay a signal that isn’t there.</h2>
-          <p class="lead">In a relay attack, equipment near your home carries your key’s wireless response to the vehicle. The vehicle can be fooled into thinking the key is nearby—even when it is inside.</p>
-          <p style="color:var(--muted-dark);max-width:640px">Lo-Key addresses one link in that chain: when the key has been still, it cuts power to the fob. With the fob off, there is no powered key signal to extend.</p>
-        </div>
-        <div class="relay-diagram reveal" aria-label="Simplified relay attack diagram">
-          <div class="relay-line" aria-hidden="true"></div>
-          <div class="relay-nodes">
-            <div class="relay-node">
-              <div class="relay-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8M8 12h5"/></svg>
-              </div>
-              <strong>Key inside your home</strong>
-            </div>
-            <div class="relay-node emphasis">
-              <div class="relay-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12a7 7 0 0 1 7-7M5 12a7 7 0 0 0 7 7M19 12a7 7 0 0 0-7-7M19 12a7 7 0 0 1-7 7"/><circle cx="12" cy="12" r="2"/></svg>
-              </div>
-              <strong>Signal is relayed</strong>
-            </div>
-            <div class="relay-node">
-              <div class="relay-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 15l2-5h14l2 5v4H3z"/><path d="M6 10l2-4h8l2 4M7 17h.01M17 17h.01"/></svg>
-              </div>
-              <strong>Vehicle sees a “nearby” key</strong>
-            </div>
-          </div>
-          <div class="interrupt-banner"><span class="x" aria-hidden="true">×</span><span>Lo-Key interrupts the chain by powering down an idle fob.</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section dark" id="how-it-works">
-      <div class="container">
-        <div class="section-head">
-          <div class="reveal">
-            <p class="eyebrow on-dark">Three simple steps</p>
-            <h2 class="h2">Install it once.<br>Then forget about it.</h2>
-          </div>
-          <p class="lead reveal">Lo-Key moves the protection into something your key already needs: its battery.</p>
-        </div>
-        <div class="steps">
-          <article class="step-card step-replace reveal">
-            <span class="step-number">1</span>
-            <h3 class="h3">Replace</h3>
-            <p>Install Lo-Key in place of the key fob’s standard CR2032 battery.</p>
-            <span class="step-note">No wiring. No pairing.</span>
-          </article>
-          <article class="step-card step-sleep reveal">
-            <span class="step-number">2</span>
-            <h3 class="h3">Sleep</h3>
-            <p>After the key remains still, Lo-Key disconnects power from the fob while its motion sensor keeps watch.</p>
-            <span class="step-note">The key stops answering relay equipment.</span>
-          </article>
-          <article class="step-card step-wake reveal">
-            <span class="step-number">3</span>
-            <h3 class="h3">Wake</h3>
-            <p>Pick up the key and motion wakes the fob automatically. A fresh active window begins.</p>
-            <span class="step-note">Your normal routine stays normal.</span>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container comparison reveal">
-        <div class="comparison-image"><img src="assets/faraday-routine.webp" alt="A driver taking a key out of a protective pouch while carrying bags"></div>
-        <div class="comparison-copy">
-          <p class="eyebrow">Security without another habit</p>
-          <h2 class="h2">Protection should not depend on remembering a pouch.</h2>
-          <p class="lead">Faraday storage can be useful, but it only works when every key—including the spare—is put away every time.</p>
-          <ul class="check-list">
-            <li><span class="check">✓</span><span>Keep the key in your pocket, bag, drawer, or usual spot.</span></li>
-            <li><span class="check">✓</span><span>No box beside the front door and no daily routine to maintain.</span></li>
-            <li><span class="check">✓</span><span>Motion brings the key back automatically when you need it.</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="section white" id="who-its-for">
-      <div class="container">
-        <div class="section-head">
-          <div class="reveal">
-            <p class="eyebrow">Who is Lo-Key for?</p>
-            <h2 class="h2">Not just a gadget for enthusiasts.</h2>
-          </div>
-          <p class="lead reveal">It is designed as a replacement battery for people who already use passive keyless entry.</p>
-        </div>
-        <div class="audience-grid">
-          <article class="audience-card reveal">
-            <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 11l8-7 8 7v9H4z"/><path d="M9 20v-6h6v6"/></svg></div>
-            <h3 class="h3">Everyday owners</h3>
-            <p>Anyone who enjoys walk-up unlocking but wants added protection while the key sits at home.</p>
-          </article>
-          <article class="audience-card reveal">
-            <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 15l2-5h14l2 5v4H3z"/><path d="M6 10l2-4h8l2 4M7 17h.01M17 17h.01"/></svg></div>
-            <h3 class="h3">Targeted vehicles</h3>
-            <p>Owners of frequently stolen SUVs, trucks, luxury vehicles, and other high-theft models.</p>
-          </article>
-          <article class="audience-card reveal">
-            <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="9" r="5"/><path d="M13 13l8 8M16 16l2-2M18 18l2-2"/></svg></div>
-            <h3 class="h3">Spare-key households</h3>
-            <p>Protection for the extra fob that is easy to forget in a drawer, cabinet, or coat pocket.</p>
-          </article>
-          <article class="audience-card reveal">
-            <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V7l8-4 8 4v13"/><path d="M8 20v-6h8v6M8 9h.01M12 9h.01M16 9h.01"/></svg></div>
-            <h3 class="h3">Dealers & locksmiths</h3>
-            <p>A simple security upgrade that can be offered during key service or routine battery replacement.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section dark" id="inside-lokey">
-      <div class="container product-showcase">
-        <div class="product-carousel reveal" data-product-carousel>
-          <div class="product-carousel-stage">
-            <img data-carousel-image src="assets/exploded-lokey.webp" alt="Concept rendering showing the layers inside a Lo-Key smart coin battery">
-            <span class="concept-label" data-carousel-label>Inside Lo-Key</span>
-            <button class="product-carousel-arrow product-carousel-prev" type="button" data-carousel-prev aria-label="Show previous product image">‹</button>
-            <button class="product-carousel-arrow product-carousel-next" type="button" data-carousel-next aria-label="Show next product image">›</button>
-          </div>
-          <div class="product-carousel-dots" data-carousel-dots aria-label="Product image selection"></div>
-        </div>
-        <div class="reveal">
-          <p class="eyebrow on-dark">Small format. Purpose-built electronics.</p>
-          <h2 class="h2">A security layer hidden inside a familiar battery.</h2>
-          <p class="lead">Inside Lo-Key, an ultra-low-power motion sensor and control circuit switch the key fob’s power without requiring changes to the vehicle.</p>
-          <div class="feature-list">
-            <div class="feature-row"><span class="num">01</span><div><strong>CR2032-compatible format</strong><span>Designed for key fobs that normally use the common CR2032 size.</span></div></div>
-            <div class="feature-row"><span class="num">02</span><div><strong>Motion-only operation</strong><span>No location tracking, wireless pairing, subscription, app, or base station.</span></div></div>
-            <div class="feature-row"><span class="num">03</span><div><strong>Automatic three-minute active window</strong><span>Movement restores power and refreshes the timer while the key remains in use.</span></div></div>
-            <div class="feature-row"><span class="num">04</span><div><strong>Ultra-low-power standby</strong><span>The internal control electronics remain lightly powered while the key fob itself is off.</span></div></div>
-            <div class="feature-row"><span class="num">05</span><div><strong>May extend key-fob battery life</strong><span>Because the fob is unpowered while sleeping, Lo-Key may reduce the energy the key itself uses. Actual service life depends on the fob, how often the key moves, and how much time it spends asleep.</span></div></div>
-          </div>
-          <a class="btn btn-primary" style="margin-top:30px" href="product.html">View product details</a>
-        </div>
-      </div>
-    </section>
-
-
-    <section class="section reviews-section" id="reviews">
-      <div class="container" data-reviews-component data-review-page-size="3">
-        <div class="reviews-heading reveal">
-          <div>
-            <p class="eyebrow">Customer reviews</p>
-            <h2 class="h2">What Lo-Key owners are saying.</h2>
-            <p class="reviews-intro">Reviews are loaded from one shared data file, so this page and the product page always show the same feedback.</p>
-          </div>
-          <div class="reviews-overview" aria-label="Review summary">
-            <strong data-review-average>—</strong>
-            <span class="review-stars review-stars-large" data-review-summary-stars aria-hidden="true">★★★★★</span>
-            <a href="#reviews" data-review-count>0 reviews</a>
-          </div>
-        </div>
-        <div class="demo-review-notice" data-demo-review-notice hidden>Demo review content is shown for layout testing. Replace it with genuine purchaser feedback before launch.</div>
-        <div class="reviews-toolbar reveal">
-          <div class="reviews-count-block">
-            <strong data-review-count-label>0 reviews</strong>
-            <span data-review-showing>Showing 0</span>
-          </div>
-          <div class="reviews-toolbar-actions">
-            <button class="review-write-button" type="button" data-open-review>Write a review</button>
-            <label class="review-sort-label">Sort reviews
-              <select class="review-sort" data-review-sort>
-                <option value="recent">Most recent</option>
-                <option value="top">Top rated</option>
-                <option value="lowest">Lowest rated</option>
-              </select>
-            </label>
-          </div>
-        </div>
-        <div class="reviews-grid" data-review-list aria-live="polite"></div>
-        <div class="reviews-show-all" data-review-show-all-wrap hidden>
-          <button type="button" data-review-show-all>Show all reviews</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="section white" id="faq">
-      <div class="container">
-        <div class="section-head" style="justify-content:center;text-align:center">
-          <div class="reveal">
-            <p class="eyebrow" style="justify-content:center">Common questions</p>
-            <h2 class="h2">The simple version.</h2>
-          </div>
-        </div>
-        <div class="faq-list reveal">
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false"><span>Will my key still work when I walk up to the car?</span><span class="plus">+</span></button>
-            <div class="faq-answer"><p>Yes. Picking up or carrying the key creates motion, which wakes the fob before you use it. Lo-Key is designed to preserve the normal pocket-key experience.</p></div>
-          </article>
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false"><span>Does Lo-Key work with every vehicle?</span><span class="plus">+</span></button>
-            <div class="faq-answer"><p>Lo-Key is being designed for key fobs that use a CR2032 battery. Battery compartments and fob power requirements vary, so confirmed compatibility should be checked before ordering.</p></div>
-          </article>
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false"><span>Does it stop every kind of vehicle theft?</span><span class="plus">+</span></button>
-            <div class="faq-answer"><p>No. Lo-Key is intended to reduce exposure to key-fob relay attacks by removing power from an idle fob. It is one layer of security and does not prevent theft methods that do not depend on relaying the key.</p></div>
-          </article>
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false"><span>Could Lo-Key extend my key-fob battery life?</span><span class="plus">+</span></button>
-            <div class="faq-answer"><p>Potentially. The key fob draws little or no power from Lo-Key while it is asleep, which may reduce the fob’s overall energy use. The real improvement will depend on the vehicle key, how often it is carried, and how much time it spends motionless.</p></div>
-          </article>
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false"><span>Does it collect location or driving data?</span><span class="plus">+</span></button>
-            <div class="faq-answer"><p>No. The motion sensing is local to the battery and is used only to decide whether the key fob should be powered. There is no app, cloud account, GPS, or wireless connection.</p></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section dark" id="about">
-      <div class="container about-card reveal">
-        <div>
-          <p class="eyebrow on-dark">About Lo-Key</p>
-          <h2 class="h2">Canadian-built protection made to disappear into your routine.</h2>
-          <p class="lead">Lo-Key began in 2026 with a straightforward idea: the safest action should be the one that requires no extra action at all.</p>
-          <p style="max-width:670px;color:#aebdcb">We are a Canadian company based in Mississauga, Ontario. Our batteries are assembled in Canada, combining practical electronics, compact mechanical design, and a focus on making everyday vehicle security easier to live with.</p>
-        </div>
-        <div class="about-facts">
-          <div class="about-fact"><span class="flag-mark" aria-hidden="true"><img src="assets/icon-maple.png" alt=""></span><div><strong>Canadian company</strong><span>Built for Canadian drivers and beyond.</span></div></div>
-          <div class="about-fact"><span class="flag-mark" aria-hidden="true"><img src="assets/icon-pin.svg" alt=""></span><div><strong>Mississauga, Ontario</strong><span>Designed and developed in the Greater Toronto Area.</span></div></div>
-          <div class="about-fact"><span class="flag-mark" aria-hidden="true"><img src="assets/icon-press.svg" alt=""></span><div><strong>Assembled in Canada</strong><span>Final battery assembly and quality checks in Canada.</span></div></div>
-          <div class="about-fact"><span class="flag-mark" aria-hidden="true"><img src="assets/icon-calendar.svg" alt=""></span><div><strong>Started in 2026</strong><span>A new company focused on a very old problem: stolen cars.</span></div></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-band">
-      <div class="container cta-inner">
-        <h2 class="h2 reveal">Keep the convenience. Put the idle signal to sleep.</h2>
-        <a class="btn btn-dark reveal" href="product.html">Shop Lo-Key <span aria-hidden="true">→</span></a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a class="brand" href="index.html"><img src="assets/logo-mark.svg" alt=""><span>lo-key</span></a>
-          <p>The smart battery that puts idle car keys to sleep. Canadian company · Mississauga, Ontario · Established 2026.</p>
-        </div>
-        <div class="footer-col"><h4>Explore</h4><a href="#how-it-works">How it works</a><a href="#who-its-for">Who it’s for</a><a href="#about">About us</a></div>
-        <div class="footer-col"><h4>Product</h4><a href="product.html">Lo-Key Smart Battery</a><a href="product.html#compatibility">Compatibility</a><a href="product.html#safety">Safety & limitations</a></div>
-        <div class="footer-col footer-social"><h4>Follow</h4><div class="footer-social-links">
-          <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Lo-Key on Instagram"><img src="assets/social-instagram.svg" alt=""><span>Instagram</span></a>
-          <a class="social-link" href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Lo-Key on Facebook"><img src="assets/social-facebook.svg" alt=""><span>Facebook</span></a>
-          <a class="social-link" href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="Lo-Key on YouTube"><img src="assets/social-youtube.svg" alt=""><span>YouTube</span></a>
-        </div></div>
-      </div>
-      <div class="footer-bottom">
-        <p>Lo-Key is designed to reduce exposure to relay attacks by powering down an idle key fob. It does not prevent all theft methods and should be used as one layer in a broader vehicle-security approach. Product imagery is conceptual.</p>
-        <p>© 2026 Lo-Key. Made in Canada.</p>
-      </div>
-    </div>
-  </footer>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="announcement">Canadian-built security for the key you already carry · Pilot launch 2026</div>
+<header aria-label="Main navigation" class="site-header">
+<div class="container nav">
+<a aria-label="Lo-Key home" class="brand" href="index.html">
+<img alt="" src="assets/logo-mark.svg"/>
+<span class="brand-name">lo-key</span>
+<span aria-label="Canadian company" class="canada-mark" title="Canadian company"><img alt="" src="assets/icon-maple.png"/></span>
+</a>
+<button aria-expanded="false" aria-label="Open navigation" class="menu-toggle" type="button"><span></span></button>
+<nav aria-label="Primary" class="nav-links">
+<a href="#relay-attacks">How it works</a>
+<a href="#who-its-for">Who it’s for</a>
+<a href="#about">About us</a>
+<a href="#faq">FAQ</a>
+<div aria-label="Social media" class="nav-socials">
+<a aria-label="Lo-Key on Instagram" class="social-link" href="https://www.instagram.com/" rel="noopener" target="_blank"><img alt="" src="assets/social-instagram.svg"/></a>
+<a aria-label="Lo-Key on Facebook" class="social-link" href="https://www.facebook.com/" rel="noopener" target="_blank"><img alt="" src="assets/social-facebook.svg"/></a>
+<a aria-label="Lo-Key on YouTube" class="social-link" href="https://www.youtube.com/" rel="noopener" target="_blank"><img alt="" src="assets/social-youtube.svg"/></a>
+</div>
+<a class="cart-link" data-open-cart="" href="#"><img class="cart-link-icon" src="assets/icon-cart.svg" alt="" aria-hidden="true"/>Cart <span class="cart-count" hidden="">0</span></a>
+<a class="btn btn-primary" href="product.html">Shop Lo-Key</a>
+</nav>
+</div>
+</header>
+<main id="main">
+<section class="hero dark">
+<div class="container hero-content">
+<div class="hero-copy reveal">
+<p class="eyebrow on-dark">Protection built into the battery</p>
+<h1 class="display">The smart battery that prevents <span>car theft.</span></h1>
+<p class="lead">Lo-Key is a CR2032 battery designed to prevent car theft by shutting down an idle key fob and waking it automatically when you pick it up.</p>
+<div class="hero-actions">
+<a class="btn btn-primary btn-hero-shop" href="product.html">Shop Lo-Key <span aria-hidden="true">→</span></a>
+<a class="btn btn-secondary" href="#relay-attacks">See how it works</a>
+</div>
+<div aria-label="Product highlights" class="hero-pills">
+<span class="pill"><span class="pill-dot"></span>No app</span>
+<span class="pill"><span class="pill-dot"></span>No base station</span>
+<span class="pill"><span class="pill-dot"></span>No car modification</span>
+</div>
+</div>
+</div>
+</section>
+<section aria-label="Vehicle theft context" class="trust-strip dark">
+<div class="container stats">
+<article class="stat reveal">
+<span class="stat-value">70%+</span>
+<span class="stat-label">of new vehicles are estimated to include keyless entry.</span>
+<a class="stat-source" href="https://www.industryresearch.biz/market-reports/keyless-vehicle-access-control-systems-market-113964" rel="noopener" target="_blank">2024 market estimate ↗</a>
+</article>
+<article class="stat reveal">
+<span class="stat-value">57k+</span>
+<span class="stat-label">private passenger vehicles were stolen in Canada in 2024.</span>
+<a class="stat-source" href="https://www.equiteassociation.com/press-releases/collective-efforts-result-in-improved-2024-auto-theft-trends-according-to-equite-associations-report-continued-efforts-needed-to-maintain-momentum" rel="noopener" target="_blank">Équité Association ↗</a>
+</article>
+<article class="stat reveal">
+<span class="stat-value">~91%</span>
+<span class="stat-label">of keyless models were not “better protected.”</span>
+<a class="stat-source" href="https://www.motor1.com/news/732980/keyless-security-systems-defeated-easy-test/" rel="noopener" target="_blank">ADAC test summary ↗</a>
+</article>
+</div>
+</section>
+<section class="section white" id="inside-lokey">
+<div class="container product-showcase">
+<div class="inside-battery-visual reveal">
+<img alt="Exploded concept rendering of the Lo-Key smart battery with shell, internal cell, and flexible circuit" src="assets/exploded-lokey.webp"/>
+<span class="concept-label">Concept rendering</span>
+</div>
+<div class="reveal">
+<p class="eyebrow">Small format. Purpose-built electronics.</p>
+<h2 class="h2">A security layer hidden inside a familiar battery.</h2>
+<p class="lead">Inside Lo-Key, an ultra-low-power motion sensor and control circuit switch the key fob’s power without requiring changes to the vehicle.</p>
+<div class="feature-list inside-feature-list">
+<div class="feature-row"><div><strong>CR2032-compatible format</strong><span>Designed for key fobs that normally use the common CR2032 size.</span></div></div>
+<div class="feature-row"><div><strong>Motion-only operation</strong><span>No location tracking, wireless pairing, subscription, app, or base station.</span></div></div>
+<div class="feature-row"><div><strong>Automatic three-minute active window</strong><span>Movement restores power and refreshes the timer while the key remains in use.</span></div></div>
+<div class="feature-row"><div><strong>Ultra-low-power standby</strong><span>The internal control electronics remain lightly powered while the key fob itself is off.</span></div></div>
+<div class="feature-row"><div><strong>May extend key-fob battery life</strong><span>Because the fob is unpowered while sleeping, Lo-Key may reduce the energy the key itself uses. Actual service life depends on the fob, how often the key moves, and how much time it spends asleep.</span></div></div>
+</div>
+<a class="btn btn-primary" href="product.html" style="margin-top:30px">View product details</a>
+</div>
+</div>
+</section><section class="section dark" id="relay-attacks">
+<div class="container problem-grid">
+<div class="reveal">
+<p class="eyebrow on-dark">Relay attacks, simply explained</p>
+<h2 class="h2">A thief can’t relay a signal that isn’t there.</h2>
+<p class="lead">In a relay attack, equipment near your home carries your key’s wireless response to the vehicle. The vehicle will be fooled into thinking the key is nearby - even when it's inside.</p>
+<p class="relay-solution-copy">Lo-Key eliminates this issue: when the key has been still, it cuts power to the fob. With the fob off, there is no powered key signal to extend.</p>
+</div>
+<div aria-label="Simplified relay attack diagram" class="relay-diagram reveal">
+<div aria-hidden="true" class="relay-line"></div>
+<div class="relay-nodes">
+<div class="relay-node">
+<div aria-hidden="true" class="relay-icon relay-number">1</div>
+<strong>Key inside your home</strong>
+<span aria-hidden="true" class="relay-path-x">×</span></div>
+<div class="relay-node emphasis">
+<div aria-hidden="true" class="relay-icon relay-number">2</div>
+<strong>Signal is relayed</strong>
+</div>
+<div class="relay-node">
+<div aria-hidden="true" class="relay-icon relay-number">3</div>
+<strong>Vehicle sees a “nearby” key and starts</strong>
+</div>
+</div>
+<div class="interrupt-banner"><span aria-hidden="true" class="x">×</span><span>Lo-Key eliminates the issue by powering down an idle fob.</span></div>
+</div>
+</div>
+</section>
+<section class="section white" id="how-it-works">
+<div class="container">
+<div class="section-head">
+<div class="reveal">
+<p class="eyebrow">How to install</p>
+<h2 class="h2">Install it once.<br/>Then forget about it.</h2>
+</div>
+<p class="lead reveal">Lo-Key moves the protection into something your key already needs: its battery.</p>
+</div>
+<div class="steps">
+<article class="step-card step-replace reveal">
+<span class="step-number">1</span>
+<h3 class="h3">Replace</h3>
+<p>Install Lo-Key in place of the key fob’s standard CR2032 battery.</p>
+<span class="step-note">No wiring. No pairing.</span>
+</article>
+<article class="step-card step-sleep reveal">
+<span class="step-number">2</span>
+<h3 class="h3">Sleep</h3>
+<p>After the key remains still, Lo-Key disconnects power from the fob while its motion sensor keeps watch.</p>
+<span class="step-note">The key stops answering relay equipment.</span>
+</article>
+<article class="step-card step-wake reveal">
+<span class="step-number">3</span>
+<h3 class="h3">Wake</h3>
+<p>Pick up the key and motion wakes the fob automatically. The car key behaves as usual.</p>
+<span class="step-note">Your normal routine stays normal.</span>
+</article>
+</div>
+</div>
+</section>
+<section class="section dark">
+<div class="container comparison reveal">
+<div class="comparison-image"><img alt="A driver taking a key out of a protective pouch while carrying bags" src="assets/faraday-routine.webp"/></div>
+<div class="comparison-copy">
+<p class="eyebrow">Security without another habit</p>
+<h2 class="h2">Protection should not depend on remembering a pouch.</h2>
+<p class="lead">Faraday storage can be useful, but it only works when every key—including the spare—is put away every time.</p>
+<ul class="check-list">
+<li><span class="check">✓</span><span>Keep the key in your pocket, bag, drawer, or usual spot.</span></li>
+<li><span class="check">✓</span><span>No box beside the front door and no daily routine to maintain.</span></li>
+<li><span class="check">✓</span><span>Motion brings the key back automatically when you need it.</span></li>
+</ul>
+</div>
+</div>
+</section>
+<section class="section white" id="who-its-for">
+<div class="container">
+<div class="section-head">
+<div class="reveal">
+<p class="eyebrow">Who is Lo-Key for?</p>
+<h2 class="h2">Not just a gadget for enthusiasts.</h2>
+</div>
+<p class="lead reveal">It is designed as a replacement battery for people who already use passive keyless entry.</p>
+</div>
+<div class="audience-grid">
+<article class="audience-card reveal">
+<div class="audience-icon"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M4 11l8-7 8 7v9H4z"></path><path d="M9 20v-6h6v6"></path></svg></div>
+<h3 class="h3">Everyday owners</h3>
+<p>Anyone who enjoys walk-up unlocking but wants added protection while the key sits at home.</p>
+</article>
+<article class="audience-card reveal">
+<div class="audience-icon"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 15l2-5h14l2 5v4H3z"></path><path d="M6 10l2-4h8l2 4M7 17h.01M17 17h.01"></path></svg></div>
+<h3 class="h3">Targeted vehicles</h3>
+<p>Owners of frequently stolen SUVs, trucks, luxury vehicles, and other high-theft models.</p>
+</article>
+<article class="audience-card reveal">
+<div class="audience-icon"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="9" cy="9" r="5"></circle><path d="M13 13l8 8M16 16l2-2M18 18l2-2"></path></svg></div>
+<h3 class="h3">Spare-key households</h3>
+<p>Protection for the extra fob that is easy to forget in a drawer, cabinet, or coat pocket.</p>
+</article>
+<article class="audience-card reveal">
+<div class="audience-icon"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M4 20V7l8-4 8 4v13"></path><path d="M8 20v-6h8v6M8 9h.01M12 9h.01M16 9h.01"></path></svg></div>
+<h3 class="h3">Dealers &amp; locksmiths</h3>
+<p>A simple security upgrade that can be offered during key service or routine battery replacement.</p>
+</article>
+</div>
+</div>
+</section>
+<section class="section reviews-section" id="reviews">
+<div class="container" data-review-page-size="3" data-reviews-component="">
+<div class="reviews-heading reveal">
+<div>
+<p class="eyebrow">Customer reviews</p>
+<h2 class="h2">What Lo-Key owners are saying.</h2>
+<p class="reviews-intro">Reviews are loaded from one shared data file, so this page and the product page always show the same feedback.</p>
+</div>
+<div aria-label="Review summary" class="reviews-overview">
+<strong data-review-average="">—</strong>
+<span aria-hidden="true" class="review-stars review-stars-large" data-review-summary-stars="">★★★★★</span>
+<a data-review-count="" href="#reviews">0 reviews</a>
+</div>
+</div>
+<div class="demo-review-notice" data-demo-review-notice="" hidden="">Demo review content is shown for layout testing. Replace it with genuine purchaser feedback before launch.</div>
+<div class="reviews-toolbar reveal">
+<div class="reviews-count-block">
+<strong data-review-count-label="">0 reviews</strong>
+<span data-review-showing="">Showing 0</span>
+</div>
+<div class="reviews-toolbar-actions">
+<button class="review-write-button" data-open-review="" type="button">Write a review</button>
+<label class="review-sort-label">Sort reviews
+              <select class="review-sort" data-review-sort="">
+<option value="recent">Most recent</option>
+<option value="top">Top rated</option>
+<option value="lowest">Lowest rated</option>
+</select>
+</label>
+</div>
+</div>
+<div aria-live="polite" class="reviews-grid" data-review-list=""></div>
+<div class="reviews-show-all" data-review-show-all-wrap="" hidden="">
+<button data-review-show-all="" type="button">Show all reviews</button>
+</div>
+</div>
+</section>
+<section class="section dark" id="about">
+<div class="container about-card reveal">
+<div>
+<p class="eyebrow on-dark">About Lo-Key</p>
+<h2 class="h2">Canadian-built protection made to disappear into your routine.</h2>
+<p class="lead">Lo-Key began in 2026 with a straightforward idea: the safest action should be the one that requires no extra action at all.</p>
+<p style="max-width:670px;color:#aebdcb">We are a Canadian company based in Mississauga, Ontario. Our batteries are assembled in Canada, combining practical electronics, compact mechanical design, and a focus on making everyday vehicle security easier to live with.</p>
+</div>
+<div class="about-facts">
+<div class="about-fact"><span aria-hidden="true" class="flag-mark"><img alt="" src="assets/icon-maple.png"/></span><div><strong>Canadian company</strong><span>Built for Canadian drivers and beyond.</span></div></div>
+<div class="about-fact"><span aria-hidden="true" class="flag-mark"><img alt="" src="assets/icon-pin.svg"/></span><div><strong>Mississauga, Ontario</strong><span>Designed and developed in the Greater Toronto Area.</span></div></div>
+<div class="about-fact"><span aria-hidden="true" class="flag-mark"><img alt="" src="assets/icon-press.svg"/></span><div><strong>Assembled in Canada</strong><span>Final battery assembly and quality checks in Canada.</span></div></div>
+<div class="about-fact"><span aria-hidden="true" class="flag-mark"><img alt="" src="assets/icon-calendar.svg"/></span><div><strong>Started in 2026</strong><span>A new company focused on a very old problem: stolen cars.</span></div></div>
+</div>
+</div>
+</section><section class="section white" id="faq">
+<div class="container">
+<div class="section-head" style="justify-content:center;text-align:center">
+<div class="reveal">
+<p class="eyebrow" style="justify-content:center">Common questions</p>
+<h2 class="h2">The simple version.</h2>
+</div>
+</div>
+<div class="faq-list reveal">
+<article class="faq-item">
+<button aria-expanded="false" class="faq-question" type="button"><span>Will my key still work when I walk up to the car?</span><span class="plus">+</span></button>
+<div class="faq-answer"><p>Yes. Picking up or carrying the key creates motion, which wakes the fob before you use it. Lo-Key is designed to preserve the normal pocket-key experience.</p></div>
+</article>
+<article class="faq-item">
+<button aria-expanded="false" class="faq-question" type="button"><span>Does Lo-Key work with every vehicle?</span><span class="plus">+</span></button>
+<div class="faq-answer"><p>Lo-Key is being designed for key fobs that use a CR2032 battery. Battery compartments and fob power requirements vary, so confirmed compatibility should be checked before ordering.</p></div>
+</article>
+<article class="faq-item">
+<button aria-expanded="false" class="faq-question" type="button"><span>Does it stop every kind of vehicle theft?</span><span class="plus">+</span></button>
+<div class="faq-answer"><p>No. Lo-Key is intended to reduce exposure to key-fob relay attacks by removing power from an idle fob. It is one layer of security and does not prevent theft methods that do not depend on relaying the key.</p></div>
+</article>
+<article class="faq-item">
+<button aria-expanded="false" class="faq-question" type="button"><span>Could Lo-Key extend my key-fob battery life?</span><span class="plus">+</span></button>
+<div class="faq-answer"><p>Potentially. The key fob draws little or no power from Lo-Key while it is asleep, which may reduce the fob’s overall energy use. The real improvement will depend on the vehicle key, how often it is carried, and how much time it spends motionless.</p></div>
+</article>
+<article class="faq-item">
+<button aria-expanded="false" class="faq-question" type="button"><span>Does it collect location or driving data?</span><span class="plus">+</span></button>
+<div class="faq-answer"><p>No. The motion sensing is local to the battery and is used only to decide whether the key fob should be powered. There is no app, cloud account, GPS, or wireless connection.</p></div>
+</article>
+</div>
+</div>
+</section>
+<section class="cta-band">
+<div class="container cta-inner">
+<h2 class="h2 reveal">Keep the convenience. Put your idle keys to sleep.</h2>
+<a class="btn btn-dark reveal" href="product.html">Shop Lo-Key <span aria-hidden="true">→</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="index.html"><img alt="" src="assets/logo-mark.svg"/><span>lo-key</span></a>
+<p>The smart battery that puts idle car keys to sleep. Canadian company · Mississauga, Ontario · Established 2026.</p>
+</div>
+<div class="footer-col"><h4>Explore</h4><a href="#relay-attacks">How it works</a><a href="#who-its-for">Who it’s for</a><a href="#about">About us</a></div>
+<div class="footer-col"><h4>Product</h4><a href="product.html">Lo-Key Smart Battery</a><a href="product.html#compatibility">Compatibility</a><a href="product.html#safety">Safety &amp; limitations</a></div>
+<div class="footer-col footer-social"><h4>Follow</h4><div class="footer-social-links">
+<a aria-label="Lo-Key on Instagram" class="social-link" href="https://www.instagram.com/" rel="noopener" target="_blank"><img alt="" src="assets/social-instagram.svg"/><span>Instagram</span></a>
+<a aria-label="Lo-Key on Facebook" class="social-link" href="https://www.facebook.com/" rel="noopener" target="_blank"><img alt="" src="assets/social-facebook.svg"/><span>Facebook</span></a>
+<a aria-label="Lo-Key on YouTube" class="social-link" href="https://www.youtube.com/" rel="noopener" target="_blank"><img alt="" src="assets/social-youtube.svg"/><span>YouTube</span></a>
+</div></div>
+</div>
+<div class="footer-bottom">
+<p>Lo-Key is designed to reduce exposure to relay attacks by powering down an idle key fob. It does not prevent all theft methods and should be used as one layer in a broader vehicle-security approach. Product imagery is conceptual.</p>
+<p>© 2026 Lo-Key. Assembled in Canada.</p>
+</div>
+</div>
+</footer>
 </body>
 </html>

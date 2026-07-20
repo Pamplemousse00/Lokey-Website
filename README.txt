@@ -106,3 +106,17 @@ The variant ID is defined near the top of script.js as SHOPIFY_VARIANT_ID.
 SOCIAL LINKS
 The Instagram, Facebook, and YouTube links currently point to each platform's home page.
 Replace those href values in index.html and product.html with the final Lo-Key account URLs.
+
+
+COMPATIBILITY LOOKUP
+--------------------
+The product page requests compatibility-data.json with GET query parameters:
+  compatibility-data.json?year=2026&make=Demo%20Motors&model=Verified%20Key
+
+A production endpoint can return either:
+  { "result": { "status": "verified|untested|incompatible", "message": "...", "keyFobBattery": "CR2032" } }
+
+or the included full-list shape:
+  { "schemaVersion": 1, "vehicles": [ ... ] }
+
+compatibility-data.js is only a fallback so the checker still works when the HTML files are opened directly from disk. The supplied records are demonstration data and must be replaced with verified vehicle/key-fob results before launch.
