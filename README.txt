@@ -120,3 +120,8 @@ or the included full-list shape:
   { "schemaVersion": 1, "vehicles": [ ... ] }
 
 compatibility-data.js is only a fallback so the checker still works when the HTML files are opened directly from disk. The supplied records are demonstration data and must be replaced with verified vehicle/key-fob results before launch.
+
+
+VEHICLE REQUEST FORM
+--------------------
+Set window.LO_KEY_VEHICLE_REQUEST_API in vehicle-request-config.js to the HTTPS endpoint that accepts POST requests. The JSON payload contains year, make, model, source, submittedAt, and pageUrl.

@@ -103,7 +103,8 @@
     document.querySelector('.cart-close').addEventListener('click', closeCart);
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
-        if (document.querySelector('.review-modal-backdrop.open')) closeReviewModal();
+        if (document.querySelector('.vehicle-request-modal-backdrop.open')) closeVehicleRequestModal();
+        else if (document.querySelector('.review-modal-backdrop.open')) closeReviewModal();
         else if (document.querySelector('.all-reviews-modal-backdrop.open')) closeAllReviewsModal();
         else if (document.querySelector('.confirm-backdrop.open')) closeConfirm(false);
         else closeCart();
@@ -943,6 +944,151 @@
     return 'unknown';
   };
 
+  let vehicleRequestLastFocus = null;
+
+  const ensureVehicleRequestModal = () => {
+    if (document.querySelector('.vehicle-request-modal-backdrop')) return;
+
+    document.body.insertAdjacentHTML('beforeend', `
+      <div class="vehicle-request-modal-backdrop" aria-hidden="true">
+        <section class="vehicle-request-modal" role="dialog" aria-modal="true" aria-labelledby="vehicle-request-modal-title">
+          <div class="vehicle-request-modal-header">
+            <div>
+              <p class="eyebrow">Help expand compatibility</p>
+              <h2 id="vehicle-request-modal-title">Request a vehicle</h2>
+            </div>
+            <button class="vehicle-request-modal-close" type="button" aria-label="Close vehicle request form">×</button>
+          </div>
+
+          <p class="vehicle-request-modal-intro">Tell us which vehicle you would like added to the compatibility list.</p>
+
+          <form class="vehicle-request-form" data-vehicle-request-form>
+            <div class="vehicle-request-form-grid">
+              <label>Year
+                <input name="year" type="number" inputmode="numeric" min="1980" max="2035" placeholder="2024" required>
+              </label>
+              <label>Make
+                <input name="make" autocomplete="organization" maxlength="60" placeholder="Toyota" required>
+              </label>
+            </div>
+
+            <label>Model
+              <input name="model" maxlength="80" placeholder="RAV4" required>
+            </label>
+
+            <p class="vehicle-request-form-note">Submitting a request does not confirm compatibility. It tells us which vehicle and key fob to research or test next.</p>
+            <p class="vehicle-request-form-status" data-vehicle-request-status aria-live="polite"></p>
+
+            <div class="vehicle-request-form-actions">
+              <button class="vehicle-request-form-cancel" type="button">Cancel</button>
+              <button class="btn btn-primary" type="submit">Submit request</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    `);
+
+    const backdrop = document.querySelector('.vehicle-request-modal-backdrop');
+    const form = backdrop?.querySelector('[data-vehicle-request-form]');
+
+    backdrop?.addEventListener('click', (event) => {
+      if (event.target === backdrop) closeVehicleRequestModal();
+    });
+    backdrop?.querySelector('.vehicle-request-modal-close')?.addEventListener('click', closeVehicleRequestModal);
+    backdrop?.querySelector('.vehicle-request-form-cancel')?.addEventListener('click', closeVehicleRequestModal);
+    form?.addEventListener('submit', submitVehicleRequestForm);
+  };
+
+  const openVehicleRequestModal = () => {
+    ensureVehicleRequestModal();
+    const backdrop = document.querySelector('.vehicle-request-modal-backdrop');
+    const form = backdrop?.querySelector('[data-vehicle-request-form]');
+    if (!backdrop || !form) return;
+
+    vehicleRequestLastFocus = document.activeElement;
+
+    const selectedYear = document.querySelector('[data-vehicle-year]')?.value || '';
+    const selectedMake = document.querySelector('[data-vehicle-make]')?.value || '';
+    const selectedModel = document.querySelector('[data-vehicle-model]')?.value || '';
+    if (selectedYear) form.elements.year.value = selectedYear;
+    if (selectedMake) form.elements.make.value = selectedMake;
+    if (selectedModel) form.elements.model.value = selectedModel;
+
+    const status = form.querySelector('[data-vehicle-request-status]');
+    if (status) status.textContent = '';
+
+    backdrop.classList.add('open');
+    backdrop.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('no-scroll');
+
+    const firstEmpty = [...form.querySelectorAll('input')].find((input) => !input.value);
+    setTimeout(() => (firstEmpty || form.elements.year)?.focus(), 60);
+  };
+
+  function closeVehicleRequestModal() {
+    const backdrop = document.querySelector('.vehicle-request-modal-backdrop');
+    if (!backdrop) return;
+    backdrop.classList.remove('open');
+    backdrop.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('no-scroll');
+    vehicleRequestLastFocus?.focus?.();
+  }
+
+  async function submitVehicleRequestForm(event) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const status = form.querySelector('[data-vehicle-request-status]');
+    const submitButton = form.querySelector('button[type="submit"]');
+    const endpoint = String(window.LO_KEY_VEHICLE_REQUEST_API || '').trim();
+
+    if (!form.reportValidity()) return;
+
+    if (!endpoint) {
+      if (status) status.textContent = 'Vehicle requests are not connected yet. Set LO_KEY_VEHICLE_REQUEST_API in vehicle-request-config.js.';
+      return;
+    }
+
+    const formData = new FormData(form);
+    const payload = {
+      year: Number(formData.get('year')),
+      make: String(formData.get('make') || '').trim(),
+      model: String(formData.get('model') || '').trim(),
+      source: 'compatibility-request',
+      submittedAt: new Date().toISOString(),
+      pageUrl: window.location.href
+    };
+
+    submitButton.disabled = true;
+    if (status) status.textContent = 'Submitting…';
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) throw new Error('The vehicle request could not be submitted. Please try again.');
+
+      form.reset();
+      closeVehicleRequestModal();
+      showToast('Thanks. Your vehicle request has been submitted.');
+    } catch (error) {
+      if (status) status.textContent = error.message || 'The vehicle request could not be submitted.';
+    } finally {
+      submitButton.disabled = false;
+    }
+  }
+
+  const initializeVehicleRequestForm = () => {
+    const buttons = document.querySelectorAll('[data-open-vehicle-request]');
+    if (!buttons.length) return;
+    buttons.forEach((button) => button.addEventListener('click', openVehicleRequestModal));
+  };
+
   const initializeCompatibilityChecker = async () => {
     const checker = document.querySelector('[data-vehicle-checker]');
     if (!checker) return;
@@ -1085,6 +1231,7 @@
     initializeProductGallery();
     initializeProductCarousel();
     initializeCompatibilityChecker();
+    initializeVehicleRequestForm();
 
     const header = document.querySelector('.site-header');
     const announcement = document.querySelector('.announcement');

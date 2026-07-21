@@ -2340,15 +2340,38 @@ button { cursor: pointer; }
   font-size: .81rem;
 }
 .vehicle-checker-help {
-  display: grid;
-  gap: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
   margin-top: 21px;
   padding-top: 18px;
   border-top: 1px solid var(--line-dark);
   color: var(--muted-dark);
   font-size: .83rem;
 }
+.vehicle-checker-help-copy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
 .vehicle-checker-help strong { color: var(--ink); }
+.vehicle-request-button {
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 0 15px;
+  border: 1px solid var(--aqua-deep);
+  border-radius: 10px;
+  color: var(--ink);
+  background: rgba(19,212,220,.12);
+  font-size: .78rem;
+  font-weight: 850;
+  transition: background 160ms ease, transform 160ms ease;
+}
+.vehicle-request-button:hover {
+  background: rgba(19,212,220,.23);
+  transform: translateY(-1px);
+}
 
 @media (max-width: 1180px) {
   .product-zoom-preview,
@@ -2663,4 +2686,261 @@ button { cursor: pointer; }
   .product-page .detail-section .section-head {
     margin-bottom: 32px;
   }
+}
+
+
+/* --------------------------------------------------------------------------
+   Visual cleanup pass: centred icons, simplified relay path, readable cards
+   -------------------------------------------------------------------------- */
+
+/* About fact icons: identical canvas, exact optical centring. */
+.about-fact {
+  min-height: 104px;
+}
+.about-fact .flag-mark {
+  width: 54px;
+  height: 54px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.about-fact .flag-mark img {
+  width: 30px !important;
+  height: 30px !important;
+  margin: 0 !important;
+  object-fit: contain;
+  object-position: center;
+  transform: none !important;
+}
+.brand .canada-mark img {
+  object-fit: contain;
+  object-position: center;
+}
+
+/* The dashed path is sufficient; remove the floating red X entirely. */
+#relay-attacks .relay-path-x {
+  display: none !important;
+}
+
+/* White installation cards on a white section, with dark readable type. */
+#how-it-works .step-card {
+  color: var(--ink) !important;
+  background: var(--white) !important;
+  border: 1px solid rgba(8,19,33,.12) !important;
+  box-shadow: 0 18px 44px rgba(8,19,33,.09) !important;
+}
+#how-it-works .step-card::after {
+  display: none !important;
+}
+#how-it-works .step-card .h3,
+#how-it-works .step-card h3,
+#how-it-works .step-card strong {
+  color: var(--ink) !important;
+}
+#how-it-works .step-card p {
+  color: #46566a !important;
+}
+#how-it-works .step-card .step-note {
+  color: #008f98 !important;
+}
+#how-it-works .step-card.step-replace {
+  border-top: 4px solid var(--aqua) !important;
+}
+#how-it-works .step-card.step-sleep {
+  border-top: 4px solid var(--gold) !important;
+}
+#how-it-works .step-card.step-wake {
+  border-top: 4px solid #70e8ed !important;
+}
+
+/* Make the ownership cards easier to read, especially on mobile. */
+.audience-card p {
+  color: #34465a !important;
+  font-size: 1rem !important;
+  line-height: 1.68 !important;
+}
+.audience-card .h3 {
+  color: var(--ink);
+  line-height: 1.16;
+}
+
+/* Explicitly separate the pouch limitation from Lo-Key's benefits. */
+.comparison-benefit-heading {
+  margin: 30px 0 4px;
+  color: var(--ink);
+  font-size: 1.22rem;
+  line-height: 1.25;
+  font-weight: 850;
+}
+.comparison-benefit-heading + .check-list {
+  margin-top: 16px;
+}
+
+/* Product specification section: the old 'dark' class was never styled for
+   detail-section, leaving pale text on a pale background. */
+.product-page #specifications.detail-section.dark {
+  color: var(--white);
+  background: var(--ink);
+}
+.product-page #specifications .h2,
+.product-page #specifications dd {
+  color: var(--white) !important;
+}
+.product-page #specifications .lead,
+.product-page #specifications dt {
+  color: #c7d2df !important;
+}
+.product-page #specifications .spec-table,
+.product-page #specifications .spec-row {
+  border-color: rgba(255,255,255,.14) !important;
+}
+
+@media (max-width: 620px) {
+  .about-fact {
+    min-height: 0;
+    align-items: center;
+  }
+  .about-fact .flag-mark {
+    width: 54px;
+    height: 54px;
+  }
+  .audience-card p {
+    font-size: 1.03rem !important;
+    line-height: 1.7 !important;
+  }
+}
+
+
+/* New vehicle request modal --------------------------------------------- */
+.vehicle-request-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 165;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(3,8,14,.72);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+.vehicle-request-modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.vehicle-request-modal {
+  width: min(620px, 100%);
+  max-height: min(90vh, 760px);
+  overflow-y: auto;
+  padding: 30px;
+  border-radius: 20px;
+  color: var(--ink);
+  background: var(--white);
+  box-shadow: 0 34px 100px rgba(0,0,0,.36);
+  transform: translateY(16px) scale(.985);
+  transition: transform 180ms ease;
+}
+.vehicle-request-modal-backdrop.open .vehicle-request-modal { transform: none; }
+.vehicle-request-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 14px;
+}
+.vehicle-request-modal-header .eyebrow { margin-bottom: 8px; }
+.vehicle-request-modal-header h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.55rem);
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+.vehicle-request-modal-close {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line-dark);
+  border-radius: 10px;
+  color: var(--ink);
+  background: var(--white);
+  font-size: 1.65rem;
+  line-height: 1;
+}
+.vehicle-request-modal-intro {
+  margin: 0 0 22px;
+  color: var(--muted-dark);
+}
+.vehicle-request-form {
+  display: grid;
+  gap: 18px;
+}
+.vehicle-request-form label {
+  color: var(--ink);
+  font-size: .86rem;
+  font-weight: 790;
+}
+.vehicle-request-form input {
+  width: 100%;
+  margin-top: 7px;
+  padding: 13px 14px;
+  border: 1px solid var(--line-dark);
+  border-radius: 10px;
+  outline: none;
+  color: var(--ink);
+  background: #fbfcfd;
+}
+.vehicle-request-form input:focus {
+  border-color: var(--aqua-deep);
+  box-shadow: 0 0 0 3px rgba(19,212,220,.14);
+}
+.vehicle-request-form-grid {
+  display: grid;
+  grid-template-columns: .7fr 1.3fr;
+  gap: 14px;
+}
+.vehicle-request-form-note {
+  margin: -2px 0 0;
+  padding: 13px 14px;
+  border-left: 3px solid var(--aqua);
+  color: var(--muted-dark);
+  background: rgba(19,212,220,.07);
+  font-size: .8rem;
+}
+.vehicle-request-form-status {
+  min-height: 1.2em;
+  margin: -7px 0 0;
+  color: #9d2c2c;
+  font-size: .82rem;
+  font-weight: 700;
+}
+.vehicle-request-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 2px;
+}
+.vehicle-request-form-cancel {
+  min-height: 52px;
+  padding: 0 20px;
+  border: 1px solid var(--line-dark);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--white);
+  font-weight: 800;
+}
+
+@media (max-width: 620px) {
+  .vehicle-checker-help {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .vehicle-request-button { width: 100%; }
+  .vehicle-request-modal { padding: 23px 19px; border-radius: 15px; }
+  .vehicle-request-form-grid { grid-template-columns: 1fr; }
+  .vehicle-request-form-actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .vehicle-request-form-actions .btn,
+  .vehicle-request-form-cancel { width: 100%; }
 }
