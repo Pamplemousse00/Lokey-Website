@@ -484,6 +484,24 @@
         openAllReviewsModal(state.sort?.value || 'recent');
       });
 
+      const overview = component.querySelector('.reviews-overview');
+      if (overview) {
+        overview.setAttribute('role', 'button');
+        overview.setAttribute('tabindex', '0');
+        overview.setAttribute('aria-label', 'Show all customer reviews');
+        const openFromOverview = (event) => {
+          event?.preventDefault?.();
+          openAllReviewsModal(state.sort?.value || 'recent');
+        };
+        overview.addEventListener('click', openFromOverview);
+        overview.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openFromOverview(event);
+          }
+        });
+      }
+
       reviewComponents.add(state);
     });
 
