@@ -1102,9 +1102,12 @@
   }
 
   const initializeVehicleRequestForm = () => {
-    const buttons = document.querySelectorAll('[data-open-vehicle-request]');
-    if (!buttons.length) return;
-    buttons.forEach((button) => button.addEventListener('click', openVehicleRequestModal));
+    document.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-open-vehicle-request]');
+      if (!button) return;
+      event.preventDefault();
+      openVehicleRequestModal();
+    });
   };
 
   const initializeCompatibilityChecker = async () => {
@@ -1168,9 +1171,13 @@
     const showResult = (status, lead, message, detail = '') => {
       result.className = `vehicle-result vehicle-result-${status}`;
       result.hidden = false;
+      const requestButton = status === 'incompatible'
+        ? `<button class="vehicle-request-button vehicle-result-request" data-open-vehicle-request type="button">Request a vehicle</button>`
+        : '';
       result.innerHTML = `
         <div class="vehicle-result-heading"><strong>${escapeHTML(lead)}</strong><span>${escapeHTML(message)}</span></div>
-        ${detail ? `<span class="vehicle-result-detail">${escapeHTML(detail)}</span>` : ''}`;
+        ${detail ? `<span class="vehicle-result-detail">${escapeHTML(detail)}</span>` : ''}
+        ${requestButton}`;
     };
 
     form.addEventListener('submit', async (event) => {

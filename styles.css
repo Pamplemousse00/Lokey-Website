@@ -3110,3 +3110,129 @@ button { cursor: pointer; }
 .audience-card .h3 {
   text-align: center;
 }
+
+
+/* --------------------------------------------------------------------------
+   Pre-launch visibility and July 2026 UI refinements
+   -------------------------------------------------------------------------- */
+
+/* Keep the persistent purchase action visible on mobile without opening the menu. */
+.mobile-buy-link {
+  display: none;
+}
+
+/* Centre all audience-card copy beneath the centred icons. */
+.audience-card .h3,
+.audience-card p {
+  text-align: center;
+}
+
+/* Pre-order state uses an amber status indicator rather than a live-stock green. */
+.stock-dot {
+  background: var(--gold) !important;
+  box-shadow: 0 0 0 5px rgba(255,196,40,.18) !important;
+}
+
+/* The warning copy and card share the vertical centre of the safety section. */
+#safety .safety-layout {
+  align-items: center;
+}
+#safety .warning-card {
+  align-self: center;
+}
+
+/* Contextual vehicle-request action shown only in a red/incompatible result. */
+.vehicle-result-request {
+  width: auto;
+  margin-top: 15px;
+  border-color: rgba(161,47,47,.42);
+  color: #7f2020;
+  background: rgba(255,255,255,.72);
+}
+.vehicle-result-request:hover {
+  background: #fff;
+  border-color: #a12f2f;
+}
+
+@media (max-width: 820px) {
+  .site-header .nav {
+    gap: 10px;
+  }
+  .mobile-buy-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    min-height: 42px;
+    margin-left: auto;
+    padding: 0 15px;
+    border-radius: 999px;
+    color: var(--ink);
+    background: var(--aqua);
+    box-shadow: 0 8px 22px rgba(19,212,220,.19);
+    font-size: .78rem;
+    font-weight: 850;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .mobile-buy-link:hover,
+  .mobile-buy-link:focus-visible {
+    background: #38e5ea;
+  }
+  .menu-toggle {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 390px) {
+  .site-header .brand {
+    gap: 7px;
+  }
+  .site-header .brand-name {
+    font-size: .96rem;
+  }
+  .mobile-buy-link {
+    min-height: 40px;
+    padding: 0 11px;
+    font-size: .71rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Navigation offset and vehicle-request refinement
+   -------------------------------------------------------------------------- */
+
+/* Keep anchored product sections visible below the fixed site header and the
+   sticky product-detail navigation. This also applies to scrollIntoView(). */
+.product-page #compatibility,
+.product-page #reviews,
+.product-page #specifications,
+.product-page #safety,
+.product-page #product-faq {
+  scroll-margin-top: 154px;
+}
+
+/* Keep the contextual request action in the original outlined aqua style,
+   including when it appears inside a red incompatibility result. */
+.vehicle-result-request {
+  border-color: var(--aqua-deep) !important;
+  color: var(--ink) !important;
+  background: rgba(19,212,220,.12) !important;
+  box-shadow: none;
+}
+.vehicle-result-request:hover,
+.vehicle-result-request:focus-visible {
+  border-color: var(--aqua-deep) !important;
+  color: var(--ink) !important;
+  background: rgba(19,212,220,.23) !important;
+}
+
+@media (max-width: 820px) {
+  .product-page #compatibility,
+  .product-page #reviews,
+  .product-page #specifications,
+  .product-page #safety,
+  .product-page #product-faq {
+    scroll-margin-top: 142px;
+  }
+}
