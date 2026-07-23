@@ -228,6 +228,72 @@
 
   const REVIEW_INITIAL_PAGE_SIZE = 3;
 
+
+  const turnstileSiteKey = () => String(window.LO_KEY_TURNSTILE_SITE_KEY || '').trim();
+
+  const isTurnstileConfigured = () => {
+    const siteKey = turnstileSiteKey();
+    return Boolean(siteKey && !siteKey.startsWith('REPLACE_'));
+  };
+
+  const renderTurnstileForForm = (form) => {
+    const container = form?.querySelector('[data-turnstile]');
+    if (!container) return;
+
+    if (!isTurnstileConfigured()) {
+      container.innerHTML = '<p class="turnstile-setup-note">Security check is not configured yet.</p>';
+      return;
+    }
+
+    if (!window.turnstile) {
+      window.setTimeout(() => renderTurnstileForForm(form), 120);
+      return;
+    }
+
+    if (container.dataset.widgetId) {
+      window.turnstile.reset(container.dataset.widgetId);
+      return;
+    }
+
+    container.innerHTML = '';
+    const action = container.dataset.turnstileAction || 'form_submit';
+    const widgetId = window.turnstile.render(container, {
+      sitekey: turnstileSiteKey(),
+      action,
+      theme: 'auto',
+      size: 'flexible',
+      callback: (token) => {
+        container.dataset.turnstileToken = token;
+      },
+      'expired-callback': () => {
+        container.dataset.turnstileToken = '';
+      },
+      'error-callback': () => {
+        container.dataset.turnstileToken = '';
+      }
+    });
+    container.dataset.widgetId = String(widgetId);
+  };
+
+  const turnstileTokenFor = (form) => {
+    const container = form?.querySelector('[data-turnstile]');
+    if (!container) return '';
+    if (container.dataset.turnstileToken) return container.dataset.turnstileToken;
+    if (window.turnstile && container.dataset.widgetId) {
+      return window.turnstile.getResponse(container.dataset.widgetId) || '';
+    }
+    return '';
+  };
+
+  const resetTurnstileFor = (form) => {
+    const container = form?.querySelector('[data-turnstile]');
+    if (!container) return;
+    container.dataset.turnstileToken = '';
+    if (window.turnstile && container.dataset.widgetId) {
+      window.turnstile.reset(container.dataset.widgetId);
+    }
+  };
+
   const getReviews = () => {
     const reviews = Array.isArray(window.LO_KEY_REVIEWS) ? window.LO_KEY_REVIEWS : [];
     const unique = new Map();
@@ -462,6 +528,27 @@
     if (document.querySelector('.all-reviews-modal-backdrop.open')) renderAllReviewsModal();
   };
 
+
+  const loadPublishedReviews = async () => {
+    const endpoint = String(window.LO_KEY_REVIEW_API || '').trim();
+    if (!endpoint) return;
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'GET',
+        headers: { Accept: 'application/json' }
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !Array.isArray(result.reviews)) {
+        throw new Error(result.error || 'Reviews could not be loaded.');
+      }
+      window.LO_KEY_REVIEWS = result.reviews;
+      renderAllReviews();
+    } catch (error) {
+      console.warn('Review API unavailable:', error);
+    }
+  };
+
   const initializeReviews = () => {
     document.querySelectorAll('[data-reviews-component]').forEach((component) => {
       const list = component.querySelector('[data-review-list]');
@@ -563,6 +650,7 @@
             </div>
 
             <p class="review-form-note">An order number alone does not create the Verified Purchase label. In production, the order number and purchase email are checked securely against Shopify before publication.</p>
+            <div class="turnstile-field" data-turnstile data-turnstile-action="review_submit"></div>
             <p class="review-form-status" data-review-form-status aria-live="polite"></p>
 
             <div class="review-form-actions">
@@ -598,6 +686,7 @@
     backdrop.classList.add('open');
     backdrop.setAttribute('aria-hidden', 'false');
     document.body.classList.add('no-scroll');
+    renderTurnstileForForm(form);
     setTimeout(() => form.querySelector('input[name="rating"]')?.focus(), 60);
   };
 
@@ -621,9 +710,14 @@
     if (!form.reportValidity()) return;
 
     if (!endpoint) {
-      if (status) {
-        status.textContent = 'Review submission is not connected yet. Set LO_KEY_REVIEW_API to your review endpoint.';
-      }
+      if (status) status.textContent = 'Review submission is not connected yet.';
+      return;
+    }
+
+    const turnstileToken = turnstileTokenFor(form);
+    if (!turnstileToken) {
+      if (status) status.textContent = 'Please complete the security check.';
+      renderTurnstileForForm(form);
       return;
     }
 
@@ -631,30 +725,25 @@
     if (status) status.textContent = 'Submitting…';
 
     try {
-      const payload = Object.fromEntries(formData.entries());
+      const payload = {
+        ...Object.fromEntries(formData.entries()),
+        turnstileToken
+      };
       const response = await fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(payload)
       });
-      if (!response.ok) throw new Error('Review submission failed.');
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || 'Review submission failed.');
 
-      const result = await response.json();
-      const review = result.review;
-      if (!review) throw new Error('The review service returned an invalid response.');
-
-      if (!Array.isArray(window.LO_KEY_REVIEWS)) window.LO_KEY_REVIEWS = [];
-      window.LO_KEY_REVIEWS.unshift(review);
-
-      reviewComponents.forEach((state) => {
-        if (state.sort) state.sort.value = 'recent';
-      });
-      renderAllReviews();
       form.reset();
+      resetTurnstileFor(form);
       closeReviewModal();
-      showToast('Thank you. Your review has been submitted.');
+      showToast(result.message || 'Thank you. Your review was submitted for approval.');
     } catch (error) {
       if (status) status.textContent = error.message || 'The review could not be submitted.';
+      resetTurnstileFor(form);
     } finally {
       submitButton.disabled = false;
     }
@@ -995,6 +1084,7 @@
             </label>
 
             <p class="vehicle-request-form-note">Submitting a request does not confirm compatibility. It tells us which vehicle and key fob to research or test next.</p>
+            <div class="turnstile-field" data-turnstile data-turnstile-action="vehicle_request"></div>
             <p class="vehicle-request-form-status" data-vehicle-request-status aria-live="polite"></p>
 
             <div class="vehicle-request-form-actions">
@@ -1038,6 +1128,7 @@
     backdrop.classList.add('open');
     backdrop.setAttribute('aria-hidden', 'false');
     document.body.classList.add('no-scroll');
+    renderTurnstileForForm(form);
 
     const firstEmpty = [...form.querySelectorAll('input')].find((input) => !input.value);
     setTimeout(() => (firstEmpty || form.elements.year)?.focus(), 60);
@@ -1062,7 +1153,14 @@
     if (!form.reportValidity()) return;
 
     if (!endpoint) {
-      if (status) status.textContent = 'Vehicle requests are not connected yet. Set LO_KEY_VEHICLE_REQUEST_API in vehicle-request-config.js.';
+      if (status) status.textContent = 'Vehicle requests are not connected yet.';
+      return;
+    }
+
+    const turnstileToken = turnstileTokenFor(form);
+    if (!turnstileToken) {
+      if (status) status.textContent = 'Please complete the security check.';
+      renderTurnstileForForm(form);
       return;
     }
 
@@ -1073,7 +1171,8 @@
       model: String(formData.get('model') || '').trim(),
       source: 'compatibility-request',
       submittedAt: new Date().toISOString(),
-      pageUrl: window.location.href
+      pageUrl: window.location.href,
+      turnstileToken
     };
 
     submitButton.disabled = true;
@@ -1088,14 +1187,16 @@
         },
         body: JSON.stringify(payload)
       });
-
-      if (!response.ok) throw new Error('The vehicle request could not be submitted. Please try again.');
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || 'The vehicle request could not be submitted. Please try again.');
 
       form.reset();
+      resetTurnstileFor(form);
       closeVehicleRequestModal();
-      showToast('Thanks. Your vehicle request has been submitted.');
+      showToast(result.message || 'Thanks. Your vehicle request has been submitted.');
     } catch (error) {
       if (status) status.textContent = error.message || 'The vehicle request could not be submitted.';
+      resetTurnstileFor(form);
     } finally {
       submitButton.disabled = false;
     }
@@ -1252,6 +1353,7 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     initializeReviews();
+    loadPublishedReviews();
     initializeReviewForm();
     initializeProductGallery();
     initializeProductCarousel();

@@ -3253,3 +3253,28 @@ button { cursor: pointer; }
     scroll-margin-top: 142px;
   }
 }
+
+
+/* Cloudflare Turnstile fields used in the review and vehicle-request modals. */
+.turnstile-field {
+  min-height: 68px;
+  margin: 14px 0 2px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.turnstile-field iframe {
+  max-width: 100%;
+}
+.turnstile-setup-note {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(161,47,47,.25);
+  border-radius: 9px;
+  color: #7f2020;
+  background: rgba(161,47,47,.07);
+  font-size: .88rem;
+}
+@media (max-width: 420px) {
+  .turnstile-field { justify-content: center; }
+}

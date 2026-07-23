@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#071b2b">
+  <title>Lo-Key Admin</title>
+  <link rel="stylesheet" href="admin.css">
+  <script defer src="admin.js"></script>
+</head>
+<body>
+  <header class="admin-header">
+    <div>
+      <p class="eyebrow">Lo-Key</p>
+      <h1>Submission admin</h1>
+    </div>
+    <button id="logoutButton" type="button" hidden>Forget key</button>
+  </header>
+
+  <main>
+    <section class="login-card" id="loginCard">
+      <h2>Enter the admin API key</h2>
+      <p>The key is kept only in this browser tab's session storage.</p>
+      <form id="loginForm">
+        <label>Admin key
+          <input id="adminKey" type="password" autocomplete="current-password" required>
+        </label>
+        <button type="submit">Open admin</button>
+      </form>
+      <p class="status" id="loginStatus" aria-live="polite"></p>
+    </section>
+
+    <section id="dashboard" hidden>
+      <div class="toolbar">
+        <div>
+          <h2>Pending reviews</h2>
+          <p>Approve a review before it appears publicly.</p>
+        </div>
+        <button id="refreshButton" type="button">Refresh</button>
+      </div>
+      <div class="card-list" id="reviewList" aria-live="polite"></div>
+
+      <div class="toolbar vehicle-toolbar">
+        <div>
+          <h2>Vehicle requests</h2>
+          <p>Newest requests are shown first.</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Year</th>
+              <th>Make</th>
+              <th>Model</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="vehicleRequestList"></tbody>
+        </table>
+      </div>
+      <p class="status" id="dashboardStatus" aria-live="polite"></p>
+    </section>
+  </main>
+</body>
+</html>
