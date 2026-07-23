@@ -32,6 +32,29 @@
     </section>
 
     <section id="dashboard" hidden>
+      <section class="metric-grid" aria-label="Cart activity">
+        <article class="metric-card">
+          <span>Add-to-cart events</span>
+          <strong id="cartEventCount">0</strong>
+          <small>Every add action</small>
+        </article>
+        <article class="metric-card">
+          <span>Units added</span>
+          <strong id="cartUnitCount">0</strong>
+          <small>Total quantity added</small>
+        </article>
+        <article class="metric-card">
+          <span>Last 24 hours</span>
+          <strong id="cart24hCount">0</strong>
+          <small>Add-to-cart events</small>
+        </article>
+        <article class="metric-card">
+          <span>Last 7 days</span>
+          <strong id="cart7dCount">0</strong>
+          <small>Add-to-cart events</small>
+        </article>
+      </section>
+
       <div class="toolbar">
         <div>
           <h2>Pending reviews</h2>
@@ -41,12 +64,82 @@
       </div>
       <div class="card-list" id="reviewList" aria-live="polite"></div>
 
+      <section class="admin-panel compatibility-panel" id="compatibilityManager">
+        <div class="panel-heading">
+          <div>
+            <h2>Compatibility manager</h2>
+            <p>Select a vehicle, enter its battery size or sizes, and publish a Yes, Probably, or No result.</p>
+          </div>
+        </div>
+
+        <form class="compatibility-form" id="compatibilityForm">
+          <label>Year
+            <select id="compatibilityYear" required>
+              <option value="">Select year</option>
+            </select>
+          </label>
+          <label>Make
+            <select id="compatibilityMake" required disabled>
+              <option value="">Select make</option>
+            </select>
+          </label>
+          <label>Model
+            <select id="compatibilityModel" required disabled>
+              <option value="">Select model</option>
+            </select>
+          </label>
+          <label>Result
+            <select id="compatibilityStatus" required>
+              <option value="">Select result</option>
+              <option value="verified">Yes</option>
+              <option value="probably">Probably</option>
+              <option value="incompatible">No</option>
+            </select>
+          </label>
+          <label class="battery-field">Key-fob battery size(s)
+            <input id="compatibilityBattery" maxlength="120" placeholder="CR2032 or CR2032 + CR2025" required>
+          </label>
+          <button class="primary-action" type="submit">Save compatibility</button>
+        </form>
+        <p class="inline-status" id="compatibilityStatusMessage" aria-live="polite"></p>
+
+        <div class="subheading">
+          <h3>Saved decisions</h3>
+          <span id="compatibilityRecordCount">0 records</span>
+        </div>
+        <div class="table-wrap compact-table-wrap">
+          <table class="compact-table">
+            <thead>
+              <tr>
+                <th>Vehicle</th>
+                <th>Battery size(s)</th>
+                <th>Result</th>
+                <th>Updated</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="compatibilityRecordList"></tbody>
+          </table>
+        </div>
+      </section>
+
       <div class="toolbar vehicle-toolbar">
         <div>
           <h2>Vehicle requests</h2>
-          <p>Newest requests are shown first.</p>
+          <p>Newest requests are shown first. Battery-size totals count every listed size once per request.</p>
         </div>
       </div>
+
+      <section class="admin-panel battery-chart-panel">
+        <div class="panel-heading">
+          <div>
+            <h3>Requested key-fob battery sizes</h3>
+            <p>A request listing two battery sizes contributes one count to each size.</p>
+          </div>
+        </div>
+        <div class="battery-chart" id="batteryChart" aria-live="polite"></div>
+      </section>
+
       <div class="table-wrap">
         <table>
           <thead>
@@ -55,7 +148,9 @@
               <th>Year</th>
               <th>Make</th>
               <th>Model</th>
+              <th>Battery size(s)</th>
               <th>Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody id="vehicleRequestList"></tbody>

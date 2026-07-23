@@ -1,141 +1,104 @@
-# Lo-Key Cloudflare backend setup
+# Lo-Key Cloudflare backend v2 setup
 
-This package adds:
+This version adds:
 
-- Turnstile protection on the vehicle-request and review forms
-- D1-backed vehicle requests and reviews
-- public `GET /api/reviews`
-- moderated `POST /api/reviews`
-- protected admin APIs and `/admin/`
-- hashed-IP submission rate limits
+- vehicle information on customer reviews
+- battery-size collection on vehicle requests
+- request deletion and battery-size charts in `/admin/`
+- an admin compatibility manager for **Yes / Probably / No** decisions
+- public D1-backed compatibility overrides
+- add-to-cart event and quantity counters
+- a lighter review popup with Turnstile preloaded during idle time
+- the supplied Turnstile public sitekey already entered in `vehicle-request-config.js`
 
-## 1. Apply the D1 schema
+## 1. Upgrade the existing D1 database
 
-Open Cloudflare > Storage & databases > D1 > `lokey-production` > Console.
-Paste and run the full contents of `schema.sql`.
+Because backend v1 is already running, open:
 
-The SQL uses `CREATE TABLE IF NOT EXISTS`, so it is safe if the existing
-`vehicle_requests` table was already created.
+**Cloudflare > Storage & databases > D1 > lokey-production > Console**
 
-## 2. Confirm the D1 binding
-
-Open Workers & Pages > your Pages project > Settings > Bindings.
-
-Add the D1 binding to Production and Preview:
-
-- Variable name: `DB`
-- Database: `lokey-production`
-
-Redeploy after changing bindings.
-
-## 3. Create a Turnstile widget
-
-Open Cloudflare > Turnstile > Add widget.
-
-Suggested settings:
-
-- Widget name: `Lo-Key forms`
-- Hostnames: `lokey.ca`, `www.lokey.ca`
-- Mode: Managed
-
-Copy both values:
-
-- Put the public **sitekey** in `vehicle-request-config.js`, replacing
-  `REPLACE_WITH_TURNSTILE_SITE_KEY`.
-- Store the private **secret key** as the encrypted Pages secret
-  `TURNSTILE_SECRET_KEY`.
-
-Never put the secret key in GitHub or a browser JavaScript file.
-
-For preview-domain testing, temporarily add the Pages preview hostname to the
-Turnstile widget's allowed hostnames. Remove it when no longer needed.
-
-## 4. Add Pages variables and secrets
-
-Open Workers & Pages > your Pages project > Settings > Variables and Secrets.
-Add these to Production and Preview, then redeploy:
-
-| Name | Type | Value |
-|---|---|---|
-| `TURNSTILE_SECRET_KEY` | Secret | Turnstile secret key |
-| `ADMIN_API_KEY` | Secret | A long random password/key |
-| `RATE_LIMIT_SALT` | Secret | Another long random value |
-| `TURNSTILE_ALLOWED_HOSTNAMES` | Plain text | `lokey.ca,www.lokey.ca` |
-
-Generate secure random values in PowerShell:
-
-```powershell
--join ((48..57)+(65..90)+(97..122) | Get-Random -Count 48 | ForEach-Object {[char]$_})
-```
-
-Run that twice: once for `ADMIN_API_KEY` and once for `RATE_LIMIT_SALT`.
-
-## 5. Commit and push
-
-Commit the complete folder to the GitHub repository connected to Cloudflare
-Pages. The `functions/` directory must be at the repository root beside
-`index.html`.
-
-Cloudflare will deploy these routes automatically:
-
-- `POST /api/vehicle-requests`
-- `GET /api/reviews`
-- `POST /api/reviews`
-- `GET /api/admin/reviews?status=pending`
-- `POST /api/admin/reviews/:id/approve`
-- `POST /api/admin/reviews/:id/reject`
-- `GET /api/admin/vehicle-requests`
-
-## 6. Test
-
-### Vehicle request
-
-Open the product page, run an incompatible vehicle lookup, select **Request a
-vehicle**, complete Turnstile, and submit. Confirm the row in D1:
-
-```sql
-SELECT * FROM vehicle_requests ORDER BY id DESC LIMIT 20;
-```
-
-### Review submission
-
-Submit a review. It should not appear publicly yet. Confirm it is pending:
-
-```sql
-SELECT id, name, rating, moderation_status, created_at
-FROM reviews
-ORDER BY id DESC;
-```
-
-### Admin
-
-Open:
+Paste and run the complete contents of:
 
 ```text
-https://lokey.ca/admin/
+MIGRATION-V2.sql
 ```
 
-Enter the exact `ADMIN_API_KEY` secret. The page can approve or reject pending
-reviews and view vehicle requests. Approved reviews appear through
-`GET /api/reviews` and normally refresh on the storefront within about a minute.
+Run this migration **once**. It adds:
 
-## 7. Recommended extra protection with Cloudflare Access
+- `reviews.vehicle`
+- `vehicle_requests.battery_sizes`
+- `compatibility_records`
+- `cart_events`
 
-The admin APIs already require the bearer key. For a second layer, create a
-Cloudflare Access self-hosted application protecting:
+Do not run `MIGRATION-V2.sql` repeatedly because SQLite will reject an attempt to add the same column twice.
 
-- `lokey.ca/admin/*`
-- `lokey.ca/api/admin/*`
+`schema.sql` is the complete schema for a brand-new database and is not needed for this upgrade.
 
-Use an Allow policy for only your email address. Keep the API key requirement in
-place as defence in depth and to protect the Pages preview domain too.
+## 2. Keep the existing Cloudflare settings
 
-## Current submission limits
+The project still requires:
 
-- Vehicle requests: 5 per IP hash per hour
-- Reviews: 3 per IP hash per 24 hours
+- D1 binding: `DB` → `lokey-production`
+- secret: `TURNSTILE_SECRET_KEY`
+- secret: `ADMIN_API_KEY`
+- secret: `RATE_LIMIT_SALT`
+- plain variable: `TURNSTILE_ALLOWED_HOSTNAMES=lokey.ca,www.lokey.ca`
 
-The database stores a salted hash, not the plain IP address. Change the limits in:
+The public Turnstile sitekey is now set to:
 
-- `functions/api/vehicle-requests.js`
-- `functions/api/reviews.js`
+```text
+0x4AAAAAAD7v8d8LZ7ZBcYW2
+```
+
+The Turnstile secret must remain only in Cloudflare and must never be committed to GitHub.
+
+## 3. Commit and deploy
+
+Commit this complete folder to the GitHub repository connected to Cloudflare Pages. Keep the `functions/` directory at the repository root beside `index.html`.
+
+Cloudflare will automatically deploy these added routes:
+
+- `GET /api/compatibility`
+- `POST /api/cart-events`
+- `GET /api/admin/cart-metrics`
+- `GET /api/admin/compatibility`
+- `POST /api/admin/compatibility`
+- `DELETE /api/admin/compatibility/:id`
+- `DELETE /api/admin/vehicle-requests/:id`
+
+The existing review and vehicle-request routes remain in place.
+
+## 4. Test after deployment
+
+### Review vehicle field
+
+Open **Write a review** and confirm that the form contains a required **Vehicle** field with the placeholder `Year, make, model`. Submit a test review, then confirm the vehicle appears in the pending review card in `/admin/`.
+
+### Vehicle request battery sizes
+
+Run an incompatible compatibility check and click **Request a vehicle**. The listed battery should prefill the battery-size field. Submit the request and confirm that:
+
+- the size appears in the admin table
+- the battery-size chart updates
+- the **Delete** button removes the request
+
+A request containing `CR2032 + CR2025` should add one chart count to both CR2032 and CR2025.
+
+### Compatibility manager
+
+In `/admin/`, choose year, make, model, result, and battery size. Save it, then run the same vehicle lookup on the public product page. The D1 decision takes priority over the static compatibility catalogue.
+
+### Cart counter
+
+Click **Add to cart** on the product page, refresh `/admin/`, and confirm that:
+
+- **Add-to-cart events** increases by one per add action
+- **Units added** increases by the selected quantity
+
+Using the plus button in the cart drawer also records an add event.
+
+## Notes
+
+- Existing approved reviews created before this migration may have no vehicle value. New reviews require one.
+- Cart events contain quantity, source, page URL, and timestamp. They do not store customer names, email addresses, or raw IP addresses.
+- The compatibility manager stores runtime overrides in D1; it does not rewrite `compatibility-data.json` in GitHub.

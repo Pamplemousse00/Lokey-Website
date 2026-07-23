@@ -12,7 +12,7 @@ export async function onRequestGet(context) {
 
   try {
     const result = await context.env.DB.prepare(`
-      SELECT id, year, make, model, status, submitted_at, page_url
+      SELECT id, year, make, model, battery_sizes, status, submitted_at, page_url
       FROM vehicle_requests
       ORDER BY submitted_at DESC, id DESC
       LIMIT 500

@@ -6,6 +6,7 @@ function publicReview(row) {
     id: String(row.id),
     name: row.name,
     country: row.country,
+    vehicle: row.vehicle || "",
     rating: Number(row.rating),
     title: row.title,
     body: row.body,
@@ -18,7 +19,7 @@ function publicReview(row) {
 export async function onRequestGet(context) {
   try {
     const result = await context.env.DB.prepare(`
-      SELECT id, name, country, rating, title, body, created_at,
+      SELECT id, name, country, vehicle, rating, title, body, created_at,
              verified, verification_status
       FROM reviews
       WHERE approved = 1 AND moderation_status = 'approved'
@@ -74,6 +75,7 @@ export async function onRequestPost(context) {
   const rating = Number(data.rating);
   const name = textField(data.name, 60);
   const country = textField(data.country, 60);
+  const vehicle = textField(data.vehicle, 120);
   const title = textField(data.title, 90);
   const body = textField(data.body, 1200);
   const orderNumber = textField(data.orderNumber, 40) || null;
@@ -84,6 +86,7 @@ export async function onRequestPost(context) {
   }
   if (name.length < 2) return json({ success: false, error: "Please enter a display name." }, 400);
   if (!country) return json({ success: false, error: "Please enter a country." }, 400);
+  if (vehicle.length < 3) return json({ success: false, error: "Please enter the vehicle year, make, and model." }, 400);
   if (title.length < 3) return json({ success: false, error: "Please enter a review title." }, 400);
   if (body.length < 20) return json({ success: false, error: "Please enter at least 20 characters in the review." }, 400);
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -96,14 +99,15 @@ export async function onRequestPost(context) {
   try {
     const result = await context.env.DB.prepare(`
       INSERT INTO reviews
-        (name, country, rating, title, body, order_number, purchase_email,
+        (name, country, vehicle, rating, title, body, order_number, purchase_email,
          verified, verification_status, approved, moderation_status,
          created_at, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, 0, ?, 0, 'pending', ?, ?)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, 'pending', ?, ?)
     `)
       .bind(
         name,
         country,
+        vehicle,
         rating,
         title,
         body,

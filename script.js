@@ -26,6 +26,23 @@
     renderCart();
   };
 
+  const trackCartAdd = (quantity, source) => {
+    const endpoint = String(window.LO_KEY_CART_EVENT_API || '').trim();
+    const safeQuantity = Math.max(1, Math.min(20, Number(quantity) || 1));
+    if (!endpoint) return;
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        quantity: safeQuantity,
+        source: String(source || 'unknown').slice(0, 40),
+        pageUrl: window.location.href
+      }),
+      keepalive: true
+    }).catch(() => {});
+  };
+
   const showToast = (message) => {
     let toast = document.querySelector('.toast');
     if (!toast) {
@@ -186,6 +203,7 @@
 
         if (action === 'increase') {
           current.qty += 1;
+          trackCartAdd(1, 'cart-drawer-increase');
         }
 
         if (action === 'decrease') {
@@ -250,10 +268,7 @@
       return;
     }
 
-    if (container.dataset.widgetId) {
-      window.turnstile.reset(container.dataset.widgetId);
-      return;
-    }
+    if (container.dataset.widgetId) return;
 
     container.innerHTML = '';
     const action = container.dataset.turnstileAction || 'form_submit';
@@ -357,11 +372,14 @@
       </div>
       <h3>${escapeHTML(review.title)}</h3>
       <p class="review-body">${escapeHTML(review.body)}</p>
+      ${review.vehicle ? `<p class="review-vehicle"><strong>Vehicle:</strong> ${escapeHTML(review.vehicle)}</p>` : ''}
       <div class="review-author">
-        <strong>${escapeHTML(review.name)}</strong>
-        <span>${escapeHTML(review.country)}</span>
+        <div>
+          <strong>${escapeHTML(review.name)}</strong>
+          <span>${escapeHTML(review.country)}</span>
+        </div>
+        ${reviewVerificationMarkup(review)}
       </div>
-      ${reviewVerificationMarkup(review)}
     </article>`;
 
   const updateReviewSummary = (reviews) => {
@@ -632,6 +650,10 @@
               </label>
             </div>
 
+            <label>Vehicle
+              <input name="vehicle" maxlength="120" placeholder="Year, make, model" required>
+            </label>
+
             <label>Review title
               <input name="title" maxlength="90" required>
             </label>
@@ -686,7 +708,7 @@
     backdrop.classList.add('open');
     backdrop.setAttribute('aria-hidden', 'false');
     document.body.classList.add('no-scroll');
-    renderTurnstileForForm(form);
+    window.requestAnimationFrame(() => renderTurnstileForForm(form));
     setTimeout(() => form.querySelector('input[name="rating"]')?.focus(), 60);
   };
 
@@ -751,6 +773,14 @@
 
   const initializeReviewForm = () => {
     ensureReviewModal();
+    const reviewForm = document.querySelector('[data-review-form]');
+    const warmTurnstile = () => renderTurnstileForForm(reviewForm);
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(warmTurnstile, { timeout: 2500 });
+    } else {
+      window.setTimeout(warmTurnstile, 1200);
+    }
+
     document.querySelectorAll('[data-open-review]').forEach((button) => {
       button.addEventListener('click', () => openReviewModal());
     });
@@ -1012,11 +1042,26 @@
   };
 
   const requestCompatibilityData = async (query = {}) => {
-    const url = new URL('compatibility-data.json', window.location.href);
-    Object.entries(query).forEach(([key, value]) => {
-      if (value !== undefined && value !== '') url.searchParams.set(key, value);
-    });
+    const hasSelection = query.year && query.make && query.model;
 
+    if (hasSelection) {
+      const endpoint = String(window.LO_KEY_COMPATIBILITY_API || '').trim();
+      if (endpoint) {
+        const apiUrl = new URL(endpoint, window.location.href);
+        Object.entries(query).forEach(([key, value]) => {
+          if (value !== undefined && value !== '') apiUrl.searchParams.set(key, value);
+        });
+        try {
+          const response = await fetch(apiUrl.toString(), { headers: { Accept: 'application/json' } });
+          const result = await response.json().catch(() => ({}));
+          if (response.ok && result.result) return result;
+        } catch (_) {
+          // Fall through to the static catalogue.
+        }
+      }
+    }
+
+    const url = new URL('compatibility-data.json', window.location.href);
     try {
       const response = await fetch(url.toString(), { headers: { Accept: 'application/json' } });
       if (!response.ok) throw new Error(`Compatibility request failed: ${response.status}`);
@@ -1083,7 +1128,11 @@
               <input name="model" maxlength="80" placeholder="RAV4" required>
             </label>
 
-            <p class="vehicle-request-form-note">Submitting a request does not confirm compatibility. It tells us which vehicle and key fob to research or test next.</p>
+            <label>Key-fob battery size(s) <span>(if known)</span>
+              <input name="batterySizes" maxlength="120" placeholder="CR2450 or CR2032 + CR2025" required>
+            </label>
+
+            <p class="vehicle-request-form-note">List every battery size if the vehicle can use more than one key-fob style. Enter “Unknown” if you have not opened the fob yet.</p>
             <div class="turnstile-field" data-turnstile data-turnstile-action="vehicle_request"></div>
             <p class="vehicle-request-form-status" data-vehicle-request-status aria-live="polite"></p>
 
@@ -1107,7 +1156,7 @@
     form?.addEventListener('submit', submitVehicleRequestForm);
   };
 
-  const openVehicleRequestModal = () => {
+  const openVehicleRequestModal = (prefill = {}) => {
     ensureVehicleRequestModal();
     const backdrop = document.querySelector('.vehicle-request-modal-backdrop');
     const form = backdrop?.querySelector('[data-vehicle-request-form]');
@@ -1121,6 +1170,7 @@
     if (selectedYear) form.elements.year.value = selectedYear;
     if (selectedMake) form.elements.make.value = selectedMake;
     if (selectedModel) form.elements.model.value = selectedModel;
+    form.elements.batterySizes.value = prefill.batterySizes || '';
 
     const status = form.querySelector('[data-vehicle-request-status]');
     if (status) status.textContent = '';
@@ -1169,6 +1219,7 @@
       year: Number(formData.get('year')),
       make: String(formData.get('make') || '').trim(),
       model: String(formData.get('model') || '').trim(),
+      batterySizes: String(formData.get('batterySizes') || '').trim(),
       source: 'compatibility-request',
       submittedAt: new Date().toISOString(),
       pageUrl: window.location.href,
@@ -1207,7 +1258,7 @@
       const button = event.target.closest('[data-open-vehicle-request]');
       if (!button) return;
       event.preventDefault();
-      openVehicleRequestModal();
+      openVehicleRequestModal({ batterySizes: button.dataset.requestBattery || '' });
     });
   };
 
@@ -1269,11 +1320,11 @@
       result.hidden = true;
     });
 
-    const showResult = (status, lead, message, detail = '') => {
+    const showResult = (status, lead, message, detail = '', requestBattery = '') => {
       result.className = `vehicle-result vehicle-result-${status}`;
       result.hidden = false;
       const requestButton = status === 'incompatible'
-        ? `<button class="vehicle-request-button vehicle-result-request" data-open-vehicle-request type="button">Request a vehicle</button>`
+        ? `<button class="vehicle-request-button vehicle-result-request" data-open-vehicle-request data-request-battery="${escapeHTML(requestBattery)}" type="button">Request a vehicle</button>`
         : '';
       result.innerHTML = `
         <div class="vehicle-result-heading"><strong>${escapeHTML(lead)}</strong><span>${escapeHTML(message)}</span></div>
@@ -1307,7 +1358,8 @@
           visualStatus,
           copy.lead,
           copy.message,
-          battery ? `Listed key-fob battery: ${battery}` : ''
+          battery ? `Listed key-fob battery: ${battery}` : '',
+          battery
         );
         return;
       }
@@ -1334,7 +1386,8 @@
           visualStatus,
           copy.lead,
           copy.message,
-          rule.battery ? `Listed key-fob battery: ${rule.battery}` : ''
+          rule.battery ? `Listed key-fob battery: ${rule.battery}` : '',
+          rule.battery || ''
         );
         return;
       }
@@ -1424,6 +1477,7 @@
         const cart = getCart();
         cart.qty += amount;
         saveCart(cart);
+        trackCartAdd(amount, 'product-add-button');
         showToast(`${amount} ${amount === 1 ? 'Lo-Key' : 'Lo-Keys'} added to cart.`);
         openCart();
       });

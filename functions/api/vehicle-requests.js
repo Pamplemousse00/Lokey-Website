@@ -37,6 +37,7 @@ export async function onRequestPost(context) {
   const year = Number(data.year);
   const make = textField(data.make, 80);
   const model = textField(data.model, 120);
+  const batterySizes = textField(data.batterySizes, 120);
   const currentYear = new Date().getUTCFullYear();
 
   if (!Number.isInteger(year) || year < 1980 || year > currentYear + 2) {
@@ -44,6 +45,7 @@ export async function onRequestPost(context) {
   }
   if (!make) return json({ success: false, error: "Please enter the vehicle make." }, 400);
   if (!model) return json({ success: false, error: "Please enter the vehicle model." }, 400);
+  if (!batterySizes) return json({ success: false, error: "Please enter the key-fob battery size, or enter Unknown." }, 400);
 
   const submittedAt = new Date().toISOString();
   const pageUrl = textField(data.pageUrl, 500) || null;
@@ -52,10 +54,10 @@ export async function onRequestPost(context) {
   try {
     const result = await context.env.DB.prepare(`
       INSERT INTO vehicle_requests
-        (year, make, model, status, submitted_at, page_url, user_agent)
-      VALUES (?, ?, ?, 'new', ?, ?, ?)
+        (year, make, model, battery_sizes, status, submitted_at, page_url, user_agent)
+      VALUES (?, ?, ?, ?, 'new', ?, ?, ?)
     `)
-      .bind(year, make, model, submittedAt, pageUrl, userAgent)
+      .bind(year, make, model, batterySizes, submittedAt, pageUrl, userAgent)
       .run();
 
     return json(

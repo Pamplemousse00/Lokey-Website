@@ -3278,3 +3278,39 @@ button { cursor: pointer; }
 @media (max-width: 420px) {
   .turnstile-field { justify-content: center; }
 }
+
+/* Backend v2: lighter review modal and added review/request metadata. */
+.review-modal-backdrop {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  background: rgba(3, 8, 14, .82);
+  transition: opacity 120ms ease;
+}
+.review-modal {
+  contain: layout paint;
+  transform: translateY(10px);
+  transition: transform 120ms ease;
+}
+.review-vehicle {
+  margin: 15px 0 0;
+  color: var(--muted-dark);
+  font-size: .84rem;
+  line-height: 1.45;
+}
+.review-vehicle strong { color: var(--ink); }
+.review-author > div:first-child {
+  display: grid;
+  gap: 3px;
+}
+.review-author > .review-verification {
+  margin-top: 0;
+  text-align: right;
+}
+.vehicle-request-form label > span {
+  color: var(--muted-dark);
+  font-weight: 600;
+}
+@media (max-width: 520px) {
+  .review-author { align-items: flex-start; }
+  .review-author > .review-verification { max-width: 44%; }
+}

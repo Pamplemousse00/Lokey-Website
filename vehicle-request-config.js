@@ -4,10 +4,8 @@
  */
 window.LO_KEY_VEHICLE_REQUEST_API = "/api/vehicle-requests";
 window.LO_KEY_REVIEW_API = "/api/reviews";
+window.LO_KEY_COMPATIBILITY_API = "/api/compatibility";
+window.LO_KEY_CART_EVENT_API = "/api/cart-events";
 
-/*
- * Public Turnstile sitekey. Replace the placeholder with the sitekey shown in
- * Cloudflare > Turnstile. Keep the matching secret key only in the Cloudflare
- * Pages environment variable TURNSTILE_SECRET_KEY.
- */
+/* Public Turnstile sitekey. Keep the matching secret only in Cloudflare. */
 window.LO_KEY_TURNSTILE_SITE_KEY = "0x4AAAAAAD7v8d8LZ7ZBcYW2";

@@ -17,7 +17,7 @@ export async function onRequestGet(context) {
 
   const where = status === "all" ? "" : "WHERE moderation_status = ?";
   const statement = context.env.DB.prepare(`
-    SELECT id, name, country, rating, title, body, order_number,
+    SELECT id, name, country, vehicle, rating, title, body, order_number,
            purchase_email, verified, verification_status, approved,
            moderation_status, created_at, approved_at, rejected_at
     FROM reviews

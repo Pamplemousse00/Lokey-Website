@@ -1,11 +1,13 @@
+-- Fresh-install schema for the Lo-Key Cloudflare Pages backend.
 -- Run this in Cloudflare: Storage & databases > D1 > lokey-production > Console.
--- It is safe to run more than once.
+-- Existing v1 databases should run MIGRATION-V2.sql instead.
 
 CREATE TABLE IF NOT EXISTS vehicle_requests (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   year INTEGER NOT NULL,
   make TEXT NOT NULL,
   model TEXT NOT NULL,
+  battery_sizes TEXT,
   status TEXT NOT NULL DEFAULT 'new',
   submitted_at TEXT NOT NULL,
   page_url TEXT,
@@ -19,6 +21,7 @@ CREATE TABLE IF NOT EXISTS reviews (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   country TEXT NOT NULL,
+  vehicle TEXT NOT NULL,
   rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
   title TEXT NOT NULL,
   body TEXT NOT NULL,
@@ -50,3 +53,31 @@ CREATE TABLE IF NOT EXISTS submission_rate_limits (
 
 CREATE INDEX IF NOT EXISTS idx_submission_rate_limits_window
 ON submission_rate_limits(window_start);
+
+CREATE TABLE IF NOT EXISTS compatibility_records (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  year INTEGER NOT NULL,
+  make TEXT NOT NULL,
+  make_normalized TEXT NOT NULL,
+  model TEXT NOT NULL,
+  model_normalized TEXT NOT NULL,
+  status TEXT NOT NULL CHECK (status IN ('verified', 'compatible', 'conditional', 'incompatible')),
+  battery_sizes TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (year, make_normalized, model_normalized)
+);
+
+CREATE INDEX IF NOT EXISTS idx_compatibility_lookup
+ON compatibility_records(year, make_normalized, model_normalized);
+
+CREATE TABLE IF NOT EXISTS cart_events (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  quantity INTEGER NOT NULL CHECK (quantity BETWEEN 1 AND 20),
+  source TEXT NOT NULL,
+  page_url TEXT,
+  created_at TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_cart_events_created
+ON cart_events(created_at);
