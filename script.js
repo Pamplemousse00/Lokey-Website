@@ -194,7 +194,7 @@
     foot.innerHTML = `
       <div class="cart-total"><span>Subtotal</span><span>${money.format(product.price * cart.qty)}</span></div>
       <button class="btn btn-primary btn-block" type="button" data-checkout>Proceed to checkout</button>
-      <p class="cart-note">Front-end demo cart. Connect this button to Shopify, Stripe, or another checkout when ready.</p>`;
+      <p class="cart-note">Taxes and shipping are calculated at checkout. Pre-order timing will be shown before payment.</p>`;
 
     body.querySelectorAll('[data-cart-action]').forEach((button) => {
       button.addEventListener('click', async () => {

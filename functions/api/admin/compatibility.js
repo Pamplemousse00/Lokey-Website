@@ -1,5 +1,6 @@
 import { json, methodNotAllowed, readJson, textField } from "../../_lib/http.js";
 import { isAdminRequest } from "../../_lib/security.js";
+import { writeAudit } from "../../_lib/audit.js";
 
 const normalize = (value) => String(value || "")
   .trim()
@@ -74,11 +75,20 @@ export async function onRequestPost(context) {
     return json({ success: false, error: "Please select Yes, Probably, or No." }, 400);
   }
   if (!batterySizes) {
-    return json({ success: false, error: "Please enter at least one key-fob battery size." }, 400);
+    return json({ success: false, error: "Please select at least one key-fob battery size." }, 400);
   }
 
+  const makeNormalized = normalize(make);
+  const modelNormalized = normalize(model);
   const now = new Date().toISOString();
+
   try {
+    const previous = await context.env.DB.prepare(`
+      SELECT id, year, make, model, status, battery_sizes, created_at, updated_at
+      FROM compatibility_records
+      WHERE year = ? AND make_normalized = ? AND model_normalized = ?
+    `).bind(year, makeNormalized, modelNormalized).first();
+
     const row = await context.env.DB.prepare(`
       INSERT INTO compatibility_records
         (year, make, make_normalized, model, model_normalized, status,
@@ -96,9 +106,9 @@ export async function onRequestPost(context) {
       .bind(
         year,
         make,
-        normalize(make),
+        makeNormalized,
         model,
-        normalize(model),
+        modelNormalized,
         status,
         batterySizes,
         now,
@@ -106,7 +116,23 @@ export async function onRequestPost(context) {
       )
       .first();
 
-    return json({ success: true, record: row, message: "Compatibility decision saved." });
+    const auditSaved = await writeAudit(context, {
+      action: previous ? "compatibility.updated" : "compatibility.created",
+      entityType: "compatibility",
+      entityId: row.id,
+      summary: `${previous ? "Updated" : "Created"} ${year} ${make} ${model}: ${status}, ${batterySizes}.`,
+      details: {
+        before: previous || null,
+        after: row,
+      },
+    });
+
+    return json({
+      success: true,
+      record: row,
+      message: `Compatibility decision ${previous ? "updated" : "saved"}.`,
+      auditSaved,
+    });
   } catch (error) {
     console.error("Admin compatibility save error:", error);
     return json({ success: false, error: "Could not save the compatibility decision." }, 500);

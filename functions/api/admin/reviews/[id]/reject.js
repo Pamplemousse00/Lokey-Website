@@ -1,5 +1,6 @@
 import { json, methodNotAllowed } from "../../../../_lib/http.js";
 import { isAdminRequest } from "../../../../_lib/security.js";
+import { writeAudit } from "../../../../_lib/audit.js";
 
 export async function onRequestPost(context) {
   if (!isAdminRequest(context.request, context.env)) {
@@ -13,6 +14,16 @@ export async function onRequestPost(context) {
 
   const now = new Date().toISOString();
   try {
+    const review = await context.env.DB.prepare(`
+      SELECT id, name, vehicle, rating, title, moderation_status
+      FROM reviews
+      WHERE id = ?
+    `).bind(id).first();
+
+    if (!review) {
+      return json({ success: false, error: "Review not found." }, 404);
+    }
+
     const result = await context.env.DB.prepare(`
       UPDATE reviews
       SET approved = 0,
@@ -28,7 +39,25 @@ export async function onRequestPost(context) {
     if (!result.meta?.changes) {
       return json({ success: false, error: "Review not found." }, 404);
     }
-    return json({ success: true, message: "Review rejected." });
+
+    const auditSaved = await writeAudit(context, {
+      action: "review.rejected",
+      entityType: "review",
+      entityId: id,
+      summary: `Rejected review “${review.title}” by ${review.name}.`,
+      details: {
+        review: {
+          id: review.id,
+          name: review.name,
+          vehicle: review.vehicle,
+          rating: review.rating,
+          title: review.title,
+        },
+        previousStatus: review.moderation_status,
+      },
+    });
+
+    return json({ success: true, message: "Review rejected.", auditSaved });
   } catch (error) {
     console.error("Reject review error:", error);
     return json({ success: false, error: "Could not reject the review." }, 500);

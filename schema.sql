@@ -81,3 +81,20 @@ CREATE TABLE IF NOT EXISTS cart_events (
 
 CREATE INDEX IF NOT EXISTS idx_cart_events_created
 ON cart_events(created_at);
+
+CREATE TABLE IF NOT EXISTS admin_audit_log (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  actor TEXT NOT NULL,
+  action TEXT NOT NULL,
+  entity_type TEXT NOT NULL,
+  entity_id TEXT,
+  summary TEXT NOT NULL,
+  details_json TEXT,
+  created_at TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_admin_audit_log_created
+ON admin_audit_log(created_at);
+
+CREATE INDEX IF NOT EXISTS idx_admin_audit_log_entity
+ON admin_audit_log(entity_type, entity_id, created_at);

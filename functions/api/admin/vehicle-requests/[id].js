@@ -1,5 +1,6 @@
 import { json, methodNotAllowed } from "../../../_lib/http.js";
 import { isAdminRequest } from "../../../_lib/security.js";
+import { writeAudit } from "../../../_lib/audit.js";
 
 export async function onRequestDelete(context) {
   if (!isAdminRequest(context.request, context.env)) {
@@ -12,6 +13,16 @@ export async function onRequestDelete(context) {
   }
 
   try {
+    const request = await context.env.DB.prepare(`
+      SELECT id, year, make, model, battery_sizes, status, submitted_at
+      FROM vehicle_requests
+      WHERE id = ?
+    `).bind(id).first();
+
+    if (!request) {
+      return json({ success: false, error: "Vehicle request not found." }, 404);
+    }
+
     const result = await context.env.DB.prepare(
       "DELETE FROM vehicle_requests WHERE id = ?"
     ).bind(id).run();
@@ -19,7 +30,16 @@ export async function onRequestDelete(context) {
     if (!result.meta?.changes) {
       return json({ success: false, error: "Vehicle request not found." }, 404);
     }
-    return json({ success: true, message: "Vehicle request deleted." });
+
+    const auditSaved = await writeAudit(context, {
+      action: "vehicle_request.deleted",
+      entityType: "vehicle_request",
+      entityId: id,
+      summary: `Deleted request for ${request.year} ${request.make} ${request.model}.`,
+      details: request,
+    });
+
+    return json({ success: true, message: "Vehicle request deleted.", auditSaved });
   } catch (error) {
     console.error("Delete vehicle request error:", error);
     return json({ success: false, error: "Could not delete the vehicle request." }, 500);

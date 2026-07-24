@@ -15,14 +15,20 @@
       <p class="eyebrow">Lo-Key</p>
       <h1>Submission admin</h1>
     </div>
-    <button id="logoutButton" type="button" hidden>Forget key</button>
+    <div class="admin-session" id="adminSession" hidden>
+      <span id="adminActorDisplay"></span>
+      <button id="logoutButton" type="button">Forget key</button>
+    </div>
   </header>
 
   <main>
     <section class="login-card" id="loginCard">
-      <h2>Enter the admin API key</h2>
-      <p>The key is kept only in this browser tab's session storage.</p>
+      <h2>Open the admin dashboard</h2>
+      <p>Your name or email is attached to approvals, deletions, and compatibility changes in the audit trail. The API key remains only in this browser tab.</p>
       <form id="loginForm">
+        <label>Your name or email
+          <input id="adminActor" type="text" maxlength="160" autocomplete="name" placeholder="Neeraj or name@example.com" required>
+        </label>
         <label>Admin key
           <input id="adminKey" type="password" autocomplete="current-password" required>
         </label>
@@ -55,6 +61,23 @@
         </article>
       </section>
 
+      <section class="admin-panel export-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>CSV exports</h2>
+            <p>Download the current D1 data for analysis, backup, or reporting.</p>
+          </div>
+        </div>
+        <div class="export-actions" id="exportActions">
+          <button type="button" data-export="reviews">Reviews</button>
+          <button type="button" data-export="vehicle-requests">Vehicle requests</button>
+          <button type="button" data-export="compatibility">Compatibility</button>
+          <button type="button" data-export="cart-events">Cart events</button>
+          <button type="button" data-export="audit-log">Audit trail</button>
+        </div>
+        <p class="inline-status" id="exportStatus" aria-live="polite"></p>
+      </section>
+
       <div class="toolbar">
         <div>
           <h2>Pending reviews</h2>
@@ -68,7 +91,7 @@
         <div class="panel-heading">
           <div>
             <h2>Compatibility manager</h2>
-            <p>Select a vehicle, enter its battery size or sizes, and publish a Yes, Probably, or No result.</p>
+            <p>Select a vehicle, choose its battery size or sizes, and publish a Yes, Probably, or No result.</p>
           </div>
         </div>
 
@@ -96,9 +119,17 @@
               <option value="incompatible">No</option>
             </select>
           </label>
-          <label class="battery-field">Key-fob battery size(s)
-            <input id="compatibilityBattery" maxlength="120" placeholder="CR2032 or CR2032 + CR2025" required>
-          </label>
+          <fieldset class="battery-field battery-selector">
+            <legend>Key-fob battery size(s)</legend>
+            <div class="battery-choice-group" id="compatibilityBatteryChoices" aria-describedby="compatibilityBatteryHelp">
+              <button class="battery-choice" type="button" data-battery-size="CR2016" aria-pressed="false">CR2016</button>
+              <button class="battery-choice" type="button" data-battery-size="CR2025" aria-pressed="false">CR2025</button>
+              <button class="battery-choice" type="button" data-battery-size="CR2032" aria-pressed="false">CR2032</button>
+              <button class="battery-choice" type="button" data-battery-size="CR2450" aria-pressed="false">CR2450</button>
+            </div>
+            <p class="field-help" id="compatibilityBatteryHelp">Select one or more sizes when the vehicle uses multiple key-fob batteries.</p>
+            <input id="compatibilityBattery" type="hidden">
+          </fieldset>
           <button class="primary-action" type="submit">Save compatibility</button>
         </form>
         <p class="inline-status" id="compatibilityStatusMessage" aria-live="polite"></p>
@@ -156,6 +187,30 @@
           <tbody id="vehicleRequestList"></tbody>
         </table>
       </div>
+
+      <section class="admin-panel audit-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Admin audit trail</h2>
+            <p>Records who approved, rejected, deleted, or changed data. Cloudflare Access email is used automatically when available.</p>
+          </div>
+        </div>
+        <div class="table-wrap compact-table-wrap">
+          <table class="audit-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Who</th>
+                <th>Action</th>
+                <th>Record</th>
+                <th>Summary</th>
+              </tr>
+            </thead>
+            <tbody id="auditLogList"></tbody>
+          </table>
+        </div>
+      </section>
+
       <p class="status" id="dashboardStatus" aria-live="polite"></p>
     </section>
   </main>

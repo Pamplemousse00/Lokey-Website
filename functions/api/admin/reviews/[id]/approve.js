@@ -1,5 +1,6 @@
 import { json, methodNotAllowed, readJson } from "../../../../_lib/http.js";
 import { isAdminRequest } from "../../../../_lib/security.js";
+import { writeAudit } from "../../../../_lib/audit.js";
 
 export async function onRequestPost(context) {
   if (!isAdminRequest(context.request, context.env)) {
@@ -23,6 +24,16 @@ export async function onRequestPost(context) {
   const now = new Date().toISOString();
 
   try {
+    const review = await context.env.DB.prepare(`
+      SELECT id, name, vehicle, rating, title, moderation_status, verified
+      FROM reviews
+      WHERE id = ?
+    `).bind(id).first();
+
+    if (!review) {
+      return json({ success: false, error: "Review not found." }, 404);
+    }
+
     const result = await context.env.DB.prepare(`
       UPDATE reviews
       SET approved = 1,
@@ -40,7 +51,30 @@ export async function onRequestPost(context) {
     if (!result.meta?.changes) {
       return json({ success: false, error: "Review not found." }, 404);
     }
-    return json({ success: true, message: "Review approved." });
+
+    const auditSaved = await writeAudit(context, {
+      action: verified ? "review.approved_verified" : "review.approved",
+      entityType: "review",
+      entityId: id,
+      summary: `${verified ? "Approved as verified" : "Approved"} review “${review.title}” by ${review.name}.`,
+      details: {
+        review: {
+          id: review.id,
+          name: review.name,
+          vehicle: review.vehicle,
+          rating: review.rating,
+          title: review.title,
+        },
+        previousStatus: review.moderation_status,
+        verified: Boolean(verified),
+      },
+    });
+
+    return json({
+      success: true,
+      message: "Review approved.",
+      auditSaved,
+    });
   } catch (error) {
     console.error("Approve review error:", error);
     return json({ success: false, error: "Could not approve the review." }, 500);

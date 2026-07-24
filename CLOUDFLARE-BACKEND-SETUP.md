@@ -1,38 +1,36 @@
-# Lo-Key Cloudflare backend v2 setup
+# Lo-Key Cloudflare backend v4 setup
 
 This version adds:
 
-- vehicle information on customer reviews
-- battery-size collection on vehicle requests
-- request deletion and battery-size charts in `/admin/`
-- an admin compatibility manager for **Yes / Probably / No** decisions
-- public D1-backed compatibility overrides
-- add-to-cart event and quantity counters
-- a lighter review popup with Turnstile preloaded during idle time
-- the supplied Turnstile public sitekey already entered in `vehicle-request-config.js`
+- public indexing support (`noindex` removed, plus `robots.txt` and `sitemap.xml`)
+- customer-facing support and policy pages
+- production checkout wording instead of demo-cart wording
+- authenticated CSV exports from `/admin/`
+- an admin audit trail for review moderation, vehicle-request deletion, and compatibility changes
+- an admin name/email field used to identify each audited action
+
+It retains all v3 features, including Turnstile, D1 reviews, vehicle requests, compatibility overrides, battery-size charts, and cart-event metrics.
 
 ## 1. Upgrade the existing D1 database
 
-Because backend v1 is already running, open:
+Open:
 
 **Cloudflare > Storage & databases > D1 > lokey-production > Console**
 
 Paste and run the complete contents of:
 
 ```text
-MIGRATION-V2.sql
+MIGRATION-V3.sql
 ```
 
-Run this migration **once**. It adds:
+This migration is safe to run again because it uses `CREATE TABLE IF NOT EXISTS` and `CREATE INDEX IF NOT EXISTS`.
 
-- `reviews.vehicle`
-- `vehicle_requests.battery_sizes`
-- `compatibility_records`
-- `cart_events`
+It creates:
 
-Do not run `MIGRATION-V2.sql` repeatedly because SQLite will reject an attempt to add the same column twice.
+- `admin_audit_log`
+- indexes for audit date and record lookups
 
-`schema.sql` is the complete schema for a brand-new database and is not needed for this upgrade.
+`schema.sql` now contains the complete schema for a brand-new database.
 
 ## 2. Keep the existing Cloudflare settings
 
@@ -44,61 +42,69 @@ The project still requires:
 - secret: `RATE_LIMIT_SALT`
 - plain variable: `TURNSTILE_ALLOWED_HOSTNAMES=lokey.ca,www.lokey.ca`
 
-The public Turnstile sitekey is now set to:
+The public Turnstile sitekey remains:
 
 ```text
 0x4AAAAAAD7v8d8LZ7ZBcYW2
 ```
 
-The Turnstile secret must remain only in Cloudflare and must never be committed to GitHub.
-
 ## 3. Commit and deploy
 
-Commit this complete folder to the GitHub repository connected to Cloudflare Pages. Keep the `functions/` directory at the repository root beside `index.html`.
+Commit the complete folder to the GitHub repository connected to Cloudflare Pages. Keep `functions/` at the repository root beside `index.html`.
 
-Cloudflare will automatically deploy these added routes:
+New routes include:
 
-- `GET /api/compatibility`
-- `POST /api/cart-events`
-- `GET /api/admin/cart-metrics`
-- `GET /api/admin/compatibility`
-- `POST /api/admin/compatibility`
-- `DELETE /api/admin/compatibility/:id`
-- `DELETE /api/admin/vehicle-requests/:id`
+- `GET /api/admin/audit-log`
+- `GET /api/admin/export/reviews`
+- `GET /api/admin/export/vehicle-requests`
+- `GET /api/admin/export/compatibility`
+- `GET /api/admin/export/cart-events`
+- `GET /api/admin/export/audit-log`
 
-The existing review and vehicle-request routes remain in place.
+All export and audit routes require the existing `ADMIN_API_KEY` bearer token.
 
-## 4. Test after deployment
+## 4. Admin identity and audit trail
 
-### Review vehicle field
+The admin login now asks for a name or email in addition to the API key. The browser sends it as `X-Admin-Actor` on authenticated admin requests.
 
-Open **Write a review** and confirm that the form contains a required **Vehicle** field with the placeholder `Year, make, model`. Submit a test review, then confirm the vehicle appears in the pending review card in `/admin/`.
+When Cloudflare Access is later enabled, the backend automatically prefers the verified `CF-Access-Authenticated-User-Email` header over the manually entered name.
 
-### Vehicle request battery sizes
+The audit trail records:
 
-Run an incompatible compatibility check and click **Request a vehicle**. The listed battery should prefill the battery-size field. Submit the request and confirm that:
+- review approval
+- review approval as verified
+- review rejection
+- vehicle-request deletion
+- compatibility creation
+- compatibility update
+- compatibility deletion
 
-- the size appears in the admin table
-- the battery-size chart updates
-- the **Delete** button removes the request
+The audit log is append-only through the current admin interface.
 
-A request containing `CR2032 + CR2025` should add one chart count to both CR2032 and CR2025.
+## 5. CSV exports
 
-### Compatibility manager
+The admin dashboard has buttons for reviews, vehicle requests, compatibility records, cart events, and the audit trail. Each export currently includes up to 10,000 newest records and opens as UTF-8 CSV with an Excel-compatible byte-order mark.
 
-In `/admin/`, choose year, make, model, result, and battery size. Save it, then run the same vehicle lookup on the public product page. The D1 decision takes priority over the static compatibility catalogue.
+## 6. Public launch pages
 
-### Cart counter
+The following pages are now linked from both storefront footers:
 
-Click **Add to cart** on the product page, refresh `/admin/`, and confirm that:
+- `contact.html`
+- `shipping.html`
+- `returns.html`
+- `warranty.html`
+- `privacy.html`
+- `terms.html`
 
-- **Add-to-cart events** increases by one per add action
-- **Units added** increases by the selected quantity
+Before accepting paid orders:
 
-Using the plus button in the cart drawer also records an add event.
+1. Create and monitor `support@lokey.ca`, or replace it throughout the files with the real support address.
+2. Confirm the policy choices currently drafted as a **30-day return window** and **12-month limited warranty**.
+3. Add the numbered corporation's legal name and seller address at checkout and on order confirmations.
+4. Have the privacy policy, terms, warranty, and returns policy reviewed for the final Canadian and U.S. sales structure.
 
-## Notes
+## 7. Search indexing
 
-- Existing approved reviews created before this migration may have no vehicle value. New reviews require one.
-- Cart events contain quantity, source, page URL, and timestamp. They do not store customer names, email addresses, or raw IP addresses.
-- The compatibility manager stores runtime overrides in D1; it does not rewrite `compatibility-data.json` in GitHub.
+The public `noindex` tags have been removed. `robots.txt` allows the public site while disallowing `/admin/` and `/api/admin/`, and `sitemap.xml` lists the public pages.
+
+The admin page remains `noindex`, and `_headers` still applies `X-Robots-Tag: noindex` to `/admin/*`.

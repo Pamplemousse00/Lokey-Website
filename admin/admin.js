@@ -3,6 +3,9 @@
   const dashboard = document.getElementById("dashboard");
   const loginForm = document.getElementById("loginForm");
   const adminKeyInput = document.getElementById("adminKey");
+  const adminActorInput = document.getElementById("adminActor");
+  const adminSession = document.getElementById("adminSession");
+  const adminActorDisplay = document.getElementById("adminActorDisplay");
   const loginStatus = document.getElementById("loginStatus");
   const dashboardStatus = document.getElementById("dashboardStatus");
   const reviewList = document.getElementById("reviewList");
@@ -14,11 +17,15 @@
   const compatibilityModel = document.getElementById("compatibilityModel");
   const compatibilityStatus = document.getElementById("compatibilityStatus");
   const compatibilityBattery = document.getElementById("compatibilityBattery");
+  const compatibilityBatteryChoices = document.getElementById("compatibilityBatteryChoices");
   const compatibilityStatusMessage = document.getElementById("compatibilityStatusMessage");
   const compatibilityRecordList = document.getElementById("compatibilityRecordList");
   const compatibilityRecordCount = document.getElementById("compatibilityRecordCount");
   const refreshButton = document.getElementById("refreshButton");
   const logoutButton = document.getElementById("logoutButton");
+  const auditLogList = document.getElementById("auditLogList");
+  const exportActions = document.getElementById("exportActions");
+  const exportStatus = document.getElementById("exportStatus");
 
   let vehicleRequests = [];
   let compatibilityRecords = [];
@@ -37,6 +44,7 @@
   };
 
   const getKey = () => sessionStorage.getItem("lokeyAdminApiKey") || "";
+  const getActor = () => sessionStorage.getItem("lokeyAdminActor") || "";
 
   async function api(path, options = {}) {
     const key = getKey();
@@ -45,6 +53,7 @@
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${key}`,
+        "X-Admin-Actor": getActor(),
         ...(options.body ? { "Content-Type": "application/json" } : {}),
         ...(options.headers || {}),
       },
@@ -59,6 +68,74 @@
     document.getElementById("cartUnitCount").textContent = Number(metrics.unitsAdded || 0).toLocaleString("en-CA");
     document.getElementById("cart24hCount").textContent = Number(metrics.events24h || 0).toLocaleString("en-CA");
     document.getElementById("cart7dCount").textContent = Number(metrics.events7d || 0).toLocaleString("en-CA");
+  }
+
+  const actionLabel = (action) => ({
+    "review.approved": "Review approved",
+    "review.approved_verified": "Review approved + verified",
+    "review.rejected": "Review rejected",
+    "vehicle_request.deleted": "Vehicle request deleted",
+    "compatibility.created": "Compatibility created",
+    "compatibility.updated": "Compatibility updated",
+    "compatibility.deleted": "Compatibility deleted",
+  }[action] || String(action || "").replaceAll("_", " ").replaceAll(".", " · "));
+
+  function renderAuditLog(entries) {
+    auditLogList.innerHTML = entries.length
+      ? entries.map((entry) => `
+          <tr>
+            <td>${escapeHTML(dateText(entry.created_at))}</td>
+            <td><strong>${escapeHTML(entry.actor)}</strong></td>
+            <td>${escapeHTML(actionLabel(entry.action))}</td>
+            <td>${escapeHTML(`${entry.entity_type || "record"}${entry.entity_id ? ` #${entry.entity_id}` : ""}`)}</td>
+            <td>${escapeHTML(entry.summary)}</td>
+          </tr>
+        `).join("")
+      : '<tr><td colspan="5">No admin changes have been recorded yet.</td></tr>';
+  }
+
+  async function refreshAuditLog() {
+    const result = await api("/api/admin/audit-log");
+    renderAuditLog(result.entries || []);
+  }
+
+  async function downloadCsv(dataset, button) {
+    const originalText = button.textContent;
+    button.disabled = true;
+    button.textContent = "Preparing…";
+    exportStatus.textContent = "";
+    try {
+      const response = await fetch(`/api/admin/export/${encodeURIComponent(dataset)}`, {
+        headers: {
+          Accept: "text/csv",
+          Authorization: `Bearer ${getKey()}`,
+          "X-Admin-Actor": getActor(),
+        },
+      });
+      if (!response.ok) {
+        const result = await response.json().catch(() => ({}));
+        throw new Error(result.error || `Export failed (${response.status}).`);
+      }
+      const blob = await response.blob();
+      const disposition = response.headers.get("Content-Disposition") || "";
+      const filename = disposition.match(/filename="?([^";]+)"?/i)?.[1] || `lokey-${dataset}.csv`;
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      exportStatus.textContent = `${filename} downloaded.`;
+      exportStatus.classList.add("success");
+    } catch (error) {
+      exportStatus.textContent = error.message;
+      exportStatus.classList.remove("success");
+    } finally {
+      button.disabled = false;
+      button.textContent = originalText;
+    }
   }
 
   function renderReviews(reviews) {
@@ -99,6 +176,29 @@
     if (text && !/^unknown$/i.test(text)) return [...new Set(text.split(/[,+/&]|\bor\b/gi).map((item) => item.trim()).filter(Boolean))];
     return [];
   };
+
+  const allowedCompatibilityBatteries = new Set(["CR2016", "CR2025", "CR2032", "CR2450"]);
+
+  const selectedCompatibilityBatteries = () => [...compatibilityBatteryChoices.querySelectorAll(".battery-choice[aria-pressed='true']")]
+    .map((button) => button.dataset.batterySize)
+    .filter((size) => allowedCompatibilityBatteries.has(size));
+
+  function syncCompatibilityBatteryValue() {
+    compatibilityBattery.value = selectedCompatibilityBatteries().join(" + ");
+  }
+
+  function setCompatibilityBatteries(values) {
+    const selected = new Set((Array.isArray(values) ? values : batteryNames(values))
+      .map((value) => String(value).toUpperCase().replace(/[\s-]+/g, ""))
+      .filter((value) => allowedCompatibilityBatteries.has(value)));
+
+    compatibilityBatteryChoices.querySelectorAll(".battery-choice").forEach((button) => {
+      const active = selected.has(button.dataset.batterySize);
+      button.setAttribute("aria-pressed", String(active));
+      button.classList.toggle("is-selected", active);
+    });
+    syncCompatibilityBatteryValue();
+  }
 
   function renderBatteryChart(requests) {
     const counts = new Map();
@@ -233,7 +333,7 @@
     populateModels();
     ensureOption(compatibilityModel, request.model);
     compatibilityModel.value = request.model;
-    compatibilityBattery.value = request.battery_sizes || "";
+    setCompatibilityBatteries(request.battery_sizes || "");
     compatibilityStatus.value = "";
     compatibilityStatusMessage.textContent = "Vehicle request loaded. Choose Yes, Probably, or No.";
     compatibilityStatusMessage.classList.remove("success");
@@ -244,26 +344,29 @@
     dashboardStatus.textContent = "Loading…";
     try {
       await loadCompatibilityCatalogue();
-      const [reviewResult, vehicleResult, compatibilityResult, metricResult] = await Promise.all([
+      const [reviewResult, vehicleResult, compatibilityResult, metricResult, auditResult] = await Promise.all([
         api("/api/admin/reviews?status=pending"),
         api("/api/admin/vehicle-requests"),
         api("/api/admin/compatibility"),
         api("/api/admin/cart-metrics"),
+        api("/api/admin/audit-log"),
       ]);
       renderReviews(reviewResult.reviews || []);
       renderVehicleRequests(vehicleResult.requests || []);
       renderCompatibilityRecords(compatibilityResult.records || []);
       renderMetrics(metricResult.metrics || {});
+      renderAuditLog(auditResult.entries || []);
+      adminActorDisplay.textContent = `Signed in as ${getActor()}`;
       dashboardStatus.textContent = "";
       loginCard.hidden = true;
       dashboard.hidden = false;
-      logoutButton.hidden = false;
+      adminSession.hidden = false;
     } catch (error) {
       dashboardStatus.textContent = error.message;
       loginStatus.textContent = error.message;
       loginCard.hidden = false;
       dashboard.hidden = true;
-      logoutButton.hidden = true;
+      adminSession.hidden = true;
       throw error;
     }
   }
@@ -271,9 +374,29 @@
   compatibilityYear.addEventListener("change", populateMakes);
   compatibilityMake.addEventListener("change", populateModels);
 
+  compatibilityBatteryChoices.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-battery-size]");
+    if (!button) return;
+    const active = button.getAttribute("aria-pressed") !== "true";
+    button.setAttribute("aria-pressed", String(active));
+    button.classList.toggle("is-selected", active);
+    syncCompatibilityBatteryValue();
+    if (selectedCompatibilityBatteries().length) {
+      compatibilityStatusMessage.textContent = "";
+      compatibilityStatusMessage.classList.remove("success");
+    }
+  });
+
   compatibilityForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!compatibilityForm.reportValidity()) return;
+    const selectedBatteries = selectedCompatibilityBatteries();
+    if (!selectedBatteries.length) {
+      compatibilityStatusMessage.textContent = "Select at least one key-fob battery size.";
+      compatibilityStatusMessage.classList.remove("success");
+      compatibilityBatteryChoices.querySelector(".battery-choice")?.focus();
+      return;
+    }
     const submit = compatibilityForm.querySelector('button[type="submit"]');
     submit.disabled = true;
     compatibilityStatusMessage.textContent = "Saving…";
@@ -286,7 +409,7 @@
           make: compatibilityMake.value,
           model: compatibilityModel.value,
           status: compatibilityStatus.value,
-          batterySizes: compatibilityBattery.value.trim(),
+          batterySizes: selectedBatteries.join(" + "),
         }),
       });
       const existingIndex = compatibilityRecords.findIndex((record) => Number(record.id) === Number(result.record.id));
@@ -295,6 +418,7 @@
       renderCompatibilityRecords(compatibilityRecords);
       compatibilityStatusMessage.textContent = result.message || "Compatibility decision saved.";
       compatibilityStatusMessage.classList.add("success");
+      refreshAuditLog().catch(() => {});
     } catch (error) {
       compatibilityStatusMessage.textContent = error.message;
     } finally {
@@ -306,12 +430,14 @@
     event.preventDefault();
     loginStatus.textContent = "Checking…";
     sessionStorage.setItem("lokeyAdminApiKey", adminKeyInput.value.trim());
+    sessionStorage.setItem("lokeyAdminActor", adminActorInput.value.trim());
     try {
       await loadDashboard();
       loginStatus.textContent = "";
       adminKeyInput.value = "";
     } catch {
       sessionStorage.removeItem("lokeyAdminApiKey");
+      sessionStorage.removeItem("lokeyAdminActor");
     }
   });
 
@@ -319,10 +445,17 @@
 
   logoutButton.addEventListener("click", () => {
     sessionStorage.removeItem("lokeyAdminApiKey");
+    sessionStorage.removeItem("lokeyAdminActor");
     dashboard.hidden = true;
     loginCard.hidden = false;
-    logoutButton.hidden = true;
-    loginStatus.textContent = "Admin key removed from this browser session.";
+    adminSession.hidden = true;
+    loginStatus.textContent = "Admin key and identity removed from this browser session.";
+  });
+
+  exportActions.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-export]");
+    if (!button) return;
+    downloadCsv(button.dataset.export, button);
   });
 
   reviewList.addEventListener("click", async (event) => {
@@ -349,6 +482,7 @@
         reviewList.innerHTML = '<div class="empty">No pending reviews.</div>';
       }
       dashboardStatus.textContent = action === "reject" ? "Review rejected." : "Review approved.";
+      refreshAuditLog().catch(() => {});
     } catch (error) {
       dashboardStatus.textContent = error.message;
       button.disabled = false;
@@ -374,6 +508,7 @@
       await api(`/api/admin/vehicle-requests/${id}`, { method: "DELETE" });
       renderVehicleRequests(vehicleRequests.filter((item) => Number(item.id) !== id));
       dashboardStatus.textContent = "Vehicle request deleted.";
+      refreshAuditLog().catch(() => {});
     } catch (error) {
       dashboardStatus.textContent = error.message;
       button.disabled = false;
@@ -393,6 +528,7 @@
       renderCompatibilityRecords(compatibilityRecords.filter((item) => Number(item.id) !== id));
       compatibilityStatusMessage.textContent = "Compatibility decision deleted.";
       compatibilityStatusMessage.classList.add("success");
+      refreshAuditLog().catch(() => {});
     } catch (error) {
       compatibilityStatusMessage.textContent = error.message;
       compatibilityStatusMessage.classList.remove("success");
@@ -400,5 +536,10 @@
     }
   });
 
-  if (getKey()) loadDashboard().catch(() => {});
+  if (getKey() && getActor()) {
+    loadDashboard().catch(() => {});
+  } else {
+    sessionStorage.removeItem("lokeyAdminApiKey");
+    sessionStorage.removeItem("lokeyAdminActor");
+  }
 })();

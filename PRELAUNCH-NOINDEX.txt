@@ -1,4 +1,0 @@
-Both HTML pages include robots and googlebot noindex directives.
-For immediate removal of already-indexed URLs, use Google Search Console > Removals.
-For the strongest pre-launch protection, enable password protection at the web host.
-Do not block the pages in robots.txt while relying on noindex, because Google must crawl them to see noindex.
