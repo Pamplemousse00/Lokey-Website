@@ -26,12 +26,35 @@ export async function onRequestGet(context) {
       ORDER BY COALESCE(approved_at, created_at) DESC, id DESC
       LIMIT 250
     `).all();
+    const summaryRow = await context.env.DB.prepare(`
+      SELECT
+        COUNT(*) AS review_count,
+        ROUND(AVG(rating), 2) AS rating_value
+      FROM reviews
+      WHERE approved = 1
+        AND moderation_status = 'approved'
+    `).first();
 
     const reviews = (result.results || []).map(publicReview);
+    const reviewCount = Number(summaryRow?.review_count || 0);
+    const ratingValue =
+      reviewCount > 0
+        ? Number(summaryRow?.rating_value || 0)
+        : null;
+
     return json(
-      { success: true, reviews },
+      {
+        success: true,
+        reviews,
+        summary: {
+          reviewCount,
+          ratingValue
+        }
+      },
       200,
-      { "Cache-Control": "public, max-age=60, s-maxage=60" }
+      {
+        "Cache-Control": "public, max-age=60, s-maxage=60"
+      }
     );
   } catch (error) {
     console.error("Review read error:", error);

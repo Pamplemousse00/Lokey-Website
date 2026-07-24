@@ -1,6 +1,54 @@
 (() => {
   'use strict';
 
+  const updateProductStructuredData = (summary) => {
+    const schemaElement = document.querySelector(
+      'script[type="application/ld+json"][data-lokey-seo="true"]'
+    );
+
+    if (!schemaElement) return;
+
+    try {
+      const schema = JSON.parse(schemaElement.textContent);
+
+      const product = schema?.["@graph"]?.find((item) => {
+        const type = item?.["@type"];
+
+        return (
+          type === "Product" ||
+          (Array.isArray(type) && type.includes("Product"))
+        );
+      });
+
+      if (!product) return;
+
+      const reviewCount = Number(summary?.reviewCount || 0);
+      const ratingValue = Number(summary?.ratingValue || 0);
+
+      if (
+        reviewCount > 0 &&
+        Number.isFinite(ratingValue) &&
+        ratingValue >= 1 &&
+        ratingValue <= 5
+      ) {
+        product.aggregateRating = {
+          "@type": "AggregateRating",
+          ratingValue: Number(ratingValue.toFixed(2)),
+          reviewCount,
+          bestRating: 5,
+          worstRating: 1
+        };
+      } else {
+        // Do not publish a fake 0-star aggregate.
+        delete product.aggregateRating;
+      }
+
+      schemaElement.textContent = JSON.stringify(schema);
+    } catch (error) {
+      console.warn("Could not update product structured data:", error);
+    }
+  };
+
   const money = new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' });
   const CART_KEY = 'lokey-cart-v1';
   const SHOPIFY_VARIANT_ID = '54038879011180';
@@ -561,6 +609,17 @@
         throw new Error(result.error || 'Reviews could not be loaded.');
       }
       window.LO_KEY_REVIEWS = result.reviews;
+      window.LO_KEY_REVIEW_SUMMARY = result.summary || {
+        reviewCount: result.reviews.length,
+        ratingValue: result.reviews.length
+          ? result.reviews.reduce(
+              (total, review) => total + Number(review.rating),
+              0
+            ) / result.reviews.length
+          : null
+      };
+
+      updateProductStructuredData(window.LO_KEY_REVIEW_SUMMARY);
       renderAllReviews();
     } catch (error) {
       console.warn('Review API unavailable:', error);
