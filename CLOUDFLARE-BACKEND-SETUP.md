@@ -108,3 +108,8 @@ Before accepting paid orders:
 The public `noindex` tags have been removed. `robots.txt` allows the public site while disallowing `/admin/` and `/api/admin/`, and `sitemap.xml` lists the public pages.
 
 The admin page remains `noindex`, and `_headers` still applies `X-Robots-Tag: noindex` to `/admin/*`.
+
+
+## SEO and AI search setup
+
+See `SEO-AI-LAUNCH-CHECKLIST.md` after deployment. The site includes canonical tags, social previews, JSON-LD, a sitemap, robots rules, and an optional `llms.txt`.
