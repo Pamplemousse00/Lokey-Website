@@ -31,7 +31,9 @@ Push this folder as the repository root connected to Cloudflare Pages. Run
 MIGRATION-V3.sql once before using the updated admin dashboard.
 
 Important launch checks
-- Create or replace support@lokey.ca.
+- Configure the contact form email delivery described in CLOUDFLARE-BACKEND-SETUP.md.
 - Confirm the drafted 30-day returns and 12-month warranty terms.
 - Insert the numbered corporation's legal seller identity at checkout/order confirmation.
 - Obtain legal review before accepting paid orders in Canada or the United States.
+
+Run MIGRATION-V4.sql once before using the contact form.

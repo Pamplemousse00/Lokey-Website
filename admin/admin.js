@@ -9,6 +9,9 @@
   const loginStatus = document.getElementById("loginStatus");
   const dashboardStatus = document.getElementById("dashboardStatus");
   const reviewList = document.getElementById("reviewList");
+  const reviewStatusFilter = document.getElementById("reviewStatusFilter");
+  const reviewSectionTitle = document.getElementById("reviewSectionTitle");
+  const reviewSectionDescription = document.getElementById("reviewSectionDescription");
   const vehicleRequestList = document.getElementById("vehicleRequestList");
   const batteryChart = document.getElementById("batteryChart");
   const compatibilityForm = document.getElementById("compatibilityForm");
@@ -74,6 +77,7 @@
     "review.approved": "Review approved",
     "review.approved_verified": "Review approved + verified",
     "review.rejected": "Review rejected",
+    "review.deleted": "Review deleted",
     "vehicle_request.deleted": "Vehicle request deleted",
     "compatibility.created": "Compatibility created",
     "compatibility.updated": "Compatibility updated",
@@ -138,19 +142,41 @@
     }
   }
 
+  const reviewStatusCopy = {
+    pending: ["Pending reviews", "Approve a review before it appears publicly."],
+    approved: ["Approved reviews", "These reviews are currently visible on the storefront."],
+    rejected: ["Rejected reviews", "Rejected reviews remain stored until you delete them."],
+    all: ["All reviews", "View every review record and permanently delete one when needed."],
+  };
+
   function renderReviews(reviews) {
+    const status = reviewStatusFilter?.value || "pending";
+    const [title, description] = reviewStatusCopy[status] || reviewStatusCopy.pending;
+    reviewSectionTitle.textContent = title;
+    reviewSectionDescription.textContent = description;
+
     if (!reviews.length) {
-      reviewList.innerHTML = '<div class="empty">No pending reviews.</div>';
+      reviewList.innerHTML = `<div class="empty">No ${escapeHTML(status === "all" ? "reviews" : `${status} reviews`)}.</div>`;
       return;
     }
 
-    reviewList.innerHTML = reviews.map((review) => `
+    reviewList.innerHTML = reviews.map((review) => {
+      const moderationStatus = String(review.moderation_status || "pending");
+      const moderationActions = moderationStatus === "pending"
+        ? `
+          <button class="approve" data-action="approve" type="button">Approve</button>
+          <button class="approve-verified" data-action="approve-verified" type="button">Approve + verified</button>
+          <button class="reject" data-action="reject" type="button">Reject</button>`
+        : "";
+
+      return `
       <article class="review-admin-card" data-review-id="${Number(review.id)}">
         <div class="review-meta">
           <span class="review-stars">${"★".repeat(Number(review.rating) || 0)}${"☆".repeat(5 - (Number(review.rating) || 0))}</span>
           <strong>${escapeHTML(review.name)}</strong>
           <span>${escapeHTML(review.country)}</span>
           <span>${escapeHTML(dateText(review.created_at))}</span>
+          <span class="review-status review-status-${escapeHTML(moderationStatus)}">${escapeHTML(moderationStatus)}</span>
         </div>
         <h3>${escapeHTML(review.title)}</h3>
         <blockquote>${escapeHTML(review.body)}</blockquote>
@@ -160,12 +186,17 @@
           <span><strong>Email:</strong> ${escapeHTML(review.purchase_email || "Not provided")}</span>
         </div>
         <div class="review-actions">
-          <button class="approve" data-action="approve" type="button">Approve</button>
-          <button class="approve-verified" data-action="approve-verified" type="button">Approve + verified</button>
-          <button class="reject" data-action="reject" type="button">Reject</button>
+          ${moderationActions}
+          <button class="delete-review" data-action="delete" type="button">Delete permanently</button>
         </div>
-      </article>
-    `).join("");
+      </article>`;
+    }).join("");
+  }
+
+  async function loadReviews() {
+    const status = reviewStatusFilter?.value || "pending";
+    const result = await api(`/api/admin/reviews?status=${encodeURIComponent(status)}`);
+    renderReviews(result.reviews || []);
   }
 
   const batteryNames = (value) => {
@@ -345,7 +376,7 @@
     try {
       await loadCompatibilityCatalogue();
       const [reviewResult, vehicleResult, compatibilityResult, metricResult, auditResult] = await Promise.all([
-        api("/api/admin/reviews?status=pending"),
+        api(`/api/admin/reviews?status=${encodeURIComponent(reviewStatusFilter?.value || "pending")}`),
         api("/api/admin/vehicle-requests"),
         api("/api/admin/compatibility"),
         api("/api/admin/cart-metrics"),
@@ -370,6 +401,13 @@
       throw error;
     }
   }
+
+  reviewStatusFilter?.addEventListener("change", () => {
+    dashboardStatus.textContent = "Loading reviews…";
+    loadReviews()
+      .then(() => { dashboardStatus.textContent = ""; })
+      .catch((error) => { dashboardStatus.textContent = error.message; });
+  });
 
   compatibilityYear.addEventListener("change", populateMakes);
   compatibilityMake.addEventListener("change", populateModels);
@@ -465,11 +503,18 @@
 
     const id = Number(card.dataset.reviewId);
     const action = button.dataset.action;
+
+    if (action === "delete" && !window.confirm("Permanently delete this review from the database? This cannot be undone.")) {
+      return;
+    }
+
     button.disabled = true;
-    dashboardStatus.textContent = "Saving…";
+    dashboardStatus.textContent = action === "delete" ? "Deleting…" : "Saving…";
 
     try {
-      if (action === "reject") {
+      if (action === "delete") {
+        await api(`/api/admin/reviews/${id}`, { method: "DELETE" });
+      } else if (action === "reject") {
         await api(`/api/admin/reviews/${id}/reject`, { method: "POST", body: JSON.stringify({}) });
       } else {
         await api(`/api/admin/reviews/${id}/approve`, {
@@ -477,11 +522,13 @@
           body: JSON.stringify({ verified: action === "approve-verified" }),
         });
       }
-      card.remove();
-      if (!reviewList.querySelector("[data-review-id]")) {
-        reviewList.innerHTML = '<div class="empty">No pending reviews.</div>';
-      }
-      dashboardStatus.textContent = action === "reject" ? "Review rejected." : "Review approved.";
+
+      await loadReviews();
+      dashboardStatus.textContent = action === "delete"
+        ? "Review permanently deleted."
+        : action === "reject"
+          ? "Review rejected."
+          : "Review approved.";
       refreshAuditLog().catch(() => {});
     } catch (error) {
       dashboardStatus.textContent = error.message;

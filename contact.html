@@ -8,6 +8,7 @@
 <link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="styles.css" rel="stylesheet"/>
 <script defer src="vehicle-request-config.js"></script>
+<script defer src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
 <script defer src="script.js"></script>
 <meta name="description" content="Contact Lo-Key for product, compatibility, preorder, shipping, return, warranty, and customer-support questions."/>
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
@@ -50,7 +51,7 @@
 <a aria-label="Lo-Key on YouTube" class="social-link" href="https://www.youtube.com/" rel="noopener" target="_blank"><img alt="" src="assets/social-youtube.svg"/></a>
 </div>
 <a class="cart-link" data-open-cart="" href="#"><img alt="" aria-hidden="true" class="cart-link-icon" src="assets/icon-cart.svg"/>Cart <span class="cart-count" hidden="">0</span></a>
-<a class="btn btn-primary" href="product.html">Shop Lo-Key</a>
+<a class="btn btn-primary" href="product.html">Buy Lo-Key</a>
 </nav>
 </div>
 </header>
@@ -75,9 +76,43 @@
 </nav>
 <article class="policy-content">
 <section class="policy-card policy-contact-card">
-<h2>Email support</h2>
-<p>Send questions to <a href="mailto:support@lokey.ca">support@lokey.ca</a>. Include your vehicle year, make, model, and the battery marking inside the key fob when asking about compatibility.</p>
-<p>For order support, include the purchaser name and order number. Do not send payment-card details or passwords by email.</p>
+<h2>Send us a message</h2>
+<p>Use this form for compatibility, product, preorder, shipping, return, warranty, privacy, or order questions. Include your vehicle year, make, model, and key-fob battery marking when relevant.</p>
+<form class="contact-form" data-contact-form>
+<div class="contact-form-grid">
+<label>Full name
+<input name="name" type="text" maxlength="80" autocomplete="name" required>
+</label>
+<label>Email address
+<input name="email" type="email" maxlength="160" autocomplete="email" required>
+</label>
+<label>Topic
+<select name="topic" required>
+<option value="">Choose a topic</option>
+<option value="Compatibility">Compatibility</option>
+<option value="Product question">Product question</option>
+<option value="Preorder or order">Preorder or order</option>
+<option value="Shipping">Shipping</option>
+<option value="Return or warranty">Return or warranty</option>
+<option value="Privacy request">Privacy request</option>
+<option value="Other">Other</option>
+</select>
+</label>
+<label>Order number <span class="optional-label">Optional</span>
+<input name="orderNumber" type="text" maxlength="50" autocomplete="off">
+</label>
+</div>
+<label>Vehicle <span class="optional-label">Optional</span>
+<input name="vehicle" type="text" maxlength="140" placeholder="Year, make, model and key-fob battery size">
+</label>
+<label>Message
+<textarea name="message" rows="7" maxlength="2500" required></textarea>
+</label>
+<p class="contact-form-note">Do not include payment-card details, passwords, government identification, or other highly sensitive information.</p>
+<div class="turnstile-field" data-turnstile data-turnstile-action="contact_submit"></div>
+<p class="contact-form-status" data-contact-form-status aria-live="polite"></p>
+<button class="btn btn-primary contact-submit" type="submit">Send message</button>
+</form>
 </section>
 <div class="policy-grid">
 <section class="policy-card"><h2>Product and compatibility</h2><p>Tell us the exact vehicle and key-fob battery size. Photos of the battery compartment may help, but remove keys, addresses, serial numbers, and other personal details from the image.</p></section>

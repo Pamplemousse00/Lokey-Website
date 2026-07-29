@@ -78,12 +78,22 @@
         <p class="inline-status" id="exportStatus" aria-live="polite"></p>
       </section>
 
-      <div class="toolbar">
+      <div class="toolbar review-admin-toolbar">
         <div>
-          <h2>Pending reviews</h2>
-          <p>Approve a review before it appears publicly.</p>
+          <h2 id="reviewSectionTitle">Pending reviews</h2>
+          <p id="reviewSectionDescription">Approve a review before it appears publicly.</p>
         </div>
-        <button id="refreshButton" type="button">Refresh</button>
+        <div class="review-toolbar-controls">
+          <label>Show
+            <select id="reviewStatusFilter">
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+              <option value="all">All reviews</option>
+            </select>
+          </label>
+          <button id="refreshButton" type="button">Refresh</button>
+        </div>
       </div>
       <div class="card-list" id="reviewList" aria-live="polite"></div>
 

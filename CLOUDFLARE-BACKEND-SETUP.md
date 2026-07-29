@@ -98,7 +98,7 @@ The following pages are now linked from both storefront footers:
 
 Before accepting paid orders:
 
-1. Create and monitor `support@lokey.ca`, or replace it throughout the files with the real support address.
+1. Configure and test the contact form email delivery described below.
 2. Confirm the policy choices currently drafted as a **30-day return window** and **12-month limited warranty**.
 3. Add the numbered corporation's legal name and seller address at checkout and on order confirmations.
 4. Have the privacy policy, terms, warranty, and returns policy reviewed for the final Canadian and U.S. sales structure.
@@ -113,3 +113,24 @@ The admin page remains `noindex`, and `_headers` still applies `X-Robots-Tag: no
 ## SEO and AI search setup
 
 See `SEO-AI-LAUNCH-CHECKLIST.md` after deployment. The site includes canonical tags, social previews, JSON-LD, a sitemap, robots rules, and an optional `llms.txt`.
+
+
+## Contact form email delivery (v6)
+
+Run `MIGRATION-V4.sql` once in the existing D1 database. The contact endpoint saves every submission in `contact_messages` before attempting email delivery.
+
+The form sends mail through the Resend HTTPS API. Create a Resend account, verify a sending domain or subdomain, and add these values under **Workers & Pages → your Pages project → Settings → Variables and Secrets**:
+
+| Name | Type | Value |
+|---|---|---|
+| `RESEND_API_KEY` | Secret | Your Resend API key |
+| `CONTACT_FROM_EMAIL` | Plain text | Example: `Lo-Key Website <website@send.lokey.ca>` |
+| `CONTACT_TO_EMAIL` | Plain text | `neerajsbb@gmail.com` |
+
+The sender address does not need an inbox, but its domain must be verified with Resend. The visitor's address is assigned as the email `Reply-To`, so replying in Gmail responds directly to the customer.
+
+Redeploy the Pages project after adding the variables. Then test the form at `/contact.html` and confirm both the Gmail delivery and the new `contact_messages` row in D1.
+
+## Review deletion (v6)
+
+The admin review section now has Pending, Approved, Rejected, and All filters. **Delete permanently** removes the review from D1 and records `review.deleted` in the audit trail. Deletion cannot be undone, so use the Reviews CSV export before removing records that may be needed later.

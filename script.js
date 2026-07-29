@@ -1463,6 +1463,72 @@
     });
   };
 
+
+  const initializeContactForm = () => {
+    const form = document.querySelector('[data-contact-form]');
+    if (!form) return;
+
+    window.requestAnimationFrame(() => renderTurnstileForForm(form));
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const status = form.querySelector('[data-contact-form-status]');
+      const submitButton = form.querySelector('button[type="submit"]');
+      const endpoint = String(window.LO_KEY_CONTACT_API || '').trim();
+
+      status?.classList.remove('success');
+      if (!form.reportValidity()) return;
+      if (!endpoint) {
+        if (status) status.textContent = 'The contact form is not connected yet.';
+        return;
+      }
+
+      const turnstileToken = turnstileTokenFor(form);
+      if (!turnstileToken) {
+        if (status) status.textContent = 'Please complete the security check.';
+        renderTurnstileForForm(form);
+        return;
+      }
+
+      const formData = new FormData(form);
+      const payload = {
+        name: String(formData.get('name') || '').trim(),
+        email: String(formData.get('email') || '').trim(),
+        topic: String(formData.get('topic') || '').trim(),
+        orderNumber: String(formData.get('orderNumber') || '').trim(),
+        vehicle: String(formData.get('vehicle') || '').trim(),
+        message: String(formData.get('message') || '').trim(),
+        pageUrl: window.location.href,
+        turnstileToken
+      };
+
+      submitButton.disabled = true;
+      if (status) status.textContent = 'Sending…';
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(result.error || 'The message could not be sent.');
+
+        form.reset();
+        resetTurnstileFor(form);
+        if (status) {
+          status.textContent = result.message || 'Thanks. Your message has been sent.';
+          status.classList.add('success');
+        }
+      } catch (error) {
+        if (status) status.textContent = error.message || 'The message could not be sent.';
+        resetTurnstileFor(form);
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  };
+
   document.addEventListener('DOMContentLoaded', () => {
     initializeReviews();
     loadPublishedReviews();
@@ -1471,6 +1537,7 @@
     initializeProductCarousel();
     initializeCompatibilityChecker();
     initializeVehicleRequestForm();
+    initializeContactForm();
 
     const header = document.querySelector('.site-header');
     const announcement = document.querySelector('.announcement');
