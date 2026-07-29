@@ -19,16 +19,16 @@
 ## Important pages
 
 - Home: https://lokey.ca/
-- Product details: https://lokey.ca/product.html
-- Compatibility checker: https://lokey.ca/product.html#compatibility
-- Safety and limitations: https://lokey.ca/product.html#safety
-- FAQ: https://lokey.ca/product.html#product-faq
-- Contact and support: https://lokey.ca/contact.html
-- Shipping: https://lokey.ca/shipping.html
-- Returns: https://lokey.ca/returns.html
-- Warranty: https://lokey.ca/warranty.html
-- Privacy: https://lokey.ca/privacy.html
-- Terms: https://lokey.ca/terms.html
+- Product details: https://lokey.ca/product
+- Compatibility checker: https://lokey.ca/product#compatibility
+- Safety and limitations: https://lokey.ca/product#safety
+- FAQ: https://lokey.ca/product#product-faq
+- Contact and support: https://lokey.ca/contact
+- Shipping: https://lokey.ca/shipping
+- Returns: https://lokey.ca/returns
+- Warranty: https://lokey.ca/warranty
+- Privacy: https://lokey.ca/privacy
+- Terms: https://lokey.ca/terms
 
 ## Claims policy
 

@@ -217,7 +217,7 @@
             <span>Add Lo-Key to keep it here while you browse.</span>
           </div>
         </div>`;
-      foot.innerHTML = `<a class="btn btn-dark btn-block" href="product.html">View Lo-Key</a>`;
+      foot.innerHTML = `<a class="btn btn-dark btn-block" href="/product">View Lo-Key</a>`;
       return;
     }
 

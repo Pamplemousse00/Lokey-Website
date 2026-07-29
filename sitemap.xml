@@ -9,7 +9,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://lokey.ca/product.html</loc>
+    <loc>https://lokey.ca/product</loc>
     <lastmod>2026-07-24</lastmod>
     <image:image>
       <image:loc>https://lokey.ca/assets/og-image.png</image:loc>
@@ -20,10 +20,10 @@
       <image:title>Exploded concept rendering of Lo-Key</image:title>
     </image:image>
   </url>
-  <url><loc>https://lokey.ca/contact.html</loc><lastmod>2026-07-24</lastmod></url>
-  <url><loc>https://lokey.ca/shipping.html</loc><lastmod>2026-07-24</lastmod></url>
-  <url><loc>https://lokey.ca/returns.html</loc><lastmod>2026-07-24</lastmod></url>
-  <url><loc>https://lokey.ca/warranty.html</loc><lastmod>2026-07-24</lastmod></url>
-  <url><loc>https://lokey.ca/privacy.html</loc><lastmod>2026-07-24</lastmod></url>
-  <url><loc>https://lokey.ca/terms.html</loc><lastmod>2026-07-24</lastmod></url>
+  <url><loc>https://lokey.ca/contact</loc><lastmod>2026-07-24</lastmod></url>
+  <url><loc>https://lokey.ca/shipping</loc><lastmod>2026-07-24</lastmod></url>
+  <url><loc>https://lokey.ca/returns</loc><lastmod>2026-07-24</lastmod></url>
+  <url><loc>https://lokey.ca/warranty</loc><lastmod>2026-07-24</lastmod></url>
+  <url><loc>https://lokey.ca/privacy</loc><lastmod>2026-07-24</lastmod></url>
+  <url><loc>https://lokey.ca/terms</loc><lastmod>2026-07-24</lastmod></url>
 </urlset>
