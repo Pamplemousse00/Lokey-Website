@@ -1,5 +1,8 @@
 {
   "version": 1,
-  "include": ["/api/*"],
+  "include": [
+    "/api/*",
+    "/.well-known/api-catalog"
+  ],
   "exclude": []
 }

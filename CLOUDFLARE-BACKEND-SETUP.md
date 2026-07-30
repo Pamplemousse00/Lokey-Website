@@ -134,3 +134,7 @@ Redeploy the Pages project after adding the variables. Then test the form at `/c
 ## Review deletion (v6)
 
 The admin review section now has Pending, Approved, Rejected, and All filters. **Delete permanently** removes the review from D1 and records `review.deleted` in the audit trail. Deletion cannot be undone, so use the Reviews CSV export before removing records that may be needed later.
+
+## AI and agent discovery update
+
+See `AGENT-READINESS-SETUP.md`. This version adds Link headers, an RFC 9727 API catalog, OpenAPI documentation, an agent compatibility endpoint, Agent Skills discovery, WebMCP read-only tools, and Content Signals. OAuth/OIDC metadata, DNS-AID records, and an MCP Server Card are intentionally not fabricated because the current site does not operate those services.

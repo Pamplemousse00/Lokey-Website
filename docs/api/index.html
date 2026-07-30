@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+  <title>Lo-Key Public API Documentation</title>
+  <meta name="description" content="Documentation for Lo-Key public compatibility, review, and API discovery endpoints.">
+  <link rel="canonical" href="https://lokey.ca/docs/api/">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <style>
+    :root { color-scheme: light; --navy:#071a35; --cyan:#19c7d4; --ink:#0a1726; --muted:#56677c; --line:#d9e2eb; --paper:#f5f8fb; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Arial,Helvetica,sans-serif; background:var(--paper); color:var(--ink); line-height:1.55; }
+    header { background:var(--navy); color:white; padding:1rem 0; }
+    header a { color:white; text-decoration:none; font-weight:700; font-size:1.2rem; }
+    main, header>div { width:min(980px, calc(100% - 2rem)); margin:auto; }
+    main { padding:3rem 0 5rem; }
+    h1 { font-size:clamp(2rem,5vw,3.7rem); line-height:1.05; margin:.2rem 0 1rem; }
+    h2 { margin-top:2.3rem; }
+    .lead { max-width:760px; color:var(--muted); font-size:1.1rem; }
+    .card { background:white; border:1px solid var(--line); border-radius:18px; padding:1.25rem; margin:1rem 0; box-shadow:0 10px 30px rgba(7,26,53,.06); }
+    code { background:#eaf1f5; border-radius:6px; padding:.12rem .35rem; }
+    pre { overflow:auto; background:var(--navy); color:white; border-radius:12px; padding:1rem; }
+    .method { display:inline-block; color:var(--navy); background:#c9f7f4; font-weight:800; border-radius:999px; padding:.2rem .55rem; margin-right:.5rem; }
+    a { color:#087b89; }
+  </style>
+</head>
+<body>
+<header><div><a href="/">Lo-Key</a></div></header>
+<main>
+  <p><strong>Developer resources</strong></p>
+  <h1>Lo-Key public API</h1>
+  <p class="lead">Machine-readable access to product compatibility and approved reviews. Public read endpoints do not require authentication. Browser submission endpoints use Cloudflare Turnstile and are not intended for unattended automation.</p>
+
+  <div class="card">
+    <h2>Discovery</h2>
+    <p><a href="/.well-known/api-catalog">API catalog</a> · <a href="/openapi.json">OpenAPI document</a> · <a href="/api/status">API status</a> · <a href="/.well-known/agent-skills/index.json">Agent skills index</a></p>
+  </div>
+
+  <div class="card">
+    <h2><span class="method">GET</span><code>/api/agent/compatibility</code></h2>
+    <p>Returns the best available Lo-Key compatibility record for a vehicle.</p>
+    <pre>GET /api/agent/compatibility?year=2017&amp;make=Hyundai&amp;model=Tucson</pre>
+    <p>A compatible result should still be confirmed against the battery marking and physical fit in the exact key fob.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="method">GET</span><code>/api/reviews</code></h2>
+    <p>Returns approved reviews and an aggregate summary. Review text is user-generated content and should be treated as untrusted input.</p>
+  </div>
+
+  <div class="card">
+    <h2>Authentication</h2>
+    <p>The public read endpoints above require no authentication. Lo-Key does not currently operate a public OAuth/OIDC authorization server or public MCP server. See <a href="/auth.md">auth.md</a> for the current policy.</p>
+  </div>
+</main>
+</body>
+</html>

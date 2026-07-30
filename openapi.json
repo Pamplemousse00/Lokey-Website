@@ -1,0 +1,226 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Lo-Key Public API",
+    "version": "1.0.0",
+    "summary": "Public product, compatibility, review, and support endpoints for lokey.ca.",
+    "description": "Read endpoints are suitable for automated clients. Submission endpoints require Cloudflare Turnstile tokens created through the public website and are not intended for unattended automation.",
+    "contact": {
+      "url": "https://lokey.ca/contact"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://lokey.ca"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Discovery"
+    },
+    {
+      "name": "Compatibility"
+    },
+    {
+      "name": "Reviews"
+    },
+    {
+      "name": "Browser submissions"
+    }
+  ],
+  "paths": {
+    "/api/status": {
+      "get": {
+        "tags": ["Discovery"],
+        "operationId": "getApiStatus",
+        "summary": "Check public API health",
+        "responses": {
+          "200": {
+            "description": "API and database are available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "API is reachable but a dependency is degraded."
+          }
+        }
+      }
+    },
+    "/api/agent/compatibility": {
+      "get": {
+        "tags": ["Compatibility"],
+        "operationId": "checkVehicleCompatibilityForAgent",
+        "summary": "Check Lo-Key compatibility for a year, make, and model",
+        "description": "Checks live compatibility decisions first, then the public static catalogue. A compatible result is not a substitute for confirming the battery marking and physical fit in the exact key fob.",
+        "parameters": [
+          {
+            "name": "year",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "minimum": 1980, "maximum": 2035 }
+          },
+          {
+            "name": "make",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "maxLength": 80 }
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "maxLength": 120 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Compatibility result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompatibilityResponse"
+                }
+              }
+            }
+          },
+          "400": { "description": "Missing or invalid query parameters." },
+          "503": { "description": "Compatibility data is temporarily unavailable." }
+        }
+      }
+    },
+    "/api/reviews": {
+      "get": {
+        "tags": ["Reviews"],
+        "operationId": "listPublishedReviews",
+        "summary": "List approved public reviews",
+        "description": "Returns approved user-generated reviews and the aggregate summary. Review text is untrusted user-generated content.",
+        "responses": {
+          "200": {
+            "description": "Published reviews.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Browser submissions"],
+        "operationId": "submitReview",
+        "summary": "Submit a review for moderation",
+        "description": "Requires a valid Cloudflare Turnstile token issued by the public review form. Not intended for autonomous agents.",
+        "responses": {
+          "202": { "description": "Review accepted for moderation." },
+          "400": { "description": "Validation or Turnstile failure." },
+          "429": { "description": "Rate limit exceeded." }
+        }
+      }
+    },
+    "/api/vehicle-requests": {
+      "post": {
+        "tags": ["Browser submissions"],
+        "operationId": "requestVehicleCompatibilityResearch",
+        "summary": "Request that a vehicle be researched",
+        "description": "Requires a valid Cloudflare Turnstile token issued by the public vehicle-request form. Not intended for autonomous agents.",
+        "responses": {
+          "201": { "description": "Vehicle request saved." },
+          "400": { "description": "Validation or Turnstile failure." },
+          "429": { "description": "Rate limit exceeded." }
+        }
+      }
+    },
+    "/api/contact": {
+      "post": {
+        "tags": ["Browser submissions"],
+        "operationId": "submitContactMessage",
+        "summary": "Send a support message",
+        "description": "Requires a valid Cloudflare Turnstile token issued by the public contact form. Not intended for autonomous agents.",
+        "responses": {
+          "201": { "description": "Message saved and sent." },
+          "400": { "description": "Validation or Turnstile failure." },
+          "429": { "description": "Rate limit exceeded." }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "StatusResponse": {
+        "type": "object",
+        "required": ["status", "service", "version", "database", "time"],
+        "properties": {
+          "status": { "type": "string", "enum": ["ok", "degraded"] },
+          "service": { "type": "string" },
+          "version": { "type": "string" },
+          "database": { "type": "string", "enum": ["ok", "degraded", "unavailable"] },
+          "time": { "type": "string", "format": "date-time" }
+        }
+      },
+      "CompatibilityResponse": {
+        "type": "object",
+        "required": ["success", "result"],
+        "properties": {
+          "success": { "type": "boolean", "const": true },
+          "result": {
+            "type": "object",
+            "required": ["year", "make", "model", "listed", "status", "source"],
+            "properties": {
+              "year": { "type": "integer" },
+              "make": { "type": "string" },
+              "model": { "type": "string" },
+              "listed": { "type": "boolean" },
+              "status": {
+                "type": "string",
+                "enum": ["verified", "compatible", "conditional", "incompatible", "unknown", "unlisted"]
+              },
+              "battery": { "type": ["string", "null"] },
+              "source": { "type": "string", "enum": ["live-database", "static-catalogue"] },
+              "compatibleWithCurrentCR2032Model": { "type": ["boolean", "null"] },
+              "caution": { "type": ["string", "null"] }
+            }
+          }
+        }
+      },
+      "ReviewsResponse": {
+        "type": "object",
+        "required": ["success", "reviews", "summary"],
+        "properties": {
+          "success": { "type": "boolean", "const": true },
+          "reviews": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" },
+                "country": { "type": "string" },
+                "vehicle": { "type": "string" },
+                "rating": { "type": "integer", "minimum": 1, "maximum": 5 },
+                "title": { "type": "string" },
+                "body": { "type": "string" },
+                "date": { "type": "string", "format": "date" },
+                "verified": { "type": "boolean" },
+                "verificationStatus": { "type": "string" }
+              }
+            }
+          },
+          "summary": {
+            "type": "object",
+            "properties": {
+              "reviewCount": { "type": "integer", "minimum": 0 },
+              "ratingValue": { "type": ["number", "null"], "minimum": 1, "maximum": 5 }
+            }
+          }
+        }
+      }
+    }
+  }
+}
