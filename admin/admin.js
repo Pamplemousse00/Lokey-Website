@@ -24,6 +24,18 @@
   const compatibilityStatusMessage = document.getElementById("compatibilityStatusMessage");
   const compatibilityRecordList = document.getElementById("compatibilityRecordList");
   const compatibilityRecordCount = document.getElementById("compatibilityRecordCount");
+  const compatibilityVehicleId = document.getElementById("compatibilityVehicleId");
+  const compatibilitySelectedRecord = document.getElementById("compatibilitySelectedRecord");
+  const compatibilitySaveButton = document.getElementById("compatibilitySaveButton");
+  const addVehicleForm = document.getElementById("addVehicleForm");
+  const addVehicleFromYear = document.getElementById("addVehicleFromYear");
+  const addVehicleToYear = document.getElementById("addVehicleToYear");
+  const addVehicleMake = document.getElementById("addVehicleMake");
+  const addVehicleModel = document.getElementById("addVehicleModel");
+  const addVehicleStatus = document.getElementById("addVehicleStatus");
+  const addVehicleBattery = document.getElementById("addVehicleBattery");
+  const addVehicleBatteryChoices = document.getElementById("addVehicleBatteryChoices");
+  const addVehicleStatusMessage = document.getElementById("addVehicleStatusMessage");
   const refreshButton = document.getElementById("refreshButton");
   const logoutButton = document.getElementById("logoutButton");
   const auditLogList = document.getElementById("auditLogList");
@@ -79,9 +91,12 @@
     "review.rejected": "Review rejected",
     "review.deleted": "Review deleted",
     "vehicle_request.deleted": "Vehicle request deleted",
-    "compatibility.created": "Compatibility created",
-    "compatibility.updated": "Compatibility updated",
-    "compatibility.deleted": "Compatibility deleted",
+    "vehicle.created": "Vehicle added",
+    "vehicle.updated": "Vehicle updated",
+    "vehicle.deleted": "Vehicle deleted",
+    "compatibility.created": "Legacy compatibility created",
+    "compatibility.updated": "Legacy compatibility updated",
+    "compatibility.deleted": "Legacy compatibility deleted",
   }[action] || String(action || "").replaceAll("_", " ").replaceAll(".", " · "));
 
   function renderAuditLog(entries) {
@@ -208,27 +223,33 @@
     return [];
   };
 
-  const allowedCompatibilityBatteries = new Set(["CR2016", "CR2025", "CR2032", "CR2450"]);
+  const batteryButtons = (group) => [...group.querySelectorAll(".battery-choice[data-battery-size]")];
 
-  const selectedCompatibilityBatteries = () => [...compatibilityBatteryChoices.querySelectorAll(".battery-choice[aria-pressed='true']")]
-    .map((button) => button.dataset.batterySize)
-    .filter((size) => allowedCompatibilityBatteries.has(size));
-
-  function syncCompatibilityBatteryValue() {
-    compatibilityBattery.value = selectedCompatibilityBatteries().join(" + ");
-  }
-
-  function setCompatibilityBatteries(values) {
-    const selected = new Set((Array.isArray(values) ? values : batteryNames(values))
-      .map((value) => String(value).toUpperCase().replace(/[\s-]+/g, ""))
-      .filter((value) => allowedCompatibilityBatteries.has(value)));
-
-    compatibilityBatteryChoices.querySelectorAll(".battery-choice").forEach((button) => {
+  function setBatteryField(input, group, value) {
+    const text = String(value || "").trim();
+    input.value = text;
+    const selected = new Set(batteryNames(text));
+    batteryButtons(group).forEach((button) => {
       const active = selected.has(button.dataset.batterySize);
       button.setAttribute("aria-pressed", String(active));
       button.classList.toggle("is-selected", active);
     });
-    syncCompatibilityBatteryValue();
+  }
+
+  function bindBatterySelector(group, input, statusElement) {
+    group.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-battery-size]");
+      if (!button) return;
+      const active = button.getAttribute("aria-pressed") !== "true";
+      button.setAttribute("aria-pressed", String(active));
+      button.classList.toggle("is-selected", active);
+      input.value = batteryButtons(group)
+        .filter((item) => item.getAttribute("aria-pressed") === "true")
+        .map((item) => item.dataset.batterySize)
+        .join(" + ");
+      statusElement.textContent = "";
+      statusElement.classList.remove("success");
+    });
   }
 
   function renderBatteryChart(requests) {
@@ -287,6 +308,12 @@
     incompatible: "No",
   }[status] || status);
 
+  const adminStatusValue = (status) => status === "verified"
+    ? "verified"
+    : status === "incompatible"
+      ? "incompatible"
+      : "probably";
+
   function renderCompatibilityRecords(records) {
     compatibilityRecords = records;
     compatibilityRecordCount.textContent = `${records.length} ${records.length === 1 ? "record" : "records"}`;
@@ -297,10 +324,15 @@
             <td>${escapeHTML(record.battery_sizes)}</td>
             <td><span class="status-badge status-${escapeHTML(record.status)}">${escapeHTML(statusLabel(record.status))}</span></td>
             <td>${escapeHTML(dateText(record.updated_at))}</td>
-            <td><button class="row-action delete" data-compatibility-action="delete" type="button">Delete</button></td>
+            <td>
+              <div class="row-actions">
+                <button class="row-action use" data-compatibility-action="edit" type="button">Edit</button>
+                <button class="row-action delete" data-compatibility-action="delete" type="button">Delete</button>
+              </div>
+            </td>
           </tr>
         `).join("")
-      : '<tr><td colspan="5">No compatibility decisions saved yet.</td></tr>';
+      : '<tr><td colspan="5">No admin catalogue changes yet.</td></tr>';
   }
 
   const fillSelect = (select, values, placeholder) => {
@@ -308,14 +340,18 @@
       values.map((value) => `<option value="${escapeHTML(value)}">${escapeHTML(value)}</option>`).join("");
   };
 
-  async function loadCompatibilityCatalogue() {
-    if (compatibilityCatalogue) return compatibilityCatalogue;
-    const response = await fetch("../compatibility-data.json", { headers: { Accept: "application/json" } });
-    if (!response.ok) throw new Error("Could not load the vehicle catalogue.");
-    compatibilityCatalogue = await response.json();
-    const years = Array.isArray(compatibilityCatalogue.years) ? compatibilityCatalogue.years.map(String) : [];
+  async function loadCompatibilityCatalogue(force = false) {
+    if (compatibilityCatalogue && !force) return compatibilityCatalogue;
+    const response = await fetch(`/api/compatibility${force ? `?refresh=${Date.now()}` : ""}`, {
+      headers: { Accept: "application/json" },
+      cache: force ? "no-store" : "default",
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(result.error || "Could not load the vehicle catalogue.");
+    compatibilityCatalogue = result;
+    const years = Array.isArray(result.years) ? result.years.map(String) : [];
     fillSelect(compatibilityYear, years, "Select year");
-    return compatibilityCatalogue;
+    return result;
   }
 
   const makesForYear = (year) => (compatibilityCatalogue?.makes || [])
@@ -332,12 +368,24 @@
       .sort((a, b) => a.localeCompare(b));
   };
 
+  function clearExistingVehicleEditor(message = "Select a vehicle") {
+    compatibilityVehicleId.value = "";
+    compatibilityStatus.value = "";
+    compatibilityStatus.disabled = true;
+    compatibilityBattery.value = "";
+    compatibilityBattery.disabled = true;
+    setBatteryField(compatibilityBattery, compatibilityBatteryChoices, "");
+    compatibilitySaveButton.disabled = true;
+    compatibilitySelectedRecord.textContent = message;
+  }
+
   function populateMakes() {
     const year = Number(compatibilityYear.value);
     fillSelect(compatibilityMake, year ? makesForYear(year) : [], "Select make");
     fillSelect(compatibilityModel, [], "Select model");
     compatibilityMake.disabled = !year;
     compatibilityModel.disabled = true;
+    clearExistingVehicleEditor();
   }
 
   function populateModels() {
@@ -345,6 +393,44 @@
     const make = compatibilityMake.value;
     fillSelect(compatibilityModel, year && make ? modelsFor(year, make) : [], "Select model");
     compatibilityModel.disabled = !(year && make);
+    clearExistingVehicleEditor();
+  }
+
+  async function loadSelectedVehicle() {
+    const year = Number(compatibilityYear.value);
+    const make = compatibilityMake.value;
+    const model = compatibilityModel.value;
+    if (!year || !make || !model) {
+      clearExistingVehicleEditor();
+      return;
+    }
+
+    clearExistingVehicleEditor("Loading vehicle...");
+    try {
+      const url = new URL("/api/compatibility", window.location.origin);
+      url.searchParams.set("year", String(year));
+      url.searchParams.set("make", make);
+      url.searchParams.set("model", model);
+      url.searchParams.set("refresh", String(Date.now()));
+      const response = await fetch(url, { headers: { Accept: "application/json" }, cache: "no-store" });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || "Could not load this vehicle.");
+      if (!result.result) throw new Error("This vehicle is no longer in the database. Refresh the catalogue.");
+
+      const record = result.result;
+      compatibilityVehicleId.value = String(record.id);
+      compatibilityStatus.value = adminStatusValue(record.status);
+      compatibilityStatus.disabled = false;
+      compatibilityBattery.disabled = false;
+      setBatteryField(compatibilityBattery, compatibilityBatteryChoices, record.battery || record.keyFobBattery || "");
+      compatibilitySaveButton.disabled = false;
+      compatibilitySelectedRecord.textContent = `Database row #${record.id}`;
+      compatibilityStatusMessage.textContent = "";
+    } catch (error) {
+      clearExistingVehicleEditor("Could not load vehicle");
+      compatibilityStatusMessage.textContent = error.message;
+      compatibilityStatusMessage.classList.remove("success");
+    }
   }
 
   const ensureOption = (select, value) => {
@@ -354,21 +440,45 @@
     }
   };
 
+  async function selectExistingVehicle(record) {
+    await loadCompatibilityCatalogue();
+    ensureOption(compatibilityYear, record.year);
+    compatibilityYear.value = String(record.year);
+    populateMakes();
+    ensureOption(compatibilityMake, record.make);
+    compatibilityMake.value = record.make;
+    populateModels();
+    ensureOption(compatibilityModel, record.model);
+    compatibilityModel.value = record.model;
+    await loadSelectedVehicle();
+    document.getElementById("compatibilityManager").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   async function useVehicleRequest(request) {
     await loadCompatibilityCatalogue();
-    ensureOption(compatibilityYear, request.year);
-    compatibilityYear.value = String(request.year);
-    populateMakes();
-    ensureOption(compatibilityMake, request.make);
-    compatibilityMake.value = request.make;
-    populateModels();
-    ensureOption(compatibilityModel, request.model);
-    compatibilityModel.value = request.model;
-    setCompatibilityBatteries(request.battery_sizes || "");
-    compatibilityStatus.value = "";
-    compatibilityStatusMessage.textContent = "Vehicle request loaded. Choose Yes, Probably, or No.";
-    compatibilityStatusMessage.classList.remove("success");
-    document.getElementById("compatibilityManager").scrollIntoView({ behavior: "smooth", block: "start" });
+    const year = Number(request.year);
+    const isListed = makesForYear(year).includes(request.make) && modelsFor(year, request.make).includes(request.model);
+    if (isListed) {
+      await selectExistingVehicle(request);
+      setBatteryField(compatibilityBattery, compatibilityBatteryChoices, request.battery_sizes || compatibilityBattery.value);
+      compatibilityStatusMessage.textContent = "Vehicle request loaded. Review the battery and result, then save changes.";
+      return;
+    }
+
+    addVehicleFromYear.value = String(year || "");
+    addVehicleToYear.value = String(year || "");
+    addVehicleMake.value = request.make || "";
+    addVehicleModel.value = request.model || "";
+    addVehicleStatus.value = "";
+    setBatteryField(addVehicleBattery, addVehicleBatteryChoices, request.battery_sizes || "");
+    addVehicleStatusMessage.textContent = "Vehicle request loaded. Choose a result and confirm the battery before adding it.";
+    addVehicleStatusMessage.classList.remove("success");
+    document.getElementById("addVehiclePanel").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  async function refreshManagedVehicles() {
+    const result = await api("/api/admin/vehicles");
+    renderCompatibilityRecords(result.records || []);
   }
 
   async function loadDashboard() {
@@ -378,7 +488,7 @@
       const [reviewResult, vehicleResult, compatibilityResult, metricResult, auditResult] = await Promise.all([
         api(`/api/admin/reviews?status=${encodeURIComponent(reviewStatusFilter?.value || "pending")}`),
         api("/api/admin/vehicle-requests"),
-        api("/api/admin/compatibility"),
+        api("/api/admin/vehicles"),
         api("/api/admin/cart-metrics"),
         api("/api/admin/audit-log"),
       ]);
@@ -411,54 +521,82 @@
 
   compatibilityYear.addEventListener("change", populateMakes);
   compatibilityMake.addEventListener("change", populateModels);
-
-  compatibilityBatteryChoices.addEventListener("click", (event) => {
-    const button = event.target.closest("button[data-battery-size]");
-    if (!button) return;
-    const active = button.getAttribute("aria-pressed") !== "true";
-    button.setAttribute("aria-pressed", String(active));
-    button.classList.toggle("is-selected", active);
-    syncCompatibilityBatteryValue();
-    if (selectedCompatibilityBatteries().length) {
-      compatibilityStatusMessage.textContent = "";
-      compatibilityStatusMessage.classList.remove("success");
-    }
-  });
+  compatibilityModel.addEventListener("change", () => loadSelectedVehicle());
+  bindBatterySelector(compatibilityBatteryChoices, compatibilityBattery, compatibilityStatusMessage);
+  bindBatterySelector(addVehicleBatteryChoices, addVehicleBattery, addVehicleStatusMessage);
 
   compatibilityForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!compatibilityForm.reportValidity()) return;
-    const selectedBatteries = selectedCompatibilityBatteries();
-    if (!selectedBatteries.length) {
-      compatibilityStatusMessage.textContent = "Select at least one key-fob battery size.";
-      compatibilityStatusMessage.classList.remove("success");
-      compatibilityBatteryChoices.querySelector(".battery-choice")?.focus();
+    const id = Number(compatibilityVehicleId.value);
+    const batterySizes = compatibilityBattery.value.trim();
+    if (!id) {
+      compatibilityStatusMessage.textContent = "Select an existing vehicle first.";
       return;
     }
-    const submit = compatibilityForm.querySelector('button[type="submit"]');
-    submit.disabled = true;
-    compatibilityStatusMessage.textContent = "Saving…";
+    if (!batterySizes) {
+      compatibilityStatusMessage.textContent = "Enter at least one key-fob battery size.";
+      compatibilityBattery.focus();
+      return;
+    }
+
+    compatibilitySaveButton.disabled = true;
+    compatibilityStatusMessage.textContent = "Saving...";
     compatibilityStatusMessage.classList.remove("success");
     try {
-      const result = await api("/api/admin/compatibility", {
-        method: "POST",
+      const result = await api(`/api/admin/vehicles/${id}`, {
+        method: "PUT",
         body: JSON.stringify({
-          year: Number(compatibilityYear.value),
-          make: compatibilityMake.value,
-          model: compatibilityModel.value,
           status: compatibilityStatus.value,
-          batterySizes: selectedBatteries.join(" + "),
+          batterySizes,
         }),
       });
-      const existingIndex = compatibilityRecords.findIndex((record) => Number(record.id) === Number(result.record.id));
-      if (existingIndex >= 0) compatibilityRecords.splice(existingIndex, 1);
-      compatibilityRecords.unshift(result.record);
-      renderCompatibilityRecords(compatibilityRecords);
-      compatibilityStatusMessage.textContent = result.message || "Compatibility decision saved.";
+      compatibilityStatusMessage.textContent = result.message || "Vehicle updated.";
       compatibilityStatusMessage.classList.add("success");
-      refreshAuditLog().catch(() => {});
+      compatibilitySelectedRecord.textContent = `Database row #${result.record.id}`;
+      await Promise.all([refreshManagedVehicles(), refreshAuditLog()]);
     } catch (error) {
       compatibilityStatusMessage.textContent = error.message;
+    } finally {
+      compatibilitySaveButton.disabled = false;
+    }
+  });
+
+  addVehicleForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!addVehicleForm.reportValidity()) return;
+    const batterySizes = addVehicleBattery.value.trim();
+    if (!batterySizes) {
+      addVehicleStatusMessage.textContent = "Enter at least one key-fob battery size.";
+      addVehicleBattery.focus();
+      return;
+    }
+
+    const submit = addVehicleForm.querySelector('button[type="submit"]');
+    submit.disabled = true;
+    addVehicleStatusMessage.textContent = "Adding vehicle...";
+    addVehicleStatusMessage.classList.remove("success");
+    try {
+      const result = await api("/api/admin/vehicles", {
+        method: "POST",
+        body: JSON.stringify({
+          yearFrom: Number(addVehicleFromYear.value),
+          yearTo: Number(addVehicleToYear.value),
+          make: addVehicleMake.value,
+          model: addVehicleModel.value,
+          status: addVehicleStatus.value,
+          batterySizes,
+        }),
+      });
+      addVehicleStatusMessage.textContent = result.message || "Vehicle added.";
+      addVehicleStatusMessage.classList.add("success");
+      addVehicleForm.reset();
+      setBatteryField(addVehicleBattery, addVehicleBatteryChoices, "");
+      compatibilityCatalogue = null;
+      await loadCompatibilityCatalogue(true);
+      await Promise.all([refreshManagedVehicles(), refreshAuditLog()]);
+    } catch (error) {
+      addVehicleStatusMessage.textContent = error.message;
     } finally {
       submit.disabled = false;
     }
@@ -563,19 +701,30 @@
   });
 
   compatibilityRecordList.addEventListener("click", async (event) => {
-    const button = event.target.closest("button[data-compatibility-action='delete']");
+    const button = event.target.closest("button[data-compatibility-action]");
     const row = button?.closest("[data-compatibility-id]");
     if (!button || !row) return;
     const id = Number(row.dataset.compatibilityId);
     const record = compatibilityRecords.find((item) => Number(item.id) === id);
-    if (!window.confirm(`Delete the compatibility decision for ${record?.year || ""} ${record?.make || ""} ${record?.model || ""}?`)) return;
+    if (!record) return;
+
+    if (button.dataset.compatibilityAction === "edit") {
+      selectExistingVehicle(record).catch((error) => {
+        compatibilityStatusMessage.textContent = error.message;
+      });
+      return;
+    }
+
+    if (!window.confirm(`Delete ${record.year} ${record.make} ${record.model} from the vehicle catalogue?`)) return;
     button.disabled = true;
     try {
-      await api(`/api/admin/compatibility/${id}`, { method: "DELETE" });
-      renderCompatibilityRecords(compatibilityRecords.filter((item) => Number(item.id) !== id));
-      compatibilityStatusMessage.textContent = "Compatibility decision deleted.";
+      await api(`/api/admin/vehicles/${id}`, { method: "DELETE" });
+      compatibilityStatusMessage.textContent = "Vehicle removed from the catalogue.";
       compatibilityStatusMessage.classList.add("success");
-      refreshAuditLog().catch(() => {});
+      compatibilityCatalogue = null;
+      await loadCompatibilityCatalogue(true);
+      await Promise.all([refreshManagedVehicles(), refreshAuditLog()]);
+      clearExistingVehicleEditor();
     } catch (error) {
       compatibilityStatusMessage.textContent = error.message;
       compatibilityStatusMessage.classList.remove("success");

@@ -1095,38 +1095,22 @@
     .replace(/[^a-z0-9]+/g, ' ')
     .trim();
 
-  const compatibilityFallback = () => {
-    const data = window.LO_KEY_COMPATIBILITY_FALLBACK;
-    return data && Array.isArray(data.makes) ? data : { years: [], makes: [] };
-  };
+  const compatibilityFallback = () => ({ years: [], makes: [] });
 
   const requestCompatibilityData = async (query = {}) => {
-    const hasSelection = query.year && query.make && query.model;
+    const endpoint = String(window.LO_KEY_COMPATIBILITY_API || '/api/compatibility').trim();
+    const url = new URL(endpoint || '/api/compatibility', window.location.origin);
+    Object.entries(query).forEach(([key, value]) => {
+      if (value !== undefined && value !== '') url.searchParams.set(key, value);
+    });
 
-    if (hasSelection) {
-      const endpoint = String(window.LO_KEY_COMPATIBILITY_API || '').trim();
-      if (endpoint) {
-        const apiUrl = new URL(endpoint, window.location.href);
-        Object.entries(query).forEach(([key, value]) => {
-          if (value !== undefined && value !== '') apiUrl.searchParams.set(key, value);
-        });
-        try {
-          const response = await fetch(apiUrl.toString(), { headers: { Accept: 'application/json' } });
-          const result = await response.json().catch(() => ({}));
-          if (response.ok && result.result) return result;
-        } catch (_) {
-          // Fall through to the static catalogue.
-        }
-      }
-    }
-
-    const url = new URL('compatibility-data.json', window.location.href);
     try {
       const response = await fetch(url.toString(), { headers: { Accept: 'application/json' } });
-      if (!response.ok) throw new Error(`Compatibility request failed: ${response.status}`);
-      return await response.json();
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || `Compatibility request failed: ${response.status}`);
+      return result;
     } catch (error) {
-      return compatibilityFallback();
+      return Object.keys(query).length ? { success: false, result: null, error: error.message } : compatibilityFallback();
     }
   };
 
@@ -1423,43 +1407,8 @@
         return;
       }
 
-      const rules = Array.isArray(data.batteryRules) ? data.batteryRules : [];
-      const selectedMake = normalizeVehicleValue(make);
-      const selectedModel = normalizeVehicleValue(model);
-      const rule = rules.find((entry) =>
-        normalizeVehicleValue(entry.make) === selectedMake &&
-        normalizeVehicleValue(entry.model) === selectedModel &&
-        year >= Number(entry.from) &&
-        year <= Number(entry.to)
-      );
-
-      if (rule) {
-        const status = normalizedCompatibilityStatus(rule.status, rule.battery);
-        const copy = compatibilityCopyFor(status);
-        const visualStatus = status === 'verified'
-          ? 'verified'
-          : status === 'incompatible'
-            ? 'incompatible'
-            : 'untested';
-        showResult(
-          visualStatus,
-          copy.lead,
-          copy.message,
-          rule.battery ? `Listed key-fob battery: ${rule.battery}` : '',
-          rule.battery || ''
-        );
-        return;
-      }
-
-      const makeEntry = data.makes.find((entry) => entry.name === make);
-      const modelEntry = makeEntry?.models.find((entry) => entry.name === model && year >= Number(entry.from) && year <= Number(entry.to));
-      if (modelEntry) {
-        const copy = compatibilityCopyFor('unknown');
-        showResult('untested', copy.lead, copy.message, `${year} ${make} ${model}`);
-      } else {
-        const copy = compatibilityCopyFor('unlisted');
-        showResult('untested', copy.lead, copy.message);
-      }
+      const copy = compatibilityCopyFor('unlisted');
+      showResult('untested', copy.lead, response?.error || copy.message);
     });
   };
 

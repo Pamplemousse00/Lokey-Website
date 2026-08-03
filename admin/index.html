@@ -6,8 +6,8 @@
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="theme-color" content="#071b2b">
   <title>Lo-Key Admin</title>
-  <link rel="stylesheet" href="admin.css">
-  <script defer src="admin.js"></script>
+  <link rel="stylesheet" href="admin.css?v=7">
+  <script defer src="admin.js?v=7"></script>
 </head>
 <body>
   <header class="admin-header">
@@ -100,52 +100,113 @@
       <section class="admin-panel compatibility-panel" id="compatibilityManager">
         <div class="panel-heading">
           <div>
-            <h2>Compatibility manager</h2>
-            <p>Select a vehicle, choose its battery size or sizes, and publish a Yes, Probably, or No result.</p>
+            <h2>Vehicle catalogue</h2>
+            <p>The production dropdowns now come from D1. Edit an existing model year or add a completely new vehicle here.</p>
           </div>
         </div>
 
-        <form class="compatibility-form" id="compatibilityForm">
-          <label>Year
-            <select id="compatibilityYear" required>
-              <option value="">Select year</option>
-            </select>
-          </label>
-          <label>Make
-            <select id="compatibilityMake" required disabled>
-              <option value="">Select make</option>
-            </select>
-          </label>
-          <label>Model
-            <select id="compatibilityModel" required disabled>
-              <option value="">Select model</option>
-            </select>
-          </label>
-          <label>Result
-            <select id="compatibilityStatus" required>
-              <option value="">Select result</option>
-              <option value="verified">Yes</option>
-              <option value="probably">Probably</option>
-              <option value="incompatible">No</option>
-            </select>
-          </label>
-          <fieldset class="battery-field battery-selector">
-            <legend>Key-fob battery size(s)</legend>
-            <div class="battery-choice-group" id="compatibilityBatteryChoices" aria-describedby="compatibilityBatteryHelp">
-              <button class="battery-choice" type="button" data-battery-size="CR2016" aria-pressed="false">CR2016</button>
-              <button class="battery-choice" type="button" data-battery-size="CR2025" aria-pressed="false">CR2025</button>
-              <button class="battery-choice" type="button" data-battery-size="CR2032" aria-pressed="false">CR2032</button>
-              <button class="battery-choice" type="button" data-battery-size="CR2450" aria-pressed="false">CR2450</button>
+        <div class="catalogue-manager-grid">
+          <section class="catalogue-editor">
+            <div class="subheading catalogue-form-heading">
+              <h3>Edit existing vehicle</h3>
+              <span id="compatibilitySelectedRecord">Select a vehicle</span>
             </div>
-            <p class="field-help" id="compatibilityBatteryHelp">Select one or more sizes when the vehicle uses multiple key-fob batteries.</p>
-            <input id="compatibilityBattery" type="hidden">
-          </fieldset>
-          <button class="primary-action" type="submit">Save compatibility</button>
-        </form>
-        <p class="inline-status" id="compatibilityStatusMessage" aria-live="polite"></p>
+            <form class="compatibility-form" id="compatibilityForm">
+              <input id="compatibilityVehicleId" type="hidden">
+              <label>Year
+                <select id="compatibilityYear" required>
+                  <option value="">Select year</option>
+                </select>
+              </label>
+              <label>Make
+                <select id="compatibilityMake" required disabled>
+                  <option value="">Select make</option>
+                </select>
+              </label>
+              <label>Model
+                <select id="compatibilityModel" required disabled>
+                  <option value="">Select model</option>
+                </select>
+              </label>
+              <label>Result
+                <select id="compatibilityStatus" required disabled>
+                  <option value="">Select result</option>
+                  <option value="verified">Yes</option>
+                  <option value="probably">Probably</option>
+                  <option value="incompatible">No</option>
+                </select>
+              </label>
+              <fieldset class="battery-field battery-selector">
+                <legend>Key-fob battery size(s)</legend>
+                <div class="battery-choice-group" id="compatibilityBatteryChoices" aria-describedby="compatibilityBatteryHelp">
+                  <button class="battery-choice" type="button" data-battery-size="CR1616" aria-pressed="false">CR1616</button>
+                  <button class="battery-choice" type="button" data-battery-size="CR1620" aria-pressed="false">CR1620</button>
+                  <button class="battery-choice" type="button" data-battery-size="CR1632" aria-pressed="false">CR1632</button>
+                  <button class="battery-choice" type="button" data-battery-size="CR2016" aria-pressed="false">CR2016</button>
+                  <button class="battery-choice" type="button" data-battery-size="CR2025" aria-pressed="false">CR2025</button>
+                  <button class="battery-choice" type="button" data-battery-size="CR2032" aria-pressed="false">CR2032</button>
+                  <button class="battery-choice" type="button" data-battery-size="CR2450" aria-pressed="false">CR2450</button>
+                </div>
+                <label class="battery-text-label">Battery description
+                  <input id="compatibilityBattery" type="text" maxlength="120" placeholder="CR2032, CR2025 or CR2032, Varies by fob..." required disabled>
+                </label>
+                <p class="field-help" id="compatibilityBatteryHelp">Use the buttons for common sizes, or type any battery description used by the fob.</p>
+              </fieldset>
+              <button class="primary-action" id="compatibilitySaveButton" type="submit" disabled>Save changes</button>
+            </form>
+            <p class="inline-status" id="compatibilityStatusMessage" aria-live="polite"></p>
+          </section>
+
+          <section class="catalogue-editor catalogue-add-panel" id="addVehiclePanel">
+            <div class="subheading catalogue-form-heading">
+              <h3>Add new vehicle</h3>
+              <span>Creates one database row per model year</span>
+            </div>
+            <form class="compatibility-form add-vehicle-form" id="addVehicleForm">
+              <label>From year
+                <input id="addVehicleFromYear" type="number" min="1980" max="2028" required>
+              </label>
+              <label>To year
+                <input id="addVehicleToYear" type="number" min="1980" max="2028" required>
+              </label>
+              <label>Make
+                <input id="addVehicleMake" type="text" maxlength="80" placeholder="Kia" required>
+              </label>
+              <label>Model
+                <input id="addVehicleModel" type="text" maxlength="120" placeholder="Soul EV" required>
+              </label>
+              <label>Result
+                <select id="addVehicleStatus" required>
+                  <option value="">Select result</option>
+                  <option value="verified">Yes</option>
+                  <option value="probably">Probably</option>
+                  <option value="incompatible">No</option>
+                </select>
+              </label>
+              <fieldset class="battery-field battery-selector">
+                <legend>Key-fob battery size(s)</legend>
+                <div class="battery-choice-group" id="addVehicleBatteryChoices" aria-describedby="addVehicleBatteryHelp">
+                  <button class="battery-choice" type="button" data-battery-size="CR1616" aria-pressed="false">CR1616</button>
+                  <button class="battery-choice" type="button" data-battery-size="CR1620" aria-pressed="false">CR1620</button>
+                  <button class="battery-choice" type="button" data-battery-size="CR1632" aria-pressed="false">CR1632</button>
+                  <button class="battery-choice" type="button" data-battery-size="CR2016" aria-pressed="false">CR2016</button>
+                  <button class="battery-choice" type="button" data-battery-size="CR2025" aria-pressed="false">CR2025</button>
+                  <button class="battery-choice" type="button" data-battery-size="CR2032" aria-pressed="false">CR2032</button>
+                  <button class="battery-choice" type="button" data-battery-size="CR2450" aria-pressed="false">CR2450</button>
+                </div>
+                <label class="battery-text-label">Battery description
+                  <input id="addVehicleBattery" type="text" maxlength="120" placeholder="CR2032" required>
+                </label>
+                <p class="field-help" id="addVehicleBatteryHelp">A range such as 2015-2018 creates separate searchable entries for all four years.</p>
+              </fieldset>
+              <button class="primary-action" type="submit">Add vehicle</button>
+            </form>
+            <p class="inline-status" id="addVehicleStatusMessage" aria-live="polite"></p>
+          </section>
+        </div>
 
         <div class="subheading">
-          <h3>Saved decisions</h3>
+          <h3>Recent catalogue changes</h3>
           <span id="compatibilityRecordCount">0 records</span>
         </div>
         <div class="table-wrap compact-table-wrap">
@@ -156,7 +217,7 @@
                 <th>Battery size(s)</th>
                 <th>Result</th>
                 <th>Updated</th>
-                <th>Action</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody id="compatibilityRecordList"></tbody>

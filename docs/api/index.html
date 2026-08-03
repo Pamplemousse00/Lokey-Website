@@ -39,8 +39,15 @@
   </div>
 
   <div class="card">
+    <h2><span class="method">GET</span><code>/api/compatibility</code></h2>
+    <p>Returns the D1-backed year, make, and model catalogue used by the website dropdowns. Add all three query parameters to return one exact vehicle record.</p>
+    <pre>GET /api/compatibility
+GET /api/compatibility?year=2016&amp;make=Kia&amp;model=Soul%20EV</pre>
+  </div>
+
+  <div class="card">
     <h2><span class="method">GET</span><code>/api/agent/compatibility</code></h2>
-    <p>Returns the best available Lo-Key compatibility record for a vehicle.</p>
+    <p>Returns the authoritative D1 compatibility record for a vehicle.</p>
     <pre>GET /api/agent/compatibility?year=2017&amp;make=Hyundai&amp;model=Tucson</pre>
     <p>A compatible result should still be confirmed against the battery marking and physical fit in the exact key fob.</p>
   </div>

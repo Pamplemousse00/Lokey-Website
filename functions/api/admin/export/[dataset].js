@@ -44,13 +44,13 @@ const exportDefinitions = {
     `,
   },
   compatibility: {
-    filename: "lokey-compatibility.csv",
-    headers: ["id", "year", "make", "model", "status", "battery_sizes", "created_at", "updated_at"],
+    filename: "lokey-vehicles.csv",
+    headers: ["id", "year", "make", "model", "status", "battery_sizes", "confidence", "source", "created_at", "updated_at"],
     sql: `
-      SELECT id, year, make, model, status, battery_sizes, created_at, updated_at
-      FROM compatibility_records
-      ORDER BY updated_at DESC, id DESC
-      LIMIT 10000
+      SELECT id, year, make, model, status, battery_sizes, confidence, source, created_at, updated_at
+      FROM vehicles
+      ORDER BY make COLLATE NOCASE, model COLLATE NOCASE, year DESC
+      LIMIT 20000
     `,
   },
   "cart-events": {

@@ -1,38 +1,88 @@
-# Lo-Key Cloudflare backend v4 setup
+# Lo-Key Cloudflare backend v7 setup
 
-This version adds:
+This version moves the entire vehicle compatibility catalogue into Cloudflare D1.
+The website no longer builds its dropdowns from `compatibility-data.json`, and the
+old `compatibility_records` override table is removed.
 
-- public indexing support (`noindex` removed, plus `robots.txt` and `sitemap.xml`)
-- customer-facing support and policy pages
-- production checkout wording instead of demo-cart wording
-- authenticated CSV exports from `/admin/`
-- an admin audit trail for review moderation, vehicle-request deletion, and compatibility changes
-- an admin name/email field used to identify each audited action
+## 1. Back up the current database
 
-It retains all v3 features, including Turnstile, D1 reviews, vehicle requests, compatibility overrides, battery-size charts, and cart-event metrics.
+Before the migration, open `/admin/` and export:
 
-## 1. Upgrade the existing D1 database
+- Compatibility
+- Vehicle requests
+- Audit trail
+
+The migration preserves the rows in `compatibility_records`, but the exports give
+you a separate rollback reference.
+
+## 2. Run the D1 migration
 
 Open:
 
 **Cloudflare > Storage & databases > D1 > lokey-production > Console**
 
-Paste and run the complete contents of:
+Open `MIGRATION-V5.sql` from this package, copy the complete file, paste it into
+the D1 console, and press **Execute** once.
 
-```text
-MIGRATION-V3.sql
-```
+The migration:
 
-This migration is safe to run again because it uses `CREATE TABLE IF NOT EXISTS` and `CREATE INDEX IF NOT EXISTS`.
+1. creates the new `vehicles` catalogue table;
+2. imports every effective year/make/model record from the former JSON catalogue;
+3. preserves existing `compatibility_records` decisions as exact-year vehicle rows;
+4. drops `compatibility_records`;
+5. creates lookup and catalogue indexes;
+6. runs two verification queries at the end.
 
-It creates:
+The first result should show approximately **7,581 vehicle-year rows**, plus any
+legacy-only vehicles you previously added. The second result should be empty,
+confirming that `compatibility_records` no longer exists.
 
-- `admin_audit_log`
-- indexes for audit date and record lookups
+Do not run `MIGRATION-V5.sql` a second time after it succeeds.
 
-`schema.sql` now contains the complete schema for a brand-new database.
+## 3. Deploy the complete website folder
 
-## 2. Keep the existing Cloudflare settings
+Commit this complete folder to the GitHub repository connected to Cloudflare
+Pages. Keep `functions/` at the repository root beside `index.html`.
+
+The relevant routes are now:
+
+- `GET /api/compatibility` — returns the D1-backed dropdown catalogue
+- `GET /api/compatibility?year=2016&make=Kia&model=Soul%20EV` — exact lookup
+- `GET /api/agent/compatibility` — agent-oriented exact lookup
+- `GET /api/admin/vehicles` — recent admin-managed vehicle rows
+- `POST /api/admin/vehicles` — add a new model or model-year range
+- `PUT /api/admin/vehicles/:id` — change the battery or status
+- `DELETE /api/admin/vehicles/:id` — remove one exact model-year row
+
+The admin routes require the existing `ADMIN_API_KEY` bearer token.
+
+## 4. Use the new admin catalogue manager
+
+Open `/admin/` after deployment.
+
+### Edit an existing model year
+
+Choose Year, Make, and Model. The current D1 battery and result load into the
+form. Change the battery description and/or Yes/Probably/No result, then press
+**Save changes**.
+
+### Add a completely new vehicle
+
+Use **Add new vehicle**. Enter:
+
+- From year
+- To year
+- Make
+- Model
+- Result
+- Battery description
+
+A one-year range creates one row. A multi-year range creates one row for every
+model year so the public and admin dropdowns update automatically.
+
+For example, a 2016-only entry uses From year `2016` and To year `2016`. The migration already adds the previously missing **2016 Kia Soul EV** as CR2032 / Probably.
+
+## 5. Existing Cloudflare variables
 
 The project still requires:
 
@@ -41,100 +91,23 @@ The project still requires:
 - secret: `ADMIN_API_KEY`
 - secret: `RATE_LIMIT_SALT`
 - plain variable: `TURNSTILE_ALLOWED_HOSTNAMES=lokey.ca,www.lokey.ca`
+- secret: `RESEND_API_KEY`
+- plain variable: `CONTACT_FROM_EMAIL`
+- plain variable: `CONTACT_TO_EMAIL`
 
-The public Turnstile sitekey remains:
+## 6. Verification after deployment
 
-```text
-0x4AAAAAAD7v8d8LZ7ZBcYW2
-```
+1. Open `/product` and confirm the Year, Make, and Model lists load.
+2. Check a known vehicle such as `2017 Hyundai Tucson`.
+3. Open `/admin/`, edit a known vehicle battery, save it, and confirm the public
+   lookup changes.
+4. Add a temporary one-year test model, confirm it appears in the dropdown, then
+   delete it.
+5. Open `/api/status` and confirm the database reports `ok`.
+6. Open `/api/compatibility` and confirm the response contains `source: "d1"`.
 
-## 3. Commit and deploy
+## 7. Fresh database installs
 
-Commit the complete folder to the GitHub repository connected to Cloudflare Pages. Keep `functions/` at the repository root beside `index.html`.
-
-New routes include:
-
-- `GET /api/admin/audit-log`
-- `GET /api/admin/export/reviews`
-- `GET /api/admin/export/vehicle-requests`
-- `GET /api/admin/export/compatibility`
-- `GET /api/admin/export/cart-events`
-- `GET /api/admin/export/audit-log`
-
-All export and audit routes require the existing `ADMIN_API_KEY` bearer token.
-
-## 4. Admin identity and audit trail
-
-The admin login now asks for a name or email in addition to the API key. The browser sends it as `X-Admin-Actor` on authenticated admin requests.
-
-When Cloudflare Access is later enabled, the backend automatically prefers the verified `CF-Access-Authenticated-User-Email` header over the manually entered name.
-
-The audit trail records:
-
-- review approval
-- review approval as verified
-- review rejection
-- vehicle-request deletion
-- compatibility creation
-- compatibility update
-- compatibility deletion
-
-The audit log is append-only through the current admin interface.
-
-## 5. CSV exports
-
-The admin dashboard has buttons for reviews, vehicle requests, compatibility records, cart events, and the audit trail. Each export currently includes up to 10,000 newest records and opens as UTF-8 CSV with an Excel-compatible byte-order mark.
-
-## 6. Public launch pages
-
-The following pages are now linked from both storefront footers:
-
-- `contact.html`
-- `shipping.html`
-- `returns.html`
-- `warranty.html`
-- `privacy.html`
-- `terms.html`
-
-Before accepting paid orders:
-
-1. Configure and test the contact form email delivery described below.
-2. Confirm the policy choices currently drafted as a **30-day return window** and **12-month limited warranty**.
-3. Add the numbered corporation's legal name and seller address at checkout and on order confirmations.
-4. Have the privacy policy, terms, warranty, and returns policy reviewed for the final Canadian and U.S. sales structure.
-
-## 7. Search indexing
-
-The public `noindex` tags have been removed. `robots.txt` allows the public site while disallowing `/admin/` and `/api/admin/`, and `sitemap.xml` lists the public pages.
-
-The admin page remains `noindex`, and `_headers` still applies `X-Robots-Tag: noindex` to `/admin/*`.
-
-
-## SEO and AI search setup
-
-See `SEO-AI-LAUNCH-CHECKLIST.md` after deployment. The site includes canonical tags, social previews, JSON-LD, a sitemap, robots rules, and an optional `llms.txt`.
-
-
-## Contact form email delivery (v6)
-
-Run `MIGRATION-V4.sql` once in the existing D1 database. The contact endpoint saves every submission in `contact_messages` before attempting email delivery.
-
-The form sends mail through the Resend HTTPS API. Create a Resend account, verify a sending domain or subdomain, and add these values under **Workers & Pages → your Pages project → Settings → Variables and Secrets**:
-
-| Name | Type | Value |
-|---|---|---|
-| `RESEND_API_KEY` | Secret | Your Resend API key |
-| `CONTACT_FROM_EMAIL` | Plain text | Example: `Lo-Key Website <website@send.lokey.ca>` |
-| `CONTACT_TO_EMAIL` | Plain text | `neerajsbb@gmail.com` |
-
-The sender address does not need an inbox, but its domain must be verified with Resend. The visitor's address is assigned as the email `Reply-To`, so replying in Gmail responds directly to the customer.
-
-Redeploy the Pages project after adding the variables. Then test the form at `/contact.html` and confirm both the Gmail delivery and the new `contact_messages` row in D1.
-
-## Review deletion (v6)
-
-The admin review section now has Pending, Approved, Rejected, and All filters. **Delete permanently** removes the review from D1 and records `review.deleted` in the audit trail. Deletion cannot be undone, so use the Reviews CSV export before removing records that may be needed later.
-
-## AI and agent discovery update
-
-See `AGENT-READINESS-SETUP.md`. This version adds Link headers, an RFC 9727 API catalog, OpenAPI documentation, an agent compatibility endpoint, Agent Skills discovery, WebMCP read-only tools, and Content Signals. OAuth/OIDC metadata, DNS-AID records, and an MCP Server Card are intentionally not fabricated because the current site does not operate those services.
+`schema.sql` contains the current table structure, including `vehicles`. The full
+catalogue seed and legacy conversion are contained in `MIGRATION-V5.sql`, which is
+intended for the existing production database described above.

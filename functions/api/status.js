@@ -18,7 +18,7 @@ export async function onRequestGet(context) {
     {
       status: healthy ? "ok" : "degraded",
       service: "Lo-Key public API",
-      version: "1.0.0",
+      version: "1.1.0",
       database,
       time: new Date().toISOString()
     },

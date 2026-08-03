@@ -287,3 +287,43 @@ tbody tr:last-child td { border-bottom: 0; }
   .review-toolbar-controls select { width: 100%; }
   .review-actions .delete-review { margin-left: 0; }
 }
+
+/* D1-backed vehicle catalogue manager */
+.catalogue-manager-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+.catalogue-editor {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  background: #f9fbfc;
+}
+.catalogue-add-panel { background: #f5fbfb; }
+.catalogue-form-heading { margin-top: 0; }
+.catalogue-editor .compatibility-form {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.catalogue-editor .compatibility-form .battery-field,
+.catalogue-editor .compatibility-form .primary-action {
+  grid-column: 1 / -1;
+}
+.battery-text-label { margin-top: 12px; }
+.compatibility-form input:disabled,
+.compatibility-form select:disabled {
+  color: #81909b;
+  background: #edf2f5;
+}
+
+@media (max-width: 1050px) {
+  .catalogue-manager-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 650px) {
+  .catalogue-editor .compatibility-form { grid-template-columns: 1fr; }
+  .catalogue-editor .compatibility-form .battery-field,
+  .catalogue-editor .compatibility-form .primary-action { grid-column: auto; }
+}
