@@ -3250,8 +3250,7 @@ button { cursor: pointer; }
 .product-page #compatibility,
 .product-page #reviews,
 .product-page #specifications,
-.product-page #safety,
-.product-page #product-faq {
+.product-page #safety {
   scroll-margin-top: 154px;
 }
 
@@ -3274,8 +3273,7 @@ button { cursor: pointer; }
   .product-page #compatibility,
   .product-page #reviews,
   .product-page #specifications,
-  .product-page #safety,
-  .product-page #product-faq {
+  .product-page #safety {
     scroll-margin-top: 142px;
   }
 }

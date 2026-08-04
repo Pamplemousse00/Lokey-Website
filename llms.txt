@@ -22,7 +22,7 @@
 - Product details: https://lokey.ca/product
 - Compatibility checker: https://lokey.ca/product#compatibility
 - Safety and limitations: https://lokey.ca/product#safety
-- FAQ: https://lokey.ca/product#product-faq
+- FAQ: https://lokey.ca/#faq
 - Contact and support: https://lokey.ca/contact
 - Shipping: https://lokey.ca/shipping
 - Returns: https://lokey.ca/returns

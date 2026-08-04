@@ -10,3 +10,8 @@
 - Changed contact handling so a submission saved to D1 is acknowledged even if Resend delivery fails.
 - Added Contact messages to the admin CSV exports for recovery and delivery diagnostics.
 - Updated the contact API documentation with 201 and 202 outcomes.
+
+## V8.1 product FAQ cleanup
+
+- Removed the product-page FAQ content, product navigation links, and product FAQ structured data.
+- Kept the homepage FAQ and changed the published FAQ reference to `/#faq`.
