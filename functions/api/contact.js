@@ -97,12 +97,24 @@ export async function onRequestPost(context) {
   const to = String(context.env.CONTACT_TO_EMAIL || "neerajsbb@gmail.com").trim();
 
   if (!apiKey || !from || !to) {
+    const deliveryError = "Email delivery is not configured.";
     await context.env.DB.prepare(`
       UPDATE contact_messages
       SET delivery_status = 'configuration_error', delivery_error = ?
       WHERE id = ?
-    `).bind("Email delivery is not configured.", messageId).run().catch(() => {});
-    return json({ success: false, error: "Email delivery is not configured yet. Your message was saved." }, 503);
+    `).bind(deliveryError, messageId).run().catch(() => {});
+    console.error("Contact email configuration error:", {
+      hasApiKey: Boolean(apiKey),
+      hasFromAddress: Boolean(from),
+      hasToAddress: Boolean(to),
+      messageId,
+    });
+    return json({
+      success: true,
+      queued: true,
+      messageId,
+      message: "Thanks. Your message has been received. Email delivery is temporarily delayed, but your submission was saved.",
+    }, 202);
   }
 
   const subject = `[Lo-Key website] ${topic} — ${name}`;
@@ -150,9 +162,16 @@ export async function onRequestPost(context) {
       }),
     });
 
-    const result = await response.json().catch(() => ({}));
+    const responseBody = await response.text();
+    let result = {};
+    try {
+      result = responseBody ? JSON.parse(responseBody) : {};
+    } catch {
+      result = { message: responseBody };
+    }
     if (!response.ok) {
-      throw new Error(result?.message || result?.error || `Email provider returned ${response.status}.`);
+      const providerMessage = result?.message || result?.error || responseBody || `Email provider returned ${response.status}.`;
+      throw new Error(`Resend ${response.status}: ${providerMessage}`);
     }
 
     await context.env.DB.prepare(`
@@ -169,7 +188,12 @@ export async function onRequestPost(context) {
       SET delivery_status = 'failed', delivery_error = ?
       WHERE id = ?
     `).bind(String(error?.message || error).slice(0, 500), messageId).run().catch(() => {});
-    return json({ success: false, error: "Your message was saved, but the email could not be delivered. Please try again shortly." }, 502);
+    return json({
+      success: true,
+      queued: true,
+      messageId,
+      message: "Thanks. Your message has been received. Email delivery is temporarily delayed, but your submission was saved.",
+    }, 202);
   }
 }
 

@@ -1,6 +1,6 @@
-LO-KEY WEBSITE + CLOUDFLARE BACKEND V7
+LO-KEY WEBSITE + CLOUDFLARE BACKEND V8
 
-Public pages
+Public pages (kept at the project root for clean URLs)
 - index.html
 - product.html
 - contact.html
@@ -11,33 +11,39 @@ Public pages
 - terms.html
 - robots.txt
 - sitemap.xml
+- openapi.json
+- auth.md
+- llms.txt
+
+Runtime assets
+- assets/css/styles.css
+- assets/js/*.js
+- assets/* images and icons
 
 Backend and admin
-- D1-backed moderated reviews
-- D1-backed vehicle compatibility catalogue and dropdowns
-- admin editing of existing vehicle battery/status records
-- admin creation of completely new vehicles and model-year ranges
-- Turnstile-protected public forms
-- vehicle requests with battery-size analytics
-- add-to-cart event metrics
-- CSV exports for reviews, requests, vehicles, cart events, and audit logs
-- admin audit trail for approvals, rejections, deletions, and vehicle changes
+- functions/: Cloudflare Pages Functions
+- admin/: authenticated D1 administration dashboard
+- D1-backed vehicle catalogue, reviews, requests, contact messages, cart events, and audit log
+- Contact submissions are saved to D1 before email delivery is attempted
+- Contact-message CSV export is available from /admin/
 
-Database
-- schema.sql: complete current table structure
-- MIGRATION-V2.sql through MIGRATION-V4.sql: older incremental migrations
-- MIGRATION-V5.sql: imports the full compatibility catalogue into D1, preserves
-  legacy compatibility_records, and drops compatibility_records
+Project documentation and database history
+- docs/internal/: deployment, SEO, agent-readiness, and change notes
+- database/schema.sql: complete current table structure
+- database/migrations/: historical migration scripts
+- database/verification/: database verification queries
+- scripts/: local verification utilities
 
 Deployment
-1. Back up the Compatibility, Vehicle requests, and Audit trail CSVs in /admin/.
-2. Run the complete MIGRATION-V5.sql once in the production D1 console.
-3. Deploy this complete folder through the GitHub repository connected to
-   Cloudflare Pages.
-4. Follow CLOUDFLARE-BACKEND-SETUP.md for verification.
+1. Push this complete folder to the GitHub repository connected to Cloudflare Pages.
+2. Confirm the production D1 binding is named DB.
+3. Confirm TURNSTILE_SECRET_KEY, ADMIN_API_KEY, RATE_LIMIT_SALT, RESEND_API_KEY,
+   CONTACT_FROM_EMAIL, CONTACT_TO_EMAIL, and TURNSTILE_ALLOWED_HOSTNAMES are set.
+4. Redeploy after changing Cloudflare variables or secrets.
 
-Important launch checks
-- Configure the contact form email delivery described in CLOUDFLARE-BACKEND-SETUP.md.
-- Confirm the drafted 30-day returns and 12-month warranty terms.
-- Insert the numbered corporation's legal seller identity at checkout/order confirmation.
-- Obtain legal review before accepting paid orders in Canada or the United States.
+Contact delivery
+- A valid form submission is first stored in contact_messages.
+- If Resend accepts the email, delivery_status becomes sent.
+- If Resend rejects it or is not configured, the visitor still receives a successful
+  acknowledgement and the delivery problem is recorded in delivery_status/delivery_error.
+- Export Contact messages in /admin/ to review stored submissions and provider errors.

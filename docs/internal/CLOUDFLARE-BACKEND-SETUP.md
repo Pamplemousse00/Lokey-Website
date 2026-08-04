@@ -21,7 +21,7 @@ Open:
 
 **Cloudflare > Storage & databases > D1 > lokey-production > Console**
 
-Open `MIGRATION-V5.sql` from this package, copy the complete file, paste it into
+Open `database/migrations/MIGRATION-V5.sql` from this package, copy the complete file, paste it into
 the D1 console, and press **Execute** once.
 
 The migration:
@@ -37,7 +37,7 @@ The first result should show approximately **7,581 vehicle-year rows**, plus any
 legacy-only vehicles you previously added. The second result should be empty,
 confirming that `compatibility_records` no longer exists.
 
-Do not run `MIGRATION-V5.sql` a second time after it succeeds.
+Do not run `database/migrations/MIGRATION-V5.sql` a second time after it succeeds.
 
 ## 3. Deploy the complete website folder
 
@@ -108,6 +108,6 @@ The project still requires:
 
 ## 7. Fresh database installs
 
-`schema.sql` contains the current table structure, including `vehicles`. The full
-catalogue seed and legacy conversion are contained in `MIGRATION-V5.sql`, which is
+`database/schema.sql` contains the current table structure, including `vehicles`. The full
+catalogue seed and legacy conversion are contained in `database/migrations/MIGRATION-V5.sql`, which is
 intended for the existing production database described above.

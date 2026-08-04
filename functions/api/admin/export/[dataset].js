@@ -43,6 +43,22 @@ const exportDefinitions = {
       LIMIT 10000
     `,
   },
+  "contact-messages": {
+    filename: "lokey-contact-messages.csv",
+    headers: [
+      "id", "name", "email", "topic", "order_number", "vehicle", "message",
+      "delivery_status", "email_provider_id", "delivery_error", "submitted_at",
+      "delivered_at", "page_url", "user_agent",
+    ],
+    sql: `
+      SELECT id, name, email, topic, order_number, vehicle, message,
+             delivery_status, email_provider_id, delivery_error, submitted_at,
+             delivered_at, page_url, user_agent
+      FROM contact_messages
+      ORDER BY submitted_at DESC, id DESC
+      LIMIT 10000
+    `,
+  },
   compatibility: {
     filename: "lokey-vehicles.csv",
     headers: ["id", "year", "make", "model", "status", "battery_sizes", "confidence", "source", "created_at", "updated_at"],

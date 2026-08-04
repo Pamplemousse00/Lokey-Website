@@ -1,7 +1,7 @@
 # Lo-Key website v7 changes
 
 - Replaced the JSON-driven production vehicle catalogue with a D1 `vehicles` table.
-- Added `MIGRATION-V5.sql` to import 7,581 exact vehicle-year rows, preserve old
+- Added `database/migrations/MIGRATION-V5.sql` to import 7,581 exact vehicle-year rows, preserve old
   `compatibility_records` edits, and drop `compatibility_records`.
 - Added the missing 2016 Kia Soul EV as CR2032 / compatible (not physically verified).
 - Changed `GET /api/compatibility` so it provides both the dropdown catalogue and

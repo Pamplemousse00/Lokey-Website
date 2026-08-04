@@ -183,13 +183,19 @@
         "description": "Requires a valid Cloudflare Turnstile token issued by the public contact form. Not intended for autonomous agents.",
         "responses": {
           "201": {
-            "description": "Message saved and sent."
+            "description": "Message saved and email sent."
           },
           "400": {
             "description": "Validation or Turnstile failure."
           },
           "429": {
             "description": "Rate limit exceeded."
+          },
+          "202": {
+            "description": "Message saved; email delivery is delayed or not configured."
+          },
+          "500": {
+            "description": "Message could not be saved to D1."
           }
         }
       }
