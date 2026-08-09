@@ -308,8 +308,15 @@ tbody tr:last-child td { border-bottom: 0; }
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .catalogue-editor .compatibility-form .battery-field,
-.catalogue-editor .compatibility-form .primary-action {
+.catalogue-editor .compatibility-form .primary-action,
+.catalogue-editor .compatibility-form .edit-range-help {
   grid-column: 1 / -1;
+}
+.edit-range-help {
+  margin: -2px 0 2px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #eef6f8;
 }
 .battery-text-label { margin-top: 12px; }
 .compatibility-form input:disabled,
@@ -325,5 +332,6 @@ tbody tr:last-child td { border-bottom: 0; }
 @media (max-width: 650px) {
   .catalogue-editor .compatibility-form { grid-template-columns: 1fr; }
   .catalogue-editor .compatibility-form .battery-field,
-  .catalogue-editor .compatibility-form .primary-action { grid-column: auto; }
+  .catalogue-editor .compatibility-form .primary-action,
+  .catalogue-editor .compatibility-form .edit-range-help { grid-column: auto; }
 }

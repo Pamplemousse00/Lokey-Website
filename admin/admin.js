@@ -18,6 +18,8 @@
   const compatibilityYear = document.getElementById("compatibilityYear");
   const compatibilityMake = document.getElementById("compatibilityMake");
   const compatibilityModel = document.getElementById("compatibilityModel");
+  const compatibilityFromYear = document.getElementById("compatibilityFromYear");
+  const compatibilityToYear = document.getElementById("compatibilityToYear");
   const compatibilityStatus = document.getElementById("compatibilityStatus");
   const compatibilityBattery = document.getElementById("compatibilityBattery");
   const compatibilityBatteryChoices = document.getElementById("compatibilityBatteryChoices");
@@ -370,6 +372,10 @@
 
   function clearExistingVehicleEditor(message = "Select a vehicle") {
     compatibilityVehicleId.value = "";
+    compatibilityFromYear.value = "";
+    compatibilityToYear.value = "";
+    compatibilityFromYear.disabled = true;
+    compatibilityToYear.disabled = true;
     compatibilityStatus.value = "";
     compatibilityStatus.disabled = true;
     compatibilityBattery.value = "";
@@ -419,6 +425,10 @@
 
       const record = result.result;
       compatibilityVehicleId.value = String(record.id);
+      compatibilityFromYear.value = String(record.year);
+      compatibilityToYear.value = String(record.year);
+      compatibilityFromYear.disabled = false;
+      compatibilityToYear.disabled = false;
       compatibilityStatus.value = adminStatusValue(record.status);
       compatibilityStatus.disabled = false;
       compatibilityBattery.disabled = false;
@@ -529,9 +539,20 @@
     event.preventDefault();
     if (!compatibilityForm.reportValidity()) return;
     const id = Number(compatibilityVehicleId.value);
+    const selectedYear = Number(compatibilityYear.value);
+    const yearFrom = Number(compatibilityFromYear.value);
+    const yearTo = Number(compatibilityToYear.value);
     const batterySizes = compatibilityBattery.value.trim();
     if (!id) {
       compatibilityStatusMessage.textContent = "Select an existing vehicle first.";
+      return;
+    }
+    if (!Number.isInteger(yearFrom) || !Number.isInteger(yearTo) || yearTo < yearFrom) {
+      compatibilityStatusMessage.textContent = "Enter a valid from/to year range.";
+      return;
+    }
+    if (selectedYear < yearFrom || selectedYear > yearTo) {
+      compatibilityStatusMessage.textContent = `The selected anchor year (${selectedYear}) must be inside the range.`;
       return;
     }
     if (!batterySizes) {
@@ -540,20 +561,34 @@
       return;
     }
 
+    const make = compatibilityMake.value;
+    const model = compatibilityModel.value;
+    const rangeText = yearFrom === yearTo ? String(yearFrom) : `${yearFrom}-${yearTo}`;
+    const yearCount = yearTo - yearFrom + 1;
+    if (yearCount > 1 && !window.confirm(`Apply these changes to ${rangeText} ${make} ${model} (${yearCount} model years)? Missing years in this range will be added.`)) return;
+
     compatibilitySaveButton.disabled = true;
-    compatibilityStatusMessage.textContent = "Saving...";
+    compatibilityStatusMessage.textContent = yearCount > 1 ? `Updating ${yearCount} model years...` : "Saving...";
     compatibilityStatusMessage.classList.remove("success");
     try {
       const result = await api(`/api/admin/vehicles/${id}`, {
         method: "PUT",
         body: JSON.stringify({
+          yearFrom,
+          yearTo,
           status: compatibilityStatus.value,
           batterySizes,
         }),
       });
-      compatibilityStatusMessage.textContent = result.message || "Vehicle updated.";
+      const successMessage = result.message || "Vehicle updated.";
+      compatibilityCatalogue = null;
+      await loadCompatibilityCatalogue(true);
+      await selectExistingVehicle({ year: selectedYear, make, model });
+      compatibilityStatusMessage.textContent = successMessage;
       compatibilityStatusMessage.classList.add("success");
-      compatibilitySelectedRecord.textContent = `Database row #${result.record.id}`;
+      compatibilityFromYear.value = String(yearFrom);
+      compatibilityToYear.value = String(yearTo);
+      compatibilitySelectedRecord.textContent = `${rangeText} ${make} ${model}`;
       await Promise.all([refreshManagedVehicles(), refreshAuditLog()]);
     } catch (error) {
       compatibilityStatusMessage.textContent = error.message;

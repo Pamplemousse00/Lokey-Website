@@ -6,8 +6,8 @@
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="theme-color" content="#071b2b">
   <title>Lo-Key Admin</title>
-  <link rel="stylesheet" href="admin.css?v=8">
-  <script defer src="admin.js?v=8"></script>
+  <link rel="stylesheet" href="admin.css?v=10">
+  <script defer src="admin.js?v=10"></script>
 </head>
 <body>
   <header class="admin-header">
@@ -102,7 +102,7 @@
         <div class="panel-heading">
           <div>
             <h2>Vehicle catalogue</h2>
-            <p>The production dropdowns now come from D1. Edit an existing model year or add a completely new vehicle here.</p>
+            <p>The production dropdowns now come from D1. Edit one model year or apply the same battery and compatibility result across a year range.</p>
           </div>
         </div>
 
@@ -129,6 +129,13 @@
                   <option value="">Select model</option>
                 </select>
               </label>
+              <label>Apply from year
+                <input id="compatibilityFromYear" type="number" min="1980" max="2028" required disabled>
+              </label>
+              <label>Apply to year
+                <input id="compatibilityToYear" type="number" min="1980" max="2028" required disabled>
+              </label>
+              <p class="field-help edit-range-help">Select any existing year as the anchor. Existing rows in this range are updated, and missing years for the same make/model are created automatically.</p>
               <label>Result
                 <select id="compatibilityStatus" required disabled>
                   <option value="">Select result</option>
