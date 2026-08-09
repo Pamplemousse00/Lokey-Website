@@ -1,0 +1,16 @@
+# Canonical public URLs. Keep legacy .html and trailing-slash variants to one 301 hop.
+/index.html / 301
+/product.html /product 301
+/product/ /product 301
+/contact.html /contact 301
+/contact/ /contact 301
+/shipping.html /shipping 301
+/shipping/ /shipping 301
+/returns.html /returns 301
+/returns/ /returns 301
+/warranty.html /warranty 301
+/warranty/ /warranty 301
+/privacy.html /privacy 301
+/privacy/ /privacy 301
+/terms.html /terms 301
+/terms/ /terms 301

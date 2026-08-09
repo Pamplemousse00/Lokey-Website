@@ -1314,7 +1314,8 @@
     const yearSelect = checker.querySelector('[data-vehicle-year]');
     const makeSelect = checker.querySelector('[data-vehicle-make]');
     const modelSelect = checker.querySelector('[data-vehicle-model]');
-    if (!form || !result || !yearSelect || !makeSelect || !modelSelect) return;
+    const checkButton = form?.querySelector('.vehicle-check-button');
+    if (!form || !result || !yearSelect || !makeSelect || !modelSelect || !checkButton) return;
 
     let data = await requestCompatibilityData();
     if (!Array.isArray(data.makes)) data = compatibilityFallback();
@@ -1364,6 +1365,7 @@
     });
 
     const showResult = (status, lead, message, detail = '', requestBattery = '') => {
+      result.removeAttribute('aria-busy');
       result.className = `vehicle-result vehicle-result-${status}`;
       result.hidden = false;
       const requestButton = status === 'incompatible'
@@ -1384,9 +1386,23 @@
 
       result.className = 'vehicle-result vehicle-result-loading';
       result.hidden = false;
-      result.textContent = 'Checking compatibility…';
+      result.setAttribute('aria-busy', 'true');
+      result.innerHTML = `
+        <div class="vehicle-loading-inner">
+          <span class="vehicle-loading-spinner" aria-hidden="true"></span>
+          <span>Checking compatibility…</span>
+        </div>`;
+      checkButton.disabled = true;
 
-      const response = await requestCompatibilityData({ year, make, model });
+      // Keep the neutral loader visible long enough to feel intentional instead of
+      // briefly flashing a result colour while the API response is resolved.
+      const minimumLoaderTime = new Promise((resolve) => window.setTimeout(resolve, 420));
+      const [response] = await Promise.all([
+        requestCompatibilityData({ year, make, model }),
+        minimumLoaderTime
+      ]);
+
+      checkButton.disabled = false;
       if (response?.result) {
         const item = response.result;
         const battery = item.keyFobBattery || item.battery || '';
