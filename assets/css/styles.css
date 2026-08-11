@@ -966,7 +966,7 @@ button { cursor: pointer; }
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity 600ms ease, transform 600ms ease; }
 .reveal.visible { opacity: 1; transform: none; }
 
-@media (max-width: 1020px) {
+@media (max-width: 900px) {
   .nav-links { gap: 17px; }
   .problem-grid, .product-showcase, .product-grid, .detail-two-col { grid-template-columns: 1fr; }
   .product-gallery { position: static; }
@@ -2120,7 +2120,7 @@ button { cursor: pointer; }
   background: var(--aqua);
 }
 
-@media (max-width: 1020px) {
+@media (max-width: 900px) {
   .product-gallery-layout {
     grid-template-columns: 68px minmax(0, 1fr);
   }
@@ -2454,7 +2454,7 @@ button { cursor: pointer; }
   .product-image-card { cursor: default; }
 }
 
-@media (max-width: 1020px) {
+@media (max-width: 900px) {
   .compatibility-layout { grid-template-columns: 1fr; gap: 34px; }
 }
 
@@ -3103,7 +3103,7 @@ button { cursor: pointer; }
 }
 
 /* Vertically centre the vehicle checker beside its explanatory copy on desktop. */
-@media (min-width: 1021px) {
+@media (min-width: 901px) {
   .compatibility-layout {
     align-items: center;
   }
@@ -3373,7 +3373,7 @@ button { cursor: pointer; }
 }
 
 /* Customer policy and support pages */
-@media (min-width: 1021px) {
+@media (min-width: 901px) {
   .footer-grid {
     grid-template-columns: minmax(250px, 1.35fr) repeat(5, minmax(105px, .72fr));
     gap: 28px;
@@ -3643,3 +3643,119 @@ button { cursor: pointer; }
   .reviews-section .review-stars-large,
   .all-reviews-modal .review-stars-large { font-size: 1.38rem; }
 }
+
+/* --------------------------------------------------------------------------
+   V12: Fold / desktop-request responsive layout
+   --------------------------------------------------------------------------
+   The homepage has one more desktop navigation item (FAQ) than the product
+   page. On narrow desktop/tablet viewports that extra item could force labels
+   and the purchase button onto two lines before the mobile breakpoint kicked
+   in. Keep the full desktop header on roomy screens, progressively compact it,
+   then switch only the homepage to the existing mobile navigation pattern a
+   little earlier. */
+
+.nav-links > a,
+.nav-links .cart-link {
+  white-space: nowrap;
+}
+
+@media (min-width: 821px) and (max-width: 1100px) {
+  .has-announcement .nav-links {
+    gap: 13px;
+    font-size: .88rem;
+  }
+  .has-announcement .nav-links > a[href="#faq"] {
+    display: none;
+  }
+  .has-announcement .nav-socials {
+    gap: 5px;
+    margin-inline: -2px 0;
+  }
+  .has-announcement .nav-links .btn-primary {
+    min-height: 52px;
+    padding-inline: 21px;
+    font-size: .9rem;
+  }
+}
+
+@media (min-width: 821px) and (max-width: 930px) {
+  .has-announcement .site-header .nav {
+    gap: 10px;
+  }
+  .has-announcement .menu-toggle {
+    display: block;
+    margin-left: 0;
+  }
+  .has-announcement .mobile-buy-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    min-height: 42px;
+    margin-left: auto;
+    padding: 0 15px;
+    border-radius: 999px;
+    color: var(--ink);
+    background: var(--aqua);
+    box-shadow: 0 8px 22px rgba(19,212,220,.19);
+    font-size: .78rem;
+    font-weight: 850;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .has-announcement .mobile-buy-link:hover,
+  .has-announcement .mobile-buy-link:focus-visible {
+    background: #38e5ea;
+  }
+  .has-announcement .nav-links {
+    position: fixed;
+    left: 20px;
+    right: 20px;
+    top: calc(var(--header-top, 0px) + 86px);
+    display: grid;
+    gap: 4px;
+    padding: 18px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 22px;
+    background: rgba(8,19,33,.98);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+  .has-announcement .nav-links.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+  .has-announcement .nav-links > a[href="#faq"] {
+    display: block;
+  }
+  .has-announcement .nav-links a {
+    padding: 12px 10px;
+  }
+  .has-announcement .nav-links .btn {
+    margin-top: 6px;
+  }
+  .has-announcement .nav-socials {
+    margin: 7px 0 5px;
+    padding: 7px 8px;
+    border-top: 1px solid rgba(255,255,255,.1);
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .has-announcement .nav-socials .social-link {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   V12: Android "Desktop site" compatibility
+   --------------------------------------------------------------------------
+   Chrome on Android commonly uses a ~980 CSS-pixel layout viewport when the
+   user explicitly requests the desktop site. Keep the site's primary
+   desktop layouts active above 900px so that 980px desktop mode is not
+   mistaken for the old tablet layout. Normal phone/Fold mobile viewports
+   remain covered by the 820px and 620px responsive breakpoints. */
