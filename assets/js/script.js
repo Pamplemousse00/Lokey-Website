@@ -49,16 +49,7 @@
     }
   };
 
-  const money = new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' });
   const CART_KEY = 'lokey-cart-v1';
-  const SHOPIFY_VARIANT_ID = '54038879011180';
-  const product = {
-    id: 'lokey-cr2032',
-    name: 'Lo-Key Anti-Theft CR2032 Battery',
-    price: 29.99,
-    image: 'assets/exploded-lokey.webp',
-    subtitle: 'CR2032-compatible motion-sleep battery'
-  };
 
   const getCart = () => {
     try {
@@ -168,7 +159,8 @@
     document.querySelector('.cart-close').addEventListener('click', closeCart);
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
-        if (document.querySelector('.vehicle-request-modal-backdrop.open')) closeVehicleRequestModal();
+        if (document.querySelector('.notify-modal-backdrop.open')) closeNotifyModal();
+        else if (document.querySelector('.vehicle-request-modal-backdrop.open')) closeVehicleRequestModal();
         else if (document.querySelector('.review-modal-backdrop.open')) closeReviewModal();
         else if (document.querySelector('.all-reviews-modal-backdrop.open')) closeAllReviewsModal();
         else if (document.querySelector('.confirm-backdrop.open')) closeConfirm(false);
@@ -198,98 +190,28 @@
 
   const renderCart = () => {
     ensureCartUI();
-    const cart = getCart();
     document.querySelectorAll('.cart-count').forEach((el) => {
-      el.textContent = String(cart.qty);
-      el.hidden = cart.qty === 0;
+      el.textContent = '0';
+      el.hidden = true;
     });
 
     const body = document.querySelector('.cart-body');
     const foot = document.querySelector('.cart-foot');
     if (!body || !foot) return;
 
-    if (cart.qty <= 0) {
-      body.innerHTML = `
-        <div class="cart-empty">
-          <div>
-            <div style="font-size:2.6rem;margin-bottom:12px">◯</div>
-            <strong style="display:block;color:#081321;margin-bottom:6px">Your cart is empty</strong>
-            <span>Add Lo-Key to keep it here while you browse.</span>
-          </div>
-        </div>`;
-      foot.innerHTML = `<a class="btn btn-dark btn-block" href="/product">View Lo-Key</a>`;
-      return;
-    }
-
     body.innerHTML = `
-      <article class="cart-item">
-        <div class="cart-item-image"><img src="${product.image}" alt="Lo-Key smart battery concept rendering"></div>
+      <div class="cart-empty">
         <div>
-          <h3>${product.name}</h3>
-          <div class="cart-item-meta">${product.subtitle}</div>
-          <div class="cart-item-actions">
-            <div class="cart-mini-qty" aria-label="Quantity controls">
-              <button type="button" data-cart-action="decrease" aria-label="Decrease quantity">−</button>
-              <span>${cart.qty}</span>
-              <button type="button" data-cart-action="increase" aria-label="Increase quantity">+</button>
-            </div>
-            <strong>${money.format(product.price * cart.qty)}</strong>
-          </div>
-          <button class="remove-item" type="button" data-cart-action="remove">Remove</button>
+          <div style="font-size:2.6rem;margin-bottom:12px">◯</div>
+          <strong style="display:block;color:#081321;margin-bottom:6px">Lo-Key is coming soon</strong>
+          <span>Join the notification list and we’ll email you when it becomes available.</span>
         </div>
-      </article>`;
-
-    foot.innerHTML = `
-      <div class="cart-total"><span>Subtotal</span><span>${money.format(product.price * cart.qty)}</span></div>
-      <button class="btn btn-primary btn-block" type="button" data-checkout>Proceed to checkout</button>
-      <p class="cart-note">Taxes and shipping are calculated at checkout. Pre-order timing will be shown before payment.</p>`;
-
-    body.querySelectorAll('[data-cart-action]').forEach((button) => {
-      button.addEventListener('click', async () => {
-        const action = button.dataset.cartAction;
-        const current = getCart();
-
-        if (action === 'increase') {
-          current.qty += 1;
-          trackCartAdd(1, 'cart-drawer-increase');
-        }
-
-        if (action === 'decrease') {
-          if (current.qty === 1) {
-            const remove = await confirmRemoval();
-            if (!remove) return;
-            current.qty = 0;
-          } else {
-            current.qty = Math.max(0, current.qty - 1);
-          }
-        }
-
-        if (action === 'remove') {
-          const remove = await confirmRemoval();
-          if (!remove) return;
-          current.qty = 0;
-        }
-
-        saveCart(current);
-      });
+      </div>`;
+    foot.innerHTML = `<button class="btn btn-dark btn-block" type="button" data-notify-from-cart>Notify Me</button>`;
+    foot.querySelector('[data-notify-from-cart]')?.addEventListener('click', () => {
+      closeCart();
+      openNotifyModal();
     });
-
-    foot.querySelector('[data-checkout]')?.addEventListener(
-      'click',
-      () => {
-        const cart = getCart();
-
-        if (cart.qty < 1) {
-          return;
-        }
-
-        const checkoutUrl =
-          `https://phit9f-0y.myshopify.com/cart/` +
-          `${SHOPIFY_VARIANT_ID}:${cart.qty}`;
-
-        window.location.assign(checkoutUrl);
-      }
-    );
   };
 
   const REVIEW_INITIAL_PAGE_SIZE = 3;
@@ -356,6 +278,116 @@
       window.turnstile.reset(container.dataset.widgetId);
     }
   };
+
+  let notifyModalLastFocus = null;
+
+  const ensureNotifyModal = () => {
+    if (document.querySelector('.notify-modal-backdrop')) return;
+
+    document.body.insertAdjacentHTML('beforeend', `
+      <div class="notify-modal-backdrop" aria-hidden="true">
+        <section class="notify-modal" role="dialog" aria-modal="true" aria-labelledby="notify-modal-title">
+          <div class="notify-modal-header">
+            <div>
+              <p class="eyebrow">Coming soon</p>
+              <h2 id="notify-modal-title">Notify me when Lo-Key is available</h2>
+            </div>
+            <button class="notify-modal-close" type="button" aria-label="Close notification form">×</button>
+          </div>
+          <p class="notify-modal-intro">Enter your email and we’ll send you one availability notification when Lo-Key is ready to order.</p>
+          <form class="notify-form" data-notify-form>
+            <label>Email address
+              <input name="email" type="email" autocomplete="email" maxlength="160" placeholder="you@example.com" required>
+            </label>
+            <p class="notify-form-note">We’ll use this address for the Lo-Key availability notification. You can ask us to remove it at any time.</p>
+            <div class="turnstile-field" data-turnstile data-turnstile-action="launch_notify"></div>
+            <p class="notify-form-status" data-notify-status aria-live="polite"></p>
+            <div class="notify-form-actions">
+              <button class="notify-form-cancel" type="button">Cancel</button>
+              <button class="btn btn-primary" type="submit">Notify Me</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    `);
+
+    const backdrop = document.querySelector('.notify-modal-backdrop');
+    const form = backdrop?.querySelector('[data-notify-form]');
+    backdrop?.addEventListener('click', (event) => {
+      if (event.target === backdrop) closeNotifyModal();
+    });
+    backdrop?.querySelector('.notify-modal-close')?.addEventListener('click', closeNotifyModal);
+    backdrop?.querySelector('.notify-form-cancel')?.addEventListener('click', closeNotifyModal);
+    form?.addEventListener('submit', submitNotifyForm);
+  };
+
+  function openNotifyModal() {
+    ensureNotifyModal();
+    const backdrop = document.querySelector('.notify-modal-backdrop');
+    const form = backdrop?.querySelector('[data-notify-form]');
+    if (!backdrop || !form) return;
+
+    notifyModalLastFocus = document.activeElement;
+    const status = form.querySelector('[data-notify-status]');
+    if (status) status.textContent = '';
+    backdrop.classList.add('open');
+    backdrop.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('no-scroll');
+    window.requestAnimationFrame(() => renderTurnstileForForm(form));
+    setTimeout(() => form.elements.email?.focus(), 60);
+  }
+
+  function closeNotifyModal() {
+    const backdrop = document.querySelector('.notify-modal-backdrop');
+    if (!backdrop) return;
+    backdrop.classList.remove('open');
+    backdrop.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('no-scroll');
+    notifyModalLastFocus?.focus?.();
+  }
+
+  async function submitNotifyForm(event) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const status = form.querySelector('[data-notify-status]');
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (!form.reportValidity()) return;
+
+    const turnstileToken = turnstileTokenFor(form);
+    if (!turnstileToken) {
+      if (status) status.textContent = 'Please complete the security check.';
+      renderTurnstileForForm(form);
+      return;
+    }
+
+    const email = String(new FormData(form).get('email') || '').trim();
+    submitButton.disabled = true;
+    if (status) status.textContent = 'Saving…';
+
+    try {
+      const response = await fetch('/api/launch-notifications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          email,
+          pageUrl: window.location.href,
+          turnstileToken
+        })
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || 'Your email could not be saved. Please try again.');
+
+      form.reset();
+      resetTurnstileFor(form);
+      closeNotifyModal();
+      showToast(result.message || 'You’re on the list. We’ll let you know when Lo-Key is available.');
+    } catch (error) {
+      if (status) status.textContent = error.message || 'Your email could not be saved. Please try again.';
+      resetTurnstileFor(form);
+    } finally {
+      submitButton.disabled = false;
+    }
+  }
 
   const getReviews = () => {
     const reviews = Array.isArray(window.LO_KEY_REVIEWS) ? window.LO_KEY_REVIEWS : [];
@@ -1553,25 +1585,8 @@
       });
     });
 
-    document.querySelectorAll('.purchase-box').forEach((box) => {
-      const qtyInput = box.querySelector('[data-quantity-input]');
-      box.querySelectorAll('[data-qty]').forEach((button) => {
-        button.addEventListener('click', () => {
-          if (!qtyInput) return;
-          const next = Math.max(1, Math.min(20, Number(qtyInput.value || 1) + Number(button.dataset.qty)));
-          qtyInput.value = String(next);
-        });
-      });
-
-      box.querySelector('[data-add-to-cart]')?.addEventListener('click', () => {
-        const amount = Math.max(1, Math.min(20, Number(qtyInput?.value || 1)));
-        const cart = getCart();
-        cart.qty += amount;
-        saveCart(cart);
-        trackCartAdd(amount, 'product-add-button');
-        showToast(`${amount} ${amount === 1 ? 'Lo-Key' : 'Lo-Keys'} added to cart.`);
-        openCart();
-      });
+    document.querySelectorAll('[data-notify-launch]').forEach((button) => {
+      button.addEventListener('click', openNotifyModal);
     });
 
     document.querySelectorAll('[data-open-cart]').forEach((button) => {

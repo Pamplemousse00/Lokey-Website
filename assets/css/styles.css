@@ -3759,3 +3759,104 @@ button { cursor: pointer; }
    desktop layouts active above 900px so that 980px desktop mode is not
    mistaken for the old tablet layout. Normal phone/Fold mobile viewports
    remain covered by the 820px and 620px responsive breakpoints. */
+
+/* Pre-launch notification signup ---------------------------------------- */
+.purchase-controls.notify-only { grid-template-columns: 1fr; }
+.footer-coming-soon { margin: 9px 0; color: #aab7c7; font-size: .9rem; }
+
+.notify-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 170;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(3,8,14,.72);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+.notify-modal-backdrop.open { opacity: 1; pointer-events: auto; }
+.notify-modal {
+  width: min(520px, 100%);
+  padding: 30px;
+  border-radius: 20px;
+  color: var(--ink);
+  background: var(--white);
+  box-shadow: 0 34px 100px rgba(0,0,0,.36);
+  transform: translateY(16px) scale(.985);
+  transition: transform 180ms ease;
+}
+.notify-modal-backdrop.open .notify-modal { transform: none; }
+.notify-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 22px;
+  margin-bottom: 14px;
+}
+.notify-modal-header .eyebrow { margin-bottom: 8px; }
+.notify-modal-header h2 {
+  margin: 0;
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
+  line-height: 1.02;
+  letter-spacing: -.04em;
+}
+.notify-modal-close {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line-dark);
+  border-radius: 10px;
+  color: var(--ink);
+  background: var(--white);
+  font-size: 1.65rem;
+  line-height: 1;
+}
+.notify-modal-intro { margin: 0 0 22px; color: var(--muted-dark); }
+.notify-form { display: grid; gap: 18px; }
+.notify-form label { color: var(--ink); font-size: .86rem; font-weight: 790; }
+.notify-form input {
+  width: 100%;
+  margin-top: 7px;
+  padding: 14px;
+  border: 1px solid var(--line-dark);
+  border-radius: 10px;
+  outline: none;
+  color: var(--ink);
+  background: #fbfcfd;
+}
+.notify-form input:focus {
+  border-color: var(--aqua-deep);
+  box-shadow: 0 0 0 3px rgba(19,212,220,.14);
+}
+.notify-form-note {
+  margin: -2px 0 0;
+  color: var(--muted-dark);
+  font-size: .78rem;
+  line-height: 1.55;
+}
+.notify-form-status {
+  min-height: 1.2em;
+  margin: -7px 0 0;
+  color: #9d2c2c;
+  font-size: .82rem;
+  font-weight: 700;
+}
+.notify-form-actions { display: flex; justify-content: flex-end; gap: 10px; }
+.notify-form-cancel {
+  min-height: 52px;
+  padding: 0 20px;
+  border: 1px solid var(--line-dark);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--white);
+  font-weight: 800;
+}
+@media (max-width: 620px) {
+  .notify-modal { padding: 23px 19px; border-radius: 15px; }
+  .notify-form-actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .notify-form-actions .btn,
+  .notify-form-cancel { width: 100%; }
+}

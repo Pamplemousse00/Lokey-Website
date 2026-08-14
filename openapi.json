@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Lo-Key Public API",
-    "version": "1.1.0",
-    "summary": "Public product, compatibility, review, and support endpoints for lokey.ca.",
+    "version": "1.2.0",
+    "summary": "Public product, compatibility, review, support, and launch-notification endpoints for lokey.ca.",
     "description": "Read endpoints are suitable for automated clients. Submission endpoints require Cloudflare Turnstile tokens created through the public website and are not intended for unattended automation.",
     "contact": {
       "url": "https://lokey.ca/contact"
@@ -247,6 +247,33 @@
           },
           "500": {
             "description": "The D1 compatibility catalogue is unavailable."
+          }
+        }
+      }
+    },
+    "/api/launch-notifications": {
+      "post": {
+        "tags": [
+          "Browser submissions"
+        ],
+        "operationId": "requestLaunchNotification",
+        "summary": "Join the Lo-Key launch notification list",
+        "description": "Stores an email address for the requested Lo-Key availability notification. Requires a valid Cloudflare Turnstile token issued by the product page.",
+        "responses": {
+          "200": {
+            "description": "Email was already subscribed and remains subscribed."
+          },
+          "201": {
+            "description": "Email saved for launch notification."
+          },
+          "400": {
+            "description": "Validation or Turnstile failure."
+          },
+          "429": {
+            "description": "Rate limit exceeded."
+          },
+          "500": {
+            "description": "Email could not be saved to D1."
           }
         }
       }

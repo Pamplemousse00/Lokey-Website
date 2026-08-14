@@ -43,6 +43,16 @@ const exportDefinitions = {
       LIMIT 10000
     `,
   },
+  "launch-notifications": {
+    filename: "lokey-launch-notifications.csv",
+    headers: ["id", "email", "status", "subscribed_at", "updated_at", "unsubscribed_at", "page_url", "user_agent"],
+    sql: `
+      SELECT id, email, status, subscribed_at, updated_at, unsubscribed_at, page_url, user_agent
+      FROM launch_notifications
+      ORDER BY subscribed_at DESC, id DESC
+      LIMIT 10000
+    `,
+  },
   "contact-messages": {
     filename: "lokey-contact-messages.csv",
     headers: [

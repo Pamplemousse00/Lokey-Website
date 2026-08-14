@@ -1,6 +1,6 @@
 -- Fresh-install schema for the Lo-Key Cloudflare Pages backend.
 -- Run this in Cloudflare: Storage & databases > D1 > lokey-production > Console.
--- Existing databases should run the migrations in order through MIGRATION-V5.sql.
+-- Existing databases should run the migrations in order through MIGRATION-V6.sql.
 
 CREATE TABLE IF NOT EXISTS vehicle_requests (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -130,3 +130,18 @@ ON contact_messages(submitted_at);
 
 CREATE INDEX IF NOT EXISTS idx_contact_messages_delivery
 ON contact_messages(delivery_status, submitted_at);
+
+
+CREATE TABLE IF NOT EXISTS launch_notifications (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT NOT NULL COLLATE NOCASE UNIQUE,
+  status TEXT NOT NULL DEFAULT 'subscribed' CHECK (status IN ('subscribed', 'unsubscribed')),
+  subscribed_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  unsubscribed_at TEXT,
+  page_url TEXT,
+  user_agent TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_launch_notifications_status
+ON launch_notifications(status, subscribed_at);
