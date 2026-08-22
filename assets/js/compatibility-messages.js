@@ -8,12 +8,12 @@ window.LO_KEY_COMPATIBILITY_MESSAGES = {
     "message": "This vehicle and key-fob combination has been tested and verified to work with Lo-Key."
   },
   "compatible": {
-    "lead": "Probably.",
-    "message": "This vehicle is listed as using a CR2032 key-fob battery, but Lo-Key has not yet been tested in this exact vehicle."
+    "lead": "Yes.",
+    "message": "Our records show that this vehicle uses a CR2032 battery. You should confirm by opening your key fob and checking the battery inside."
   },
   "conditional": {
-    "lead": "Probably.",
-    "message": "This vehicle may use more than one key-fob battery. Check the battery marking inside your key before ordering."
+    "lead": "Check first.",
+    "message": "Our records show more than one possible key-fob battery for this vehicle. Open your key fob and confirm that the battery inside is marked CR2032."
   },
   "incompatible": {
     "lead": "No.",

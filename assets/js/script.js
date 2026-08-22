@@ -212,6 +212,7 @@
       closeCart();
       openNotifyModal();
     });
+    updateLaunchNotifyButtons();
   };
 
   const REVIEW_INITIAL_PAGE_SIZE = 3;
@@ -280,6 +281,36 @@
   };
 
   let notifyModalLastFocus = null;
+  const launchNotifyStorageKey = 'lokey-launch-notification-submitted';
+  let launchNotificationSubmitted = (() => {
+    try {
+      return window.localStorage.getItem(launchNotifyStorageKey) === '1';
+    } catch {
+      return false;
+    }
+  })();
+
+  const updateLaunchNotifyButtons = () => {
+    document.querySelectorAll('[data-notify-launch], [data-notify-from-cart]').forEach((button) => {
+      button.textContent = launchNotificationSubmitted ? 'Notify Me ✓' : 'Notify Me';
+      button.setAttribute(
+        'aria-label',
+        launchNotificationSubmitted
+          ? 'Notification request received'
+          : 'Notify me when Lo-Key is available'
+      );
+    });
+  };
+
+  const markLaunchNotificationSubmitted = () => {
+    launchNotificationSubmitted = true;
+    try {
+      window.localStorage.setItem(launchNotifyStorageKey, '1');
+    } catch {
+      // The visible confirmation still works when storage is unavailable.
+    }
+    updateLaunchNotifyButtons();
+  };
 
   const ensureNotifyModal = () => {
     if (document.querySelector('.notify-modal-backdrop')) return;
@@ -379,6 +410,7 @@
 
       form.reset();
       resetTurnstileFor(form);
+      markLaunchNotificationSubmitted();
       closeNotifyModal();
       showToast(result.message || 'You’re on the list. We’ll let you know when Lo-Key is available.');
     } catch (error) {
@@ -1440,7 +1472,7 @@
         const battery = item.keyFobBattery || item.battery || '';
         const status = normalizedCompatibilityStatus(item.status, battery);
         const copy = compatibilityCopyFor(status);
-        const visualStatus = status === 'verified'
+        const visualStatus = status === 'verified' || status === 'compatible'
           ? 'verified'
           : status === 'incompatible'
             ? 'incompatible'
@@ -1449,7 +1481,7 @@
           visualStatus,
           copy.lead,
           copy.message,
-          battery ? `Listed key-fob battery: ${battery}` : '',
+          status === 'compatible' ? '' : (battery ? `Key-fob battery: ${battery}` : ''),
           battery
         );
         return;
@@ -1585,6 +1617,7 @@
       });
     });
 
+    updateLaunchNotifyButtons();
     document.querySelectorAll('[data-notify-launch]').forEach((button) => {
       button.addEventListener('click', openNotifyModal);
     });
