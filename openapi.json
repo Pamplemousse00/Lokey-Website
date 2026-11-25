@@ -258,7 +258,7 @@
         ],
         "operationId": "requestLaunchNotification",
         "summary": "Join the Lo-Key launch notification list",
-        "description": "Stores an email address for the requested Lo-Key availability notification. Requires a valid Cloudflare Turnstile token issued by the product page.",
+        "description": "Stores an email address for the requested Lo-Key availability notification and queues an owner email alert for a genuinely new signup. Requires a valid Cloudflare Turnstile token issued by the product page.",
         "responses": {
           "200": {
             "description": "Email was already subscribed and remains subscribed."

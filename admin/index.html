@@ -6,8 +6,8 @@
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="theme-color" content="#071b2b">
   <title>Lo-Key Admin</title>
-  <link rel="stylesheet" href="admin.css?v=10">
-  <script defer src="admin.js?v=10"></script>
+  <link rel="stylesheet" href="admin.css?v=11">
+  <script defer src="admin.js?v=11"></script>
 </head>
 <body>
   <header class="admin-header">
@@ -38,7 +38,7 @@
     </section>
 
     <section id="dashboard" hidden>
-      <section class="metric-grid" aria-label="Cart activity">
+      <section class="metric-grid" aria-label="Site activity">
         <article class="metric-card">
           <span>Add-to-cart events</span>
           <strong id="cartEventCount">0</strong>
@@ -59,6 +59,11 @@
           <strong id="cart7dCount">0</strong>
           <small>Add-to-cart events</small>
         </article>
+        <article class="metric-card">
+          <span>Notify Me signups</span>
+          <strong id="launchSubscriberCount">0</strong>
+          <small>Currently subscribed</small>
+        </article>
       </section>
 
       <section class="admin-panel export-panel">
@@ -78,6 +83,29 @@
           <button type="button" data-export="audit-log">Audit trail</button>
         </div>
         <p class="inline-status" id="exportStatus" aria-live="polite"></p>
+      </section>
+
+      <section class="admin-panel launch-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Notify Me signups</h2>
+            <p>Availability-notification requests saved in D1. Newest signups are shown first.</p>
+          </div>
+          <span class="panel-stat" id="launchNotificationSummary">0 signups</span>
+        </div>
+        <div class="table-wrap compact-table-wrap">
+          <table class="compact-table launch-table">
+            <thead>
+              <tr>
+                <th>Signed up</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody id="launchNotificationList"></tbody>
+          </table>
+        </div>
       </section>
 
       <div class="toolbar review-admin-toolbar">

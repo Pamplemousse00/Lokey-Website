@@ -94,6 +94,8 @@ The project still requires:
 - secret: `RESEND_API_KEY`
 - plain variable: `CONTACT_FROM_EMAIL`
 - plain variable: `CONTACT_TO_EMAIL`
+- optional plain variable: `LAUNCH_NOTIFY_FROM_EMAIL` (defaults to `CONTACT_FROM_EMAIL`)
+- optional plain variable: `LAUNCH_NOTIFY_TO_EMAIL` (defaults to `CONTACT_TO_EMAIL`)
 
 ## 6. Verification after deployment
 
@@ -111,3 +113,17 @@ The project still requires:
 `database/schema.sql` contains the current table structure, including `vehicles`. The full
 catalogue seed and legacy conversion are contained in `database/migrations/MIGRATION-V5.sql`, which is
 intended for the existing production database described above.
+
+
+## 8. Notify Me signup alerts
+
+The product-page Notify Me form posts to `/api/launch-notifications`. The address is
+saved to the `launch_notifications` D1 table before any admin email is attempted.
+Apply `database/migrations/MIGRATION-V6.sql` once on an existing database if that table
+has not already been created.
+
+For a genuinely new signup, the Pages Function queues a Resend email to
+`LAUNCH_NOTIFY_TO_EMAIL` (or `CONTACT_TO_EMAIL` when the launch-specific variable is
+omitted). Repeated submissions from an already-subscribed address do not send duplicate
+admin alerts. The list and current subscribed count are visible in `/admin/`, and the
+existing **Launch notifications** CSV export downloads the stored records.

@@ -43,6 +43,9 @@
   const auditLogList = document.getElementById("auditLogList");
   const exportActions = document.getElementById("exportActions");
   const exportStatus = document.getElementById("exportStatus");
+  const launchNotificationList = document.getElementById("launchNotificationList");
+  const launchNotificationSummary = document.getElementById("launchNotificationSummary");
+  const launchSubscriberCount = document.getElementById("launchSubscriberCount");
 
   let vehicleRequests = [];
   let compatibilityRecords = [];
@@ -85,6 +88,37 @@
     document.getElementById("cartUnitCount").textContent = Number(metrics.unitsAdded || 0).toLocaleString("en-CA");
     document.getElementById("cart24hCount").textContent = Number(metrics.events24h || 0).toLocaleString("en-CA");
     document.getElementById("cart7dCount").textContent = Number(metrics.events7d || 0).toLocaleString("en-CA");
+  }
+
+  const sourceText = (value) => {
+    const text = String(value || "").trim();
+    if (!text) return "Not provided";
+    try {
+      const url = new URL(text);
+      return `${url.pathname || "/"}${url.search || ""}`;
+    } catch {
+      return text;
+    }
+  };
+
+  function renderLaunchNotifications(notifications = [], stats = {}) {
+    const subscribed = Number(stats.subscribed || 0);
+    const total = Number(stats.total || notifications.length || 0);
+    const subscribed7d = Number(stats.subscribed7d || 0);
+
+    launchSubscriberCount.textContent = subscribed.toLocaleString("en-CA");
+    launchNotificationSummary.textContent = `${total.toLocaleString("en-CA")} total · ${subscribed7d.toLocaleString("en-CA")} in last 7 days`;
+
+    launchNotificationList.innerHTML = notifications.length
+      ? notifications.map((entry) => `
+          <tr>
+            <td>${escapeHTML(dateText(entry.subscribed_at))}</td>
+            <td><strong>${escapeHTML(entry.email)}</strong></td>
+            <td><span class="status-badge ${entry.status === "subscribed" ? "status-verified" : "status-incompatible"}">${escapeHTML(entry.status)}</span></td>
+            <td class="launch-source">${escapeHTML(sourceText(entry.page_url))}</td>
+          </tr>
+        `).join("")
+      : '<tr><td colspan="4">No Notify Me signups yet.</td></tr>';
   }
 
   const actionLabel = (action) => ({
@@ -495,18 +529,20 @@
     dashboardStatus.textContent = "Loading…";
     try {
       await loadCompatibilityCatalogue();
-      const [reviewResult, vehicleResult, compatibilityResult, metricResult, auditResult] = await Promise.all([
+      const [reviewResult, vehicleResult, compatibilityResult, metricResult, auditResult, launchResult] = await Promise.all([
         api(`/api/admin/reviews?status=${encodeURIComponent(reviewStatusFilter?.value || "pending")}`),
         api("/api/admin/vehicle-requests"),
         api("/api/admin/vehicles"),
         api("/api/admin/cart-metrics"),
         api("/api/admin/audit-log"),
+        api("/api/admin/launch-notifications"),
       ]);
       renderReviews(reviewResult.reviews || []);
       renderVehicleRequests(vehicleResult.requests || []);
       renderCompatibilityRecords(compatibilityResult.records || []);
       renderMetrics(metricResult.metrics || {});
       renderAuditLog(auditResult.entries || []);
+      renderLaunchNotifications(launchResult.notifications || [], launchResult.stats || {});
       adminActorDisplay.textContent = `Signed in as ${getActor()}`;
       dashboardStatus.textContent = "";
       loginCard.hidden = true;
