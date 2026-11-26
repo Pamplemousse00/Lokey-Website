@@ -127,3 +127,9 @@ For a genuinely new signup, the Pages Function queues a Resend email to
 omitted). Repeated submissions from an already-subscribed address do not send duplicate
 admin alerts. The list and current subscribed count are visible in `/admin/`, and the
 existing **Launch notifications** CSV export downloads the stored records.
+
+## V13: multiple signup alert recipients and tabbed admin
+
+Set the Production plain-text Pages variable `LAUNCH_NOTIFY_TO_EMAIL` to a comma-separated list of recipient email addresses, for example `owner@example.com,uncle@example.com`. This overrides `CONTACT_TO_EMAIL` for Notify Me alerts only. Both recipients receive the same internal alert with the latest 20 active subscriber emails and their Eastern-time signup dates. Only use authorized internal recipients. No new D1 migration or Resend key is required. Redeploy after updating the variable. Test with a new subscriber address.
+
+The admin dashboard now has separate tabs for Overview, CSV exports, Notify Me, Reviews, Vehicle catalogue, Vehicle requests and Audit trail. Existing API limits and exports remain unchanged.

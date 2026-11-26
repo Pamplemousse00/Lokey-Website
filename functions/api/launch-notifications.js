@@ -1,3 +1,4 @@
+import { emailDate } from "../_lib/email-date.js";
 import { json, methodNotAllowed, readJson, textField } from "../_lib/http.js";
 import { checkRateLimit, verifyTurnstile } from "../_lib/security.js";
 
@@ -13,41 +14,50 @@ const escapeHtml = (value) => String(value ?? "")
 const adminAlertConfig = (env) => ({
   apiKey: String(env.RESEND_API_KEY || "").trim(),
   from: String(env.LAUNCH_NOTIFY_FROM_EMAIL || env.CONTACT_FROM_EMAIL || "").trim(),
-  to: String(env.LAUNCH_NOTIFY_TO_EMAIL || env.CONTACT_TO_EMAIL || "neerajsbb@gmail.com").trim(),
+  to: [...new Set(String(env.LAUNCH_NOTIFY_TO_EMAIL || env.CONTACT_TO_EMAIL || "neerajsbb@gmail.com")
+    .split(/[,;\n]+/).map(address => address.trim().toLowerCase()).filter(Boolean))],
 });
 
-async function sendAdminSignupAlert({ env, notificationId, email, subscribedAt, pageUrl, subscriberCount }) {
+async function sendAdminSignupAlert({ env, notificationId, email, subscribedAt, pageUrl, subscriberCount, recentSubscribers }) {
   const { apiKey, from, to } = adminAlertConfig(env);
-  if (!apiKey || !from || !to) {
+  if (!apiKey || !from || !to.length || to.some(address => !emailPattern.test(address))) {
     console.error("Launch signup email configuration error:", {
       hasApiKey: Boolean(apiKey),
       hasFromAddress: Boolean(from),
-      hasToAddress: Boolean(to),
+      hasToAddress: Boolean(to.length),
       notificationId,
     });
     return { status: "not_configured" };
   }
 
   const source = pageUrl || "Not provided";
-  const countText = Number.isFinite(Number(subscriberCount))
+  const countText = subscriberCount !== null && Number.isFinite(Number(subscriberCount))
     ? Number(subscriberCount).toLocaleString("en-CA")
     : "Unknown";
+  const signedUp = emailDate(subscribedAt);
+  const recentText = recentSubscribers === null ? ["Subscriber list temporarily unavailable."] : recentSubscribers.length ? recentSubscribers.map((row, index) => `${index + 1}. ${row.email} — ${emailDate(row.subscribed_at)}`) : ["No active subscribers."];
+  const recentHtml = recentSubscribers === null ? "<p>Subscriber list temporarily unavailable.</p>" : recentSubscribers.length ? `<table cellpadding="6" cellspacing="0" style="border-collapse:collapse"><thead><tr><th align="left">Email</th><th align="left">Signed up (Eastern)</th></tr></thead><tbody>${recentSubscribers.map(row => `<tr><td>${escapeHtml(row.email)}</td><td>${escapeHtml(emailDate(row.subscribed_at))}</td></tr>`).join("")}</tbody></table>` : "<p>No active subscribers.</p>";
   const textBody = [
     "New Lo-Key Notify Me signup",
     "",
     `Email: ${email}`,
-    `Signed up: ${subscribedAt}`,
+    `Signed up: ${signedUp}`,
     `Source: ${source}`,
     `Current subscribed list: ${countText}`,
+    "",
+    "Latest 20 active subscribers (newest first)",
+    ...recentText,
   ].join("\n");
   const htmlBody = `
     <h2>New Lo-Key Notify Me signup</h2>
     <table cellpadding="6" cellspacing="0" style="border-collapse:collapse">
       <tr><th align="left">Email</th><td>${escapeHtml(email)}</td></tr>
-      <tr><th align="left">Signed up</th><td>${escapeHtml(subscribedAt)}</td></tr>
+      <tr><th align="left">Signed up</th><td>${escapeHtml(signedUp)}</td></tr>
       <tr><th align="left">Source</th><td>${escapeHtml(source)}</td></tr>
       <tr><th align="left">Current subscribed list</th><td>${escapeHtml(countText)}</td></tr>
-    </table>`;
+    </table>
+    <h3>Latest 20 active subscribers (newest first)</h3>
+    ${recentHtml}`;
 
   try {
     const response = await fetch("https://api.resend.com/emails", {
@@ -60,8 +70,8 @@ async function sendAdminSignupAlert({ env, notificationId, email, subscribedAt, 
       },
       body: JSON.stringify({
         from,
-        to: [to],
-        subject: `[Lo-Key] New Notify Me signup — ${email}`,
+        to,
+        subject: `[Lo-Key website] New Notify Me signup — ${email}`,
         text: textBody,
         html: htmlBody,
       }),
@@ -143,10 +153,11 @@ export async function onRequestPost(context) {
       notificationId = existing.id;
       await context.env.DB.prepare(`
         UPDATE launch_notifications
-        SET status = 'subscribed', updated_at = ?, unsubscribed_at = NULL,
+        SET subscribed_at = CASE WHEN status <> 'subscribed' THEN ? ELSE subscribed_at END,
+            status = 'subscribed', updated_at = ?, unsubscribed_at = NULL,
             page_url = ?, user_agent = ?
         WHERE id = ?
-      `).bind(now, pageUrl, userAgent, existing.id).run();
+      `).bind(now, now, pageUrl, userAgent, existing.id).run();
     } else {
       const result = await context.env.DB.prepare(`
         INSERT INTO launch_notifications
@@ -164,6 +175,7 @@ export async function onRequestPost(context) {
   let adminAlert = { status: "not_needed" };
   if (isNewSignup || isResubscribe) {
     let subscriberCount = null;
+    let recentSubscribers = null;
     try {
       const countRow = await context.env.DB.prepare(
         "SELECT COUNT(*) AS count FROM launch_notifications WHERE status = 'subscribed'"
@@ -173,6 +185,17 @@ export async function onRequestPost(context) {
       console.error("Launch notification count error:", error);
     }
 
+    try {
+      const recent = await context.env.DB.prepare(`
+        SELECT email, subscribed_at FROM launch_notifications
+        WHERE status = 'subscribed'
+        ORDER BY subscribed_at DESC, id DESC LIMIT 20
+      `).all();
+      recentSubscribers = recent.results || [];
+    } catch (error) {
+      console.error("Launch notification recent subscribers error:", error);
+    }
+
     const alertPromise = sendAdminSignupAlert({
       env: context.env,
       notificationId,
@@ -180,6 +203,7 @@ export async function onRequestPost(context) {
       subscribedAt: now,
       pageUrl,
       subscriberCount,
+      recentSubscribers,
     });
     if (typeof context.waitUntil === "function") {
       context.waitUntil(alertPromise);

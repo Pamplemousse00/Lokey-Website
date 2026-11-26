@@ -6,8 +6,8 @@
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="theme-color" content="#071b2b">
   <title>Lo-Key Admin</title>
-  <link rel="stylesheet" href="admin.css?v=11">
-  <script defer src="admin.js?v=11"></script>
+  <link rel="stylesheet" href="admin.css?v=13">
+  <script defer src="admin.js?v=13"></script>
 </head>
 <body>
   <header class="admin-header">
@@ -38,6 +38,19 @@
     </section>
 
     <section id="dashboard" hidden>
+      <div class="admin-navigation">
+        <div class="admin-tabs" role="tablist" aria-label="Admin sections">
+          <button type="button" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true" tabindex="0" data-admin-tab="overview">Overview</button>
+          <button type="button" role="tab" id="tab-exports" aria-controls="panel-exports" aria-selected="false" tabindex="-1" data-admin-tab="exports">CSV exports</button>
+          <button type="button" role="tab" id="tab-signups" aria-controls="panel-signups" aria-selected="false" tabindex="-1" data-admin-tab="signups">Notify Me</button>
+          <button type="button" role="tab" id="tab-reviews" aria-controls="panel-reviews" aria-selected="false" tabindex="-1" data-admin-tab="reviews">Reviews</button>
+          <button type="button" role="tab" id="tab-catalogue" aria-controls="panel-catalogue" aria-selected="false" tabindex="-1" data-admin-tab="catalogue">Vehicle catalogue</button>
+          <button type="button" role="tab" id="tab-requests" aria-controls="panel-requests" aria-selected="false" tabindex="-1" data-admin-tab="requests">Vehicle requests</button>
+          <button type="button" role="tab" id="tab-audit" aria-controls="panel-audit" aria-selected="false" tabindex="-1" data-admin-tab="audit">Audit trail</button>
+        </div>
+        <button type="button" id="refreshAllButton" class="refresh-all">Refresh all</button>
+      </div>
+      <section role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" class="admin-tab-panel">
       <section class="metric-grid" aria-label="Site activity">
         <article class="metric-card">
           <span>Add-to-cart events</span>
@@ -66,6 +79,8 @@
         </article>
       </section>
 
+      </section>
+      <section role="tabpanel" id="panel-exports" aria-labelledby="tab-exports" class="admin-tab-panel" hidden>
       <section class="admin-panel export-panel">
         <div class="panel-heading">
           <div>
@@ -85,6 +100,8 @@
         <p class="inline-status" id="exportStatus" aria-live="polite"></p>
       </section>
 
+      </section>
+      <section role="tabpanel" id="panel-signups" aria-labelledby="tab-signups" class="admin-tab-panel" hidden>
       <section class="admin-panel launch-panel">
         <div class="panel-heading">
           <div>
@@ -108,6 +125,8 @@
         </div>
       </section>
 
+      </section>
+      <section role="tabpanel" id="panel-reviews" aria-labelledby="tab-reviews" class="admin-tab-panel" hidden>
       <div class="toolbar review-admin-toolbar">
         <div>
           <h2 id="reviewSectionTitle">Pending reviews</h2>
@@ -127,6 +146,8 @@
       </div>
       <div class="card-list" id="reviewList" aria-live="polite"></div>
 
+      </section>
+      <section role="tabpanel" id="panel-catalogue" aria-labelledby="tab-catalogue" class="admin-tab-panel" hidden>
       <section class="admin-panel compatibility-panel" id="compatibilityManager">
         <div class="panel-heading">
           <div>
@@ -262,6 +283,8 @@
         </div>
       </section>
 
+      </section>
+      <section role="tabpanel" id="panel-requests" aria-labelledby="tab-requests" class="admin-tab-panel" hidden>
       <div class="toolbar vehicle-toolbar">
         <div>
           <h2>Vehicle requests</h2>
@@ -296,6 +319,8 @@
         </table>
       </div>
 
+      </section>
+      <section role="tabpanel" id="panel-audit" aria-labelledby="tab-audit" class="admin-tab-panel" hidden>
       <section class="admin-panel audit-panel">
         <div class="panel-heading">
           <div>
@@ -319,6 +344,7 @@
         </div>
       </section>
 
+      </section>
       <p class="status" id="dashboardStatus" aria-live="polite"></p>
     </section>
   </main>

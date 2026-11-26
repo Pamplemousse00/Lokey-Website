@@ -47,6 +47,29 @@
   const launchNotificationSummary = document.getElementById("launchNotificationSummary");
   const launchSubscriberCount = document.getElementById("launchSubscriberCount");
 
+  const adminTabs = [...document.querySelectorAll("[data-admin-tab]")];
+  function selectAdminTab(key, focus = false) {
+    if (!adminTabs.some(tab => tab.dataset.adminTab === key)) key = "overview";
+    for (const tab of adminTabs) {
+      const active = tab.dataset.adminTab === key;
+      tab.setAttribute("aria-selected", String(active));
+      tab.tabIndex = active ? 0 : -1;
+      document.getElementById(tab.getAttribute("aria-controls")).hidden = !active;
+      if (active && focus) tab.focus();
+    }
+  }
+  adminTabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => selectAdminTab(tab.dataset.adminTab));
+    tab.addEventListener("keydown", event => {
+      const next = { ArrowRight: (index + 1) % adminTabs.length,
+        ArrowLeft: (index + adminTabs.length - 1) % adminTabs.length,
+        Home: 0, End: adminTabs.length - 1 }[event.key];
+      if (next === undefined) return;
+      event.preventDefault();
+      selectAdminTab(adminTabs[next].dataset.adminTab, true);
+    });
+  });
+
   let vehicleRequests = [];
   let compatibilityRecords = [];
   let compatibilityCatalogue = null;
@@ -495,6 +518,7 @@
     ensureOption(compatibilityModel, record.model);
     compatibilityModel.value = record.model;
     await loadSelectedVehicle();
+    selectAdminTab("catalogue");
     document.getElementById("compatibilityManager").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -517,6 +541,7 @@
     setBatteryField(addVehicleBattery, addVehicleBatteryChoices, request.battery_sizes || "");
     addVehicleStatusMessage.textContent = "Vehicle request loaded. Choose a result and confirm the battery before adding it.";
     addVehicleStatusMessage.classList.remove("success");
+    selectAdminTab("catalogue");
     document.getElementById("addVehiclePanel").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -688,6 +713,7 @@
     }
   });
 
+  document.getElementById("refreshAllButton").addEventListener("click", () => loadDashboard().catch(() => {}));
   refreshButton.addEventListener("click", () => loadDashboard().catch(() => {}));
 
   logoutButton.addEventListener("click", () => {

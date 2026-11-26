@@ -1,3 +1,4 @@
+import { emailDate } from "../_lib/email-date.js";
 import { json, methodNotAllowed, readJson, textField } from "../_lib/http.js";
 import { checkRateLimit, verifyTurnstile } from "../_lib/security.js";
 
@@ -124,7 +125,7 @@ export async function onRequestPost(context) {
     `Topic: ${topic}`,
     `Order number: ${orderNumber || "Not provided"}`,
     `Vehicle: ${vehicle || "Not provided"}`,
-    `Submitted: ${submittedAt}`,
+    `Submitted: ${emailDate(submittedAt)}`,
     `Page: ${pageUrl || "Not provided"}`,
     "",
     message,
@@ -138,7 +139,7 @@ export async function onRequestPost(context) {
       <tr><th align="left">Topic</th><td>${escapeHtml(topic)}</td></tr>
       <tr><th align="left">Order number</th><td>${escapeHtml(orderNumber || "Not provided")}</td></tr>
       <tr><th align="left">Vehicle</th><td>${escapeHtml(vehicle || "Not provided")}</td></tr>
-      <tr><th align="left">Submitted</th><td>${escapeHtml(submittedAt)}</td></tr>
+      <tr><th align="left">Submitted</th><td>${escapeHtml(emailDate(submittedAt))}</td></tr>
     </table>
     <h3>Message</h3>
     <p style="white-space:pre-wrap">${escapeHtml(message)}</p>`;

@@ -353,3 +353,14 @@ tbody tr:last-child td { border-bottom: 0; }
   .catalogue-editor .compatibility-form .primary-action,
   .catalogue-editor .compatibility-form .edit-range-help { grid-column: auto; }
 }
+
+/* Tabbed administration */
+.admin-navigation { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:22px; }
+.admin-tabs { display:flex; gap:5px; flex:1; flex-wrap:wrap; background:white; border:1px solid var(--line); border-radius:12px; padding:6px; }
+.admin-tabs button, .refresh-all { font-weight:700; color:var(--navy); background:transparent; border:1px solid transparent; border-radius:8px; padding:10px 14px; white-space:nowrap; }
+.admin-tabs button[aria-selected="true"] { background:var(--navy); color:white; }
+.admin-tabs button:hover:not([aria-selected="true"]) { background:var(--paper); }
+.admin-tabs button:focus-visible, .refresh-all:focus-visible { outline:2px solid #087f8a; outline-offset:2px; }
+.refresh-all { border-color:var(--line); background:white; }
+.admin-tab-panel[hidden] { display:none !important; }
+.admin-tab-panel > .admin-panel:first-child, .admin-tab-panel > .toolbar:first-child { margin-top:0; }
