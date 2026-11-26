@@ -24,9 +24,21 @@ export async function onRequestGet(context) {
       `).first(),
     ]);
 
+    let alerts = new Map();
+    let alertDiagnosticsAvailable = true;
+    try {
+      const result = await context.env.DB.prepare(`SELECT a.* FROM launch_alert_results a
+        JOIN launch_notifications n ON n.id = a.notification_id
+        ORDER BY n.subscribed_at DESC, n.id DESC LIMIT 1000`).all();
+      alerts = new Map((result.results || []).map(row => [row.notification_id, row]));
+    } catch (error) {
+      alertDiagnosticsAvailable = false;
+      console.error("Launch alert diagnostics unavailable:", error);
+    }
     return json({
       success: true,
-      notifications: rows.results || [],
+      alertDiagnosticsAvailable,
+      notifications: (rows.results || []).map(row => ({ ...row, alert: alerts.get(row.id) || null })),
       stats: {
         total: Number(stats?.total || 0),
         subscribed: Number(stats?.subscribed || 0),

@@ -145,3 +145,12 @@ CREATE TABLE IF NOT EXISTS launch_notifications (
 
 CREATE INDEX IF NOT EXISTS idx_launch_notifications_status
 ON launch_notifications(status, subscribed_at);
+
+-- Optional but recommended for V14 email diagnostics. Safe to run again.
+CREATE TABLE IF NOT EXISTS launch_alert_results (
+  notification_id INTEGER PRIMARY KEY REFERENCES launch_notifications(id) ON DELETE CASCADE,
+  status TEXT NOT NULL,
+  provider_id TEXT,
+  error TEXT,
+  attempted_at TEXT NOT NULL
+);

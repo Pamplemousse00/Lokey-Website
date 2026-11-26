@@ -27,7 +27,7 @@ async function sendAdminSignupAlert({ env, notificationId, email, subscribedAt, 
       hasToAddress: Boolean(to.length),
       notificationId,
     });
-    return { status: "not_configured" };
+    return { status: "not_configured", error: "Missing API key, sender or valid recipient configuration." };
   }
 
   const source = pageUrl || "Not provided";
@@ -62,6 +62,7 @@ async function sendAdminSignupAlert({ env, notificationId, email, subscribedAt, 
   try {
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
+      signal: AbortSignal.timeout(10000),
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
@@ -196,7 +197,7 @@ export async function onRequestPost(context) {
       console.error("Launch notification recent subscribers error:", error);
     }
 
-    const alertPromise = sendAdminSignupAlert({
+    adminAlert = await sendAdminSignupAlert({
       env: context.env,
       notificationId,
       email,
@@ -204,12 +205,20 @@ export async function onRequestPost(context) {
       pageUrl,
       subscriberCount,
       recentSubscribers,
+    }).catch(error => {
+      console.error("Launch alert preparation failed:", error);
+      return { status: "failed", error: String(error?.message || error).slice(0, 500) };
     });
-    if (typeof context.waitUntil === "function") {
-      context.waitUntil(alertPromise);
-      adminAlert = { status: "queued" };
-    } else {
-      adminAlert = await alertPromise;
+    try {
+      await context.env.DB.prepare(`INSERT INTO launch_alert_results
+        (notification_id, status, provider_id, error, attempted_at)
+        VALUES (?, ?, ?, ?, ?) ON CONFLICT(notification_id) DO UPDATE SET
+        status=excluded.status, provider_id=excluded.provider_id,
+        error=excluded.error, attempted_at=excluded.attempted_at`)
+        .bind(notificationId, adminAlert.status, adminAlert.providerId || null,
+          adminAlert.error || null, new Date().toISOString()).run();
+    } catch (error) {
+      console.error("Could not persist launch email result:", error);
     }
   }
 

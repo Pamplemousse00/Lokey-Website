@@ -124,13 +124,13 @@
     }
   };
 
-  function renderLaunchNotifications(notifications = [], stats = {}) {
+  function renderLaunchNotifications(notifications = [], stats = {}, diagnosticsAvailable = true) {
     const subscribed = Number(stats.subscribed || 0);
     const total = Number(stats.total || notifications.length || 0);
     const subscribed7d = Number(stats.subscribed7d || 0);
 
     launchSubscriberCount.textContent = subscribed.toLocaleString("en-CA");
-    launchNotificationSummary.textContent = `${total.toLocaleString("en-CA")} total · ${subscribed7d.toLocaleString("en-CA")} in last 7 days`;
+    launchNotificationSummary.textContent = `${total.toLocaleString("en-CA")} total · ${subscribed7d.toLocaleString("en-CA")} in last 7 days${diagnosticsAvailable ? "" : " · Email diagnostics unavailable (run Migration V7)"}`;
 
     launchNotificationList.innerHTML = notifications.length
       ? notifications.map((entry) => `
@@ -139,9 +139,11 @@
             <td><strong>${escapeHTML(entry.email)}</strong></td>
             <td><span class="status-badge ${entry.status === "subscribed" ? "status-verified" : "status-incompatible"}">${escapeHTML(entry.status)}</span></td>
             <td class="launch-source">${escapeHTML(sourceText(entry.page_url))}</td>
+            <td>${escapeHTML(entry.alert ? (entry.alert.status === "sent" ? "Accepted by Resend" : entry.alert.status) : "Not recorded")}${entry.alert?.error ? `<div>${escapeHTML(entry.alert.error)}</div>` : ""}${entry.alert?.provider_id ? `<div>${escapeHTML(entry.alert.provider_id)}</div>` : ""}</td>
+            <td><button class="row-action delete" type="button" data-launch-delete="${Number(entry.id)}" data-email="${escapeHTML(entry.email)}">Delete</button></td>
           </tr>
         `).join("")
-      : '<tr><td colspan="4">No Notify Me signups yet.</td></tr>';
+      : '<tr><td colspan="6">No Notify Me signups yet.</td></tr>';
   }
 
   const actionLabel = (action) => ({
@@ -149,6 +151,7 @@
     "review.approved_verified": "Review approved + verified",
     "review.rejected": "Review rejected",
     "review.deleted": "Review deleted",
+    "launch_notification.deleted": "Notify Me signup deleted",
     "vehicle_request.deleted": "Vehicle request deleted",
     "vehicle.created": "Vehicle added",
     "vehicle.updated": "Vehicle updated",
@@ -567,7 +570,7 @@
       renderCompatibilityRecords(compatibilityResult.records || []);
       renderMetrics(metricResult.metrics || {});
       renderAuditLog(auditResult.entries || []);
-      renderLaunchNotifications(launchResult.notifications || [], launchResult.stats || {});
+      renderLaunchNotifications(launchResult.notifications || [], launchResult.stats || {}, launchResult.alertDiagnosticsAvailable);
       adminActorDisplay.textContent = `Signed in as ${getActor()}`;
       dashboardStatus.textContent = "";
       loginCard.hidden = true;
@@ -729,6 +732,22 @@
     const button = event.target.closest("button[data-export]");
     if (!button) return;
     downloadCsv(button.dataset.export, button);
+  });
+
+  launchNotificationList.addEventListener("click", async (event) => {
+    const button = event.target.closest("button[data-launch-delete]");
+    if (!button || !window.confirm(`Permanently delete ${button.dataset.email} from the Notify Me list? They can sign up again later.`)) return;
+    button.disabled = true;
+    try {
+      const deleted = await api(`/api/admin/launch-notifications/${Number(button.dataset.launchDelete)}`, {method:"DELETE"});
+      const result = await api("/api/admin/launch-notifications");
+      renderLaunchNotifications(result.notifications, result.stats, result.alertDiagnosticsAvailable);
+      dashboardStatus.textContent = deleted.auditSaved ? "Signup deleted." : "Signup deleted; audit entry could not be saved.";
+      refreshAuditLog().catch(() => {});
+    } catch (error) {
+      dashboardStatus.textContent = error.message;
+      button.disabled = false;
+    }
   });
 
   reviewList.addEventListener("click", async (event) => {

@@ -133,3 +133,9 @@ existing **Launch notifications** CSV export downloads the stored records.
 Set the Production plain-text Pages variable `LAUNCH_NOTIFY_TO_EMAIL` to a comma-separated list of recipient email addresses, for example `owner@example.com,uncle@example.com`. This overrides `CONTACT_TO_EMAIL` for Notify Me alerts only. Both recipients receive the same internal alert with the latest 20 active subscriber emails and their Eastern-time signup dates. Only use authorized internal recipients. No new D1 migration or Resend key is required. Redeploy after updating the variable. Test with a new subscriber address.
 
 The admin dashboard now has separate tabs for Overview, CSV exports, Notify Me, Reviews, Vehicle catalogue, Vehicle requests and Audit trail. Existing API limits and exports remain unchanged.
+
+## V14: signup alert diagnostics and removal
+
+Run `database/migrations/MIGRATION-V7.sql` in the existing D1 database to enable persistent alert diagnostics. This migration is additive and safe to rerun. V14 still saves signups and attempts emails if the diagnostics table is missing. The admin Notify Me tab displays the latest alert outcome and provider ID or error. Accepted by Resend is not a guarantee of inbox delivery; check Resend Emails for delivery events. Older signups show Not recorded. New signup requests await the email API with a ten-second timeout after the database save; email failure does not invalidate the signup. No automatic historical resend occurs.
+
+Delete in the Notify Me tab permanently removes the selected signup and its alert diagnostic, refreshes counts, and records an audit action (without the subscriber address). A deleted address can subscribe again. Use a new address or delete your own test signup before retesting. Verify Production variables and redeploy; existing comma-separated recipient syntax remains valid. Only authorized internal recipients should receive the subscriber list.
